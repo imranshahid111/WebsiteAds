@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Word Counter — Words, Characters & Reading Time Online</title>
+<meta name="description" content="Free online word counter by {{BRAND}}: count words, characters, sentences, and paragraphs instantly — plus reading and speaking time. Works on any device, no sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOURDOMAIN.com/tools/word-counter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Word Counter — {{BRAND}}">
+<meta property="og:description" content="Count words, characters, sentences, paragraphs, and reading time in real time.">
+<meta property="og:url" content="https://YOURDOMAIN.com/tools/word-counter.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is word count calculated?","acceptedAnswer":{"@type":"Answer","text":"Words are counted as sequences of non-whitespace characters. Multiple spaces, tabs, and line breaks do not inflate the count."}},
+{"@type":"Question","name":"What is the average adult reading speed?","acceptedAnswer":{"@type":"Answer","text":"About 200–250 words per minute for silent reading and 130–150 for speaking aloud. This tool uses 200 wpm for reading time and 130 wpm for speaking time."}},
+{"@type":"Question","name":"Does the text I paste stay private?","acceptedAnswer":{"@type":"Answer","text":"Yes. The counter runs entirely in your browser with JavaScript — your text is never uploaded or stored."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Word Counter &amp; Reading Time</h1>
+  <p>Paste or type your text — counts update live as you write.</p>
+
+  <div class="toolbox">
+    <h2>Your text</h2>
+    <div class="field">
+      <label for="wcInput">Type or paste text here</label>
+      <textarea id="wcInput" placeholder="Start typing or paste your text…"></textarea>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="v" id="wWords">0</div><div class="k">Words</div></div>
+      <div class="stat"><div class="v" id="wChars">0</div><div class="k">Characters</div></div>
+      <div class="stat"><div class="v" id="wCharsNS">0</div><div class="k">Characters (no spaces)</div></div>
+      <div class="stat"><div class="v" id="wSent">0</div><div class="k">Sentences</div></div>
+      <div class="stat"><div class="v" id="wPara">0</div><div class="k">Paragraphs</div></div>
+      <div class="stat"><div class="v" id="wRead">0 min</div><div class="k">Reading time</div></div>
+      <div class="stat"><div class="v" id="wSpeak">0 min</div><div class="k">Speaking time</div></div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why Word Count Matters More Than You Think</h2>
+    <p>Word count is the hidden constraint behind almost everything you write. A college essay must land between 500 and 650 words. A YouTube description gets cut off after about 150 characters on mobile. An SEO article needs enough depth to rank but not so much fluff that readers bounce. A tweet has a hard character ceiling. Knowing your count in real time — without pasting into a word processor — removes friction from all of these tasks, which is exactly what this tool is built for.</p>
+    <h3>How the counting works</h3>
+    <p>This counter treats any sequence of non-whitespace characters as one word, so extra spaces, tabs, and line breaks never inflate the number. Characters are counted both with and without spaces because different platforms ask for different things: college applications usually mean words, while social platforms and SMS-style fields mean characters. Sentences are detected from sentence-ending punctuation, and paragraphs from blank lines. If you are checking a requirement, use the "characters (no spaces)" figure only when the requirement explicitly says so — most of the time, plain word count is what is wanted.</p>
+    <h3>Reading time: the 200-words-per-minute rule</h3>
+    <p>Reading time here is based on 200 words per minute, the widely used average for adult silent reading of English. At that pace, a 1,000-word article takes five minutes — which is why "5 min read" labels cluster around that length. Speaking time uses 130 words per minute, the typical pace for presentations and voiceover. If you are scripting a YouTube video, the speaking-time figure is the one to watch: a 1,300-word script is roughly a 10-minute video. These are averages, not guarantees — technical material reads slower, and nervous speakers go faster — but they are accurate enough for planning.</p>
+    <h3>Practical targets for common formats</h3>
+    <table>
+      <tr><th>Format</th><th>Typical target</th><th>Notes</th></tr>
+      <tr><td>College essay</td><td>500–650 words</td><td>Check the prompt's exact limits</td></tr>
+      <tr><td>YouTube description</td><td>150–300 words</td><td>Key info in the first 150 characters</td></tr>
+      <tr><td>SEO blog post</td><td>1,200–2,000 words</td><td>Depth beats length; no filler</td></tr>
+      <tr><td>Shorts/TikTok caption</td><td>Under 150 characters</td><td>Hook first, hashtags last</td></tr>
+      <tr><td>Email newsletter</td><td>150–400 words</td><td>One idea per email</td></tr>
+    </table>
+    <h3>Tips for hitting a word count without padding</h3>
+    <p>If you are short, add an example instead of adjectives — examples carry meaning and words at the same time. Break one long paragraph into two with a transition sentence, which adds structure and length honestly. If you are over, cut throat-clearing openers ("In today's fast-paced world…") and repeated points; almost every draft has 10% removable water. And never pad with filler phrases to hit a minimum — teachers, editors, and Google's ranking systems all penalize empty words. Aim for the middle of the target range, not the edges.</p>
+    <h3>Privacy note</h3>
+    <p>Essays, scripts, and drafts are personal. Unlike some online counters, this page never uploads your text — the counting runs in JavaScript on your own device. You can use it for confidential work with confidence. Pair it with our <a href="ai-prompt-generator.html">AI prompt generator</a> when you are planning scripts, and the <a href="password-generator.html">password generator</a> to secure the accounts where you publish your writing.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income into needs, wants, savings.</p></div>
+      <div class="card"><h3><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></h3><p>Monthly payment and total interest.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var wcInput = document.getElementById('wcInput');
+function fmtMin(m){
+  if(m < 1){ return Math.max(1, Math.round(m*60)) + ' sec'; }
+  var mm = Math.floor(m), ss = Math.round((m-mm)*60);
+  return ss > 0 ? mm + 'm ' + ss + 's' : mm + ' min';
+}
+function updateWC(){
+  var r = Core.analyzeText(wcInput.value);
+  document.getElementById('wWords').textContent = r.words.toLocaleString('en-US');
+  document.getElementById('wChars').textContent = r.chars.toLocaleString('en-US');
+  document.getElementById('wCharsNS').textContent = r.charsNoSpace.toLocaleString('en-US');
+  document.getElementById('wSent').textContent = r.sentences.toLocaleString('en-US');
+  document.getElementById('wPara').textContent = r.paragraphs.toLocaleString('en-US');
+  document.getElementById('wRead').textContent = fmtMin(r.readMin);
+  document.getElementById('wSpeak').textContent = fmtMin(r.speakMin);
+}
+wcInput.addEventListener('input', updateWC);
+updateWC();
+</script>
+</body>
+</html>

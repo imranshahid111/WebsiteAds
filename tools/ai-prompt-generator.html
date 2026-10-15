@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Video Prompt Generator — Structured Prompts for Shorts & Reels</title>
+<meta name="description" content="Free AI video prompt generator by {{BRAND}}: enter your topic, pick a style and platform, and get a structured cinematic prompt for AI video tools. One-click copy.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOURDOMAIN.com/tools/ai-prompt-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free AI Video Prompt Generator — {{BRAND}}">
+<meta property="og:description" content="Turn any topic into a structured AI video prompt. One action per clip, camera move, setting, and negatives included.">
+<meta property="og:url" content="https://YOURDOMAIN.com/tools/ai-prompt-generator.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What makes a good AI video prompt?","acceptedAnswer":{"@type":"Answer","text":"One subject, one action, one camera move, and one setting per clip — plus a lock block describing your subject so it looks the same across clips, and a negatives list banning things like extra limbs and on-screen text."}},
+{"@type":"Question","name":"Why do my AI videos look different in every shot?","acceptedAnswer":{"@type":"Answer","text":"Because each clip is generated independently. Repeating a detailed lock block (face, clothes, props) verbatim in every prompt keeps the subject consistent."}},
+{"@type":"Question","name":"Can I use these prompts with any AI video tool?","acceptedAnswer":{"@type":"Answer","text":"Yes. The structured format works with popular AI video generators — the wording is tool-agnostic and focuses on subject, action, camera, and setting."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>AI Video Prompt Generator</h1>
+  <p>Describe your video once — get a structured, cinematic prompt ready to paste into any AI video tool.</p>
+
+  <div class="toolbox">
+    <h2>Build your prompt</h2>
+    <div class="field">
+      <label for="topic">Video topic (be specific)</label>
+      <input type="text" id="topic" placeholder="e.g. A wooden vintage coupe being hand-carved in a workshop">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="style">Visual style</label>
+        <select id="style">
+          <option>Photorealistic cinematic</option>
+          <option>Hyper-detailed close-up</option>
+          <option>Warm golden-hour film</option>
+          <option>Moody low-light</option>
+          <option>Playful cartoon</option>
+          <option>Minimal flat animation</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="platform">Platform</label>
+        <select id="platform">
+          <option>YouTube Shorts (9:16)</option>
+          <option>TikTok (9:16)</option>
+          <option>Instagram Reels (9:16)</option>
+          <option>YouTube long-form (16:9)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="duration">Clip length</label>
+        <select id="duration">
+          <option>5 seconds</option>
+          <option>8 seconds</option>
+          <option selected>10 seconds</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="lock">Subject lock (repeat in every clip — optional but recommended)</label>
+      <input type="text" id="lock" placeholder="e.g. craftsman, 40s, rolled sleeves, safety glasses, honey-brown wood">
+    </div>
+    <button onclick="genPrompt()">Generate prompt</button>
+    <div class="copyout" id="promptOut" style="display:none"></div>
+    <div class="field" id="copyWrap" style="display:none">
+      <button class="btn-ghost" onclick="copyText(document.getElementById('promptOut').textContent, this)">Copy prompt</button>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>How to Write AI Video Prompts That Don't Look Fake</h2>
+    <p>Most AI video prompts fail for the same reason: they try to do too much in one clip. A prompt like "a man builds a car, then drives it through the city at sunset" asks the model to juggle three scenes, two lighting setups, and a camera transition in eight seconds. The result is morphing faces, melting hands, and backgrounds that slide into each other. The fix is discipline: <strong>one subject, one action, one camera move, one setting per clip</strong>. If your video needs three actions, write three prompts. Your final video is a montage of short, clean clips — not one impossible mega-prompt.</p>
+    <h3>The lock block: how to keep subjects consistent</h3>
+    <p>AI video tools generate each clip independently, so "the same man" means nothing to them. You need a <strong>lock block</strong> — a dense, repeatable description of your subject that you paste verbatim at the top of every prompt: age, skin tone, hair, exact clothing, distinctive props. "Craftsman, mid-40s, weathered hands, rolled-up denim sleeves, amber safety glasses, leather tool belt." Change nothing between clips. Even a single changed adjective (denim → cotton) can shift the look. The generator above has a dedicated field for this because it is the single highest-impact habit in AI video.</p>
+    <h3>The four-part clip structure</h3>
+    <table>
+      <tr><th>Part</th><th>Example</th><th>Why it matters</th></tr>
+      <tr><td>Subject</td><td>A skilled woodworker sanding a curved panel</td><td>Anchors who/what the shot is about</td></tr>
+      <tr><td>Action</td><td>Slowly sliding sandpaper along the grain, dust drifting</td><td>One motion the model can render cleanly</td></tr>
+      <tr><td>Camera</td><td>Slow push-in from medium to close-up</td><td>Gives the clip cinematic energy</td></tr>
+      <tr><td>Setting</td><td>Sunlit workshop, tools on wooden bench, warm practicals</td><td>Grounds the lighting and mood</td></tr>
+    </table>
+    <p>Write these four lines, and you have 90% of a professional prompt. The generated prompt follows exactly this structure.</p>
+    <h3>Negatives: ban the failure modes</h3>
+    <p>Every generator above includes a negatives block because certain defects are so common they deserve a standing ban: extra limbs, extra fingers, morphing faces, watermark text, on-screen captions, logo text. AI models love to hallucinate text on signs and labels — if your scene should have no readable text, say so explicitly. This one habit removes the defects that scream "AI-made" to viewers.</p>
+    <h3>Common mistakes and quick fixes</h3>
+    <p><strong>Mistake 1: camera whiplash.</strong> Asking for "drone shot, then close-up, then orbit" in one clip guarantees a jarring mess. Fix: one camera move per clip; transitions happen in your edit. <strong>Mistake 2: dialogue in prompts.</strong> Lip-synced speech is still unreliable; keep clips visual-first and add voiceover in post. <strong>Mistake 3: vague subjects.</strong> "A nice car" gives you a random car; "honey-brown wooden 2-door vintage coupe, round headlights" gives you <em>your</em> car. <strong>Mistake 4: ignoring aspect ratio.</strong> A 16:9 cinematic prompt pasted into a 9:16 Shorts generator will crop the subject's face. Pick the platform first — the generator sets framing accordingly.</p>
+    <h3>Putting it together: your workflow</h3>
+    <p>One, write your lock block once and reuse it. Two, storyboard your video as 6–10 short clips, each with one action. Three, generate a prompt per clip with this tool. Four, generate clips and keep only the best takes. Five, edit in any free editor, add real voiceover or music, and review each clip for morphing before publishing. Creators who follow this pipeline consistently produce AI video that viewers cannot distinguish from filmed footage at Shorts scale — and every prompt starts in the box above.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income into needs, wants, savings.</p></div>
+      <div class="card"><h3><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></h3><p>Monthly payment and total interest.</p></div>
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function genPrompt(){
+  var topic = document.getElementById('topic').value.trim() || 'a craftsman shaping wood in a sunlit workshop';
+  var style = document.getElementById('style').value;
+  var platform = document.getElementById('platform').value;
+  var duration = document.getElementById('duration').value;
+  var lock = document.getElementById('lock').value.trim();
+  var vertical = platform.indexOf('16:9') === -1;
+  var lines = [];
+  lines.push('--- AI VIDEO PROMPT (' + duration + ', ' + (vertical ? 'vertical 9:16' : 'widescreen 16:9') + ') ---');
+  lines.push('');
+  if(lock){ lines.push('[LOCK — repeat verbatim in every clip of this project]'); lines.push(lock); lines.push(''); }
+  lines.push('[SUBJECT] ' + topic);
+  lines.push('[STYLE] ' + style + '. Photorealistic anatomy, natural skin texture, consistent subject identity.');
+  lines.push('[ACTION] One clear motion only — slow, deliberate, physically plausible.');
+  lines.push('[CAMERA] Slow push-in from medium to close-up, smooth, no whip moves.');
+  lines.push('[SETTING] ' + (vertical ? 'Framed for vertical: keep the subject centered with headroom.' : 'Framed for widescreen: balanced composition.') + ' Realistic lighting, depth of field.');
+  lines.push('');
+  lines.push('[NEGATIVES] extra limbs, extra fingers, morphing face, warped hands, watermark, logo, on-screen text, captions, subtitles, cartoon artifacts, blurry edges');
+  var out = document.getElementById('promptOut');
+  out.textContent = lines.join('\n');
+  out.style.display = 'block';
+  document.getElementById('copyWrap').style.display = 'block';
+}
+</script>
+</body>
+</html>

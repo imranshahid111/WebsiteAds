@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Loan EMI Calculator — Monthly Payment & Total Interest (USA)</title>
+<meta name="description" content="Free loan EMI calculator by {{BRAND}}: enter the loan amount, interest rate, and term to see your exact monthly payment, total interest, and a year-by-year payoff summary. No sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOURDOMAIN.com/calculators/loan-emi-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Loan EMI Calculator — {{BRAND}}">
+<meta property="og:description" content="Calculate your monthly loan payment, total interest, and payoff schedule in seconds.">
+<meta property="og:url" content="https://YOURDOMAIN.com/calculators/loan-emi-calculator.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is EMI calculated?","acceptedAnswer":{"@type":"Answer","text":"EMI = P × r × (1+r)^n ÷ ((1+r)^n − 1), where P is principal, r is the monthly interest rate, and n is the number of monthly payments. Our calculator applies this formula instantly."}},
+{"@type":"Question","name":"Why is most of my early payment interest?","acceptedAnswer":{"@type":"Answer","text":"Interest is charged on the outstanding balance, which is highest at the start. As the balance shrinks, more of each fixed payment goes to principal."}},
+{"@type":"Question","name":"Does a longer loan term always cost more?","acceptedAnswer":{"@type":"Answer","text":"Yes — a longer term lowers the monthly payment but increases total interest significantly, because you pay interest for more months on a slowly falling balance."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Loan EMI Calculator</h1>
+  <p>Find out exactly what a loan really costs — monthly payment, total interest, and how your balance falls year by year.</p>
+
+  <div class="toolbox">
+    <h2>Your loan</h2>
+    <div class="row">
+      <div class="field">
+        <label for="principal">Loan amount ($)</label>
+        <input type="number" id="principal" value="20000" min="0" step="500">
+      </div>
+      <div class="field">
+        <label for="rate">Annual interest rate (%)</label>
+        <input type="number" id="rate" value="7.5" min="0" max="60" step="0.1">
+      </div>
+      <div class="field">
+        <label for="years">Loan term (years)</label>
+        <input type="number" id="years" value="5" min="0.5" max="40" step="0.5">
+      </div>
+    </div>
+    <button onclick="calcLoan()">Calculate</button>
+    <div class="result" id="loanResult" style="display:none">
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="emiAmt">$0</div><div class="k">Monthly payment (EMI)</div></div>
+        <div class="stat"><div class="v" id="intAmt">$0</div><div class="k">Total interest</div></div>
+        <div class="stat"><div class="v" id="totAmt">$0</div><div class="k">Total you'll pay</div></div>
+      </div>
+      <h3 style="margin-top:20px">Year-by-year payoff summary</h3>
+      <div style="overflow-x:auto">
+      <table id="schedTable">
+        <tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Balance left</th></tr>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>How Loan EMI Is Calculated</h2>
+    <p>EMI stands for <strong>Equated Monthly Installment</strong> — the fixed amount you pay every month for the life of a loan. Unlike a simple division of the loan amount by the number of months, an EMI blends principal repayment with interest in a precise ratio. The formula lenders use is: <em>EMI = P × r × (1+r)^n ÷ ((1+r)^n − 1)</em>, where P is the amount you borrow, r is the monthly interest rate (annual rate divided by 12), and n is the total number of payments. The calculator above applies exactly this formula, so its numbers match what a bank will quote you.</p>
+    <h3>A concrete example</h3>
+    <p>Borrow $20,000 at 7.5% annual interest for 5 years. The monthly EMI comes out to about $400.74. Over 60 payments you will pay roughly $24,044 in total — meaning $4,044 is interest. Notice that interest is over 20% of the original amount. Drop the rate to 5% and the EMI falls to about $377.42, with total interest of only $2,645. That two-and-a-half percentage point difference saves you nearly $1,400, which is why comparing APRs matters far more than comparing monthly payments when you shop for a loan.</p>
+    <h3>Why your first payments are mostly interest</h3>
+    <p>This is the part that surprises most borrowers. Interest is always calculated on the <em>remaining balance</em>, not the original loan. In month one of the example above, the balance is the full $20,000, so interest alone is about $125 — nearly a third of the payment. Very little goes to principal. Each month the balance drops slightly, so the interest portion shrinks and the principal portion grows. By the final year, almost the entire payment is principal. This schedule is called <strong>amortization</strong>, and the year-by-year table in the result shows it in action.</p>
+    <h3>Shorter term vs. lower payment: the trade-off</h3>
+    <table>
+      <tr><th>$20,000 at 7.5%</th><th>Monthly EMI</th><th>Total interest</th></tr>
+      <tr><td>3 years</td><td>~$622</td><td>~$2,395</td></tr>
+      <tr><td>5 years</td><td>~$401</td><td>~$4,044</td></tr>
+      <tr><td>7 years</td><td>~$306</td><td>~$5,721</td></tr>
+    </table>
+    <p>Stretching the same loan from 3 to 7 years cuts the monthly payment in half but more than doubles the interest. Choose the shortest term whose payment fits comfortably in your budget — test it with our <a href="50-30-20-budget-calculator.html">50/30/20 budget calculator</a> to make sure the EMI lands safely inside your "needs" bucket.</p>
+    <h3>The power of extra payments</h3>
+    <p>Because interest accrues on the outstanding balance, any extra payment attacks the most expensive part of the loan. Adding just $50 a month to the $20,000 example above shortens the loan by about 8 months and saves over $600 in interest. Even one extra payment per year — say, from a tax refund — can shave a meaningful chunk off a 5-year loan. Before doing this, check that your lender does not charge a prepayment penalty; most US auto and personal loans do not, but some mortgages do.</p>
+    <h3>EMI vs. other repayment structures</h3>
+    <p>Not all loans use fixed EMI. Credit cards require only a minimum payment, which keeps balances alive for years. Some student loans offer graduated repayment, starting low and rising with your expected income. Balloons loans keep payments tiny but demand a huge final payment. Fixed EMI is the most predictable structure — you always know exactly when the loan ends — which is why most car loans and personal loans use it.</p>
+    <h3>What lenders look at before approving you</h3>
+    <p>The rate you are offered depends on your credit score, debt-to-income ratio, and the loan type. Secured loans (like auto loans, backed by the car) usually carry lower rates than unsecured personal loans. If your quoted rate is high, improving your credit score by even 30–50 points before applying can move you into a better tier. Run the numbers at both rates in this calculator and decide whether waiting and improving your score is worth the wait.</p>
+    <h3>A final checklist before you borrow</h3>
+    <p>One, run the exact loan terms here — never trust a salesman's mental math. Two, confirm the APR includes fees, not just the advertised interest rate. Three, check the payment fits your budget with room to spare. Four, ask about prepayment penalties. Five, sleep on it for 24 hours if it is not urgent. Borrowing well is less about getting the lowest rate on the planet and more about borrowing only what fits your life.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>See where your loan payment fits in your budget.</p></div>
+      <div class="card"><h3><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools.</p></div>
+      <div class="card"><h3><a href="../tools/word-counter.html">Word Counter</a></h3><p>Words, characters, reading time.</p></div>
+      <div class="card"><h3><a href="../tools/password-generator.html">Password Generator</a></h3><p>Strong random passwords with a strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="../tools/word-counter.html">Word Counter</a></li>
+        <li><a href="../tools/password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. Educational content only — not financial advice. See our <a href="../disclaimer.html">disclaimer</a>.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function calcLoan(){
+  var r = Core.loanEmi(
+    document.getElementById('principal').value,
+    document.getElementById('rate').value,
+    document.getElementById('years').value
+  );
+  document.getElementById('loanResult').style.display='block';
+  document.getElementById('emiAmt').textContent = fmtUSD(r.emi);
+  document.getElementById('intAmt').textContent = fmtUSD(r.interest);
+  document.getElementById('totAmt').textContent = fmtUSD(r.total);
+  var t = document.getElementById('schedTable');
+  t.innerHTML = '<tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Balance left</th></tr>';
+  r.schedule.forEach(function(row){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+row.year+'</td><td>'+fmtUSD(row.principal)+'</td><td>'+fmtUSD(row.interest)+'</td><td>'+fmtUSD(row.balance)+'</td>';
+    t.appendChild(tr);
+  });
+}
+window.addEventListener('load', calcLoan);
+</script>
+</body>
+</html>
