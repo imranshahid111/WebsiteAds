@@ -1,1 +1,98 @@
-Ly8ge3tCUkFORH19IHNoYXJlZCBoZWxwZXJzIOKAlCBjb3B5IGJ1dHRvbnMsIGlucHV0IG5pY2V0aWVzLiBObyBkZXBlbmRlbmNpZXMuCmZ1bmN0aW9uIGNvcHlUZXh0KHRleHQsIGJ0bikgewogIHZhciBkb25lID0gZnVuY3Rpb24oKXsgaWYoYnRuKXsgdmFyIG89YnRuLnRleHRDb250ZW50OyBidG4udGV4dENvbnRlbnQ9J0NvcGllZCDinJMnOyBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7YnRuLnRleHRDb250ZW50PW87fSwxNjAwKTt9IH07CiAgaWYgKG5hdmlnYXRvci5jbGlwYm9hcmQgJiYgbmF2aWdhdG9yLmNsaXBib2FyZC53cml0ZVRleHQpIHsKICAgIG5hdmlnYXRvci5jbGlwYm9hcmQud3JpdGVUZXh0KHRleHQpLnRoZW4oZG9uZSwgZnVuY3Rpb24oKXsgZmFsbGJhY2tDb3B5KHRleHQpOyBkb25lKCk7IH0pOwogIH0gZWxzZSB7IGZhbGxiYWNrQ29weSh0ZXh0KTsgZG9uZSgpOyB9Cn0KZnVuY3Rpb24gZmFsbGJhY2tDb3B5KHRleHQpewogIHZhciB0YT1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCd0ZXh0YXJlYScpOyB0YS52YWx1ZT10ZXh0OyB0YS5zdHlsZS5wb3NpdGlvbj0nZml4ZWQnOyB0YS5zdHlsZS5vcGFjaXR5PScwJzsKICBkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKHRhKTsgdGEuc2VsZWN0KCk7CiAgdHJ5eyBkb2N1bWVudC5leGVjQ29tbWFuZCgnY29weScpOyB9Y2F0Y2goZSl7fQogIGRvY3VtZW50LmJvZHkucmVtb3ZlQ2hpbGQodGEpOwp9CmZ1bmN0aW9uIGZtdFVTRChuKXsgcmV0dXJuICckJyArIE51bWJlcihuKS50b0xvY2FsZVN0cmluZygnZW4tVVMnLHttYXhpbXVtRnJhY3Rpb25EaWdpdHM6MixtaW5pbXVtRnJhY3Rpb25EaWdpdHM6Mn0pOyB9CmZ1bmN0aW9uIGNsYW1wKG4sbWluLG1heCl7IHJldHVybiBNYXRoLm1pbihtYXgsIE1hdGgubWF4KG1pbiwgbikpOyB9Ci8vIFNoYXJlZCBjb3JlIG1hdGggc28gaXQgY2FuIGJlIHVuaXQtdGVzdGVkIGluIE5vZGUgd2l0aG91dCBhIERPTS4KdmFyIENvcmUgPSAoZnVuY3Rpb24oKXsKICBmdW5jdGlvbiBidWRnZXQ1MDMwMjAoaW5jb21lKXsKICAgIGluY29tZSA9IE1hdGgubWF4KDAsIE51bWJlcihpbmNvbWUpfHwwKTsKICAgIHZhciBuZWVkcz1pbmNvbWUqMC41MCwgd2FudHM9aW5jb21lKjAuMzAsIHNhdmU9aW5jb21lKjAuMjA7CiAgICByZXR1cm4ge25lZWRzOm5lZWRzLCB3YW50czp3YW50cywgc2F2ZTpzYXZlLCB5ZWFybHlOZWVkczpuZWVkcyoxMiwgeWVhcmx5V2FudHM6d2FudHMqMTIsIHllYXJseVNhdmU6c2F2ZSoxMn07CiAgfQogIGZ1bmN0aW9uIGxvYW5FbWkocHJpbmNpcGFsLCBhbm51YWxSYXRlUGN0LCB5ZWFycyl7CiAgICBwcmluY2lwYWw9TWF0aC5tYXgoMCxOdW1iZXIocHJpbmNpcGFsKXx8MCk7IGFubnVhbFJhdGVQY3Q9TWF0aC5tYXgoMCxOdW1iZXIoYW5udWFsUmF0ZVBjdCl8fDApOyB5ZWFycz1NYXRoLm1heCgwLjI1LE51bWJlcih5ZWFycyl8fDApOwogICAgdmFyIG49TWF0aC5yb3VuZCh5ZWFycyoxMiksIHI9YW5udWFsUmF0ZVBjdC8xMDAvMTIsIGVtaTsKICAgIGlmKHI9PT0wKXsgZW1pPXByaW5jaXBhbC9uOyB9IGVsc2UgeyB2YXIgZj1NYXRoLnBvdygxK3Isbik7IGVtaT1wcmluY2lwYWwqcipmLyhmLTEpOyB9CiAgICB2YXIgdG90YWw9ZW1pKm4sIGludGVyZXN0PXRvdGFsLXByaW5jaXBhbDsKICAgIC8vIHllYXJseSBhbW9ydGl6YXRpb24gc3VtbWFyeQogICAgdmFyIHJvd3M9W10sIGJhbD1wcmluY2lwYWw7CiAgICBmb3IodmFyIHk9MTt5PD15ZWFycyAmJiBiYWw+MC4wMDE7eSsrKXsKICAgICAgdmFyIHlJbnQ9MCwgeVByaW49MDsKICAgICAgZm9yKHZhciBtPTA7bTwxMiAmJiBiYWw+MC4wMDE7bSsrKXsKICAgICAgICB2YXIgaT1iYWwqciwgcD1lbWktaTsKICAgICAgICBpZihwPmJhbCl7IHA9YmFsOyBpPWVtaS1wOyB9CiAgICAgICAgeUludCs9aTsgeVByaW4rPXA7IGJhbC09cDsKICAgICAgfQogICAgICByb3dzLnB1c2goe3llYXI6eSwgaW50ZXJlc3Q6eUludCwgcHJpbmNpcGFsOnlQcmluLCBiYWxhbmNlOk1hdGgubWF4KDAsYmFsKX0pOwogICAgfQogICAgcmV0dXJuIHtlbWk6ZW1pLCB0b3RhbDp0b3RhbCwgaW50ZXJlc3Q6aW50ZXJlc3QsIG1vbnRoczpuLCBzY2hlZHVsZTpyb3dzfTsKICB9CiAgZnVuY3Rpb24gYW5hbHl6ZVRleHQodGV4dCl7CiAgICB0ZXh0ID0gdGV4dCB8fCAnJzsKICAgIHZhciBjaGFycyA9IHRleHQubGVuZ3RoOwogICAgdmFyIGNoYXJzTm9TcGFjZSA9IHRleHQucmVwbGFjZSgvXHMvZywnJykubGVuZ3RoOwogICAgdmFyIHdvcmRzID0gKHRleHQudHJpbSgpLm1hdGNoKC9cUysvZykgfHwgW10pLmxlbmd0aDsKICAgIHZhciBzZW50ZW5jZXMgPSAodGV4dC5tYXRjaCgvW14uIT9dK1suIT9dKy9nKSB8fCBbXSkubGVuZ3RoOwogICAgdmFyIHBhcmFncmFwaHMgPSB0ZXh0LnNwbGl0KC9cblxzKlxuLykuZmlsdGVyKGZ1bmN0aW9uKHApe3JldHVybiBwLnRyaW0oKS5sZW5ndGg+MDt9KS5sZW5ndGg7CiAgICBpZih0ZXh0LnRyaW0oKS5sZW5ndGg+MCAmJiBwYXJhZ3JhcGhzPT09MCkgcGFyYWdyYXBocz0xOwogICAgdmFyIHJlYWRNaW4gPSB3b3Jkcy8yMDAsIHNwZWFrTWluID0gd29yZHMvMTMwOwogICAgcmV0dXJuIHt3b3Jkczp3b3JkcywgY2hhcnM6Y2hhcnMsIGNoYXJzTm9TcGFjZTpjaGFyc05vU3BhY2UsIHNlbnRlbmNlczpzZW50ZW5jZXMsIHBhcmFncmFwaHM6cGFyYWdyYXBocywgcmVhZE1pbjpyZWFkTWluLCBzcGVha01pbjpzcGVha01pbn07CiAgfQogIGZ1bmN0aW9uIHBhc3N3b3JkRW50cm9weShsZW5ndGgsIHBvb2xTaXplKXsKICAgIHJldHVybiAoTnVtYmVyKGxlbmd0aCl8fDApICogTWF0aC5sb2cyKHBvb2xTaXplfHwxKTsKICB9CiAgZnVuY3Rpb24gc3RyZW5ndGhMYWJlbChiaXRzKXsKICAgIGlmKGJpdHM8NDApIHJldHVybiB7bGFiZWw6J1dlYWsnLCBjb2xvcjonI2RjMjYyNicsIHBjdDoyNX07CiAgICBpZihiaXRzPDYwKSByZXR1cm4ge2xhYmVsOidGYWlyJywgY29sb3I6JyNkOTc3MDYnLCBwY3Q6NTB9OwogICAgaWYoYml0czw4MCkgcmV0dXJuIHtsYWJlbDonU3Ryb25nJywgY29sb3I6JyMxNmEzNGEnLCBwY3Q6NzV9OwogICAgcmV0dXJuIHtsYWJlbDonVmVyeSBzdHJvbmcnLCBjb2xvcjonIzFkNGVkOCcsIHBjdDoxMDB9OwogIH0KICAvLyBNb250aHMgbmVlZGVkIHRvIHJlYWNoIGEgc2F2aW5ncyB0YXJnZXQgd2l0aCBtb250aGx5IGNvbnRyaWJ1dGlvbnMgKyBtb250aGx5LWNvbXBvdW5kZWQgaW50ZXJlc3QuCiAgZnVuY3Rpb24gc2F2aW5nc0dvYWwoY3VycmVudCwgbW9udGhseSwgYW5udWFsUmF0ZVBjdCwgdGFyZ2V0KXsKICAgIGN1cnJlbnQgPSBNYXRoLm1heCgwLCBOdW1iZXIoY3VycmVudCl8fDApOwogICAgbW9udGhseSA9IE1hdGgubWF4KDAsIE51bWJlcihtb250aGx5KXx8MCk7CiAgICBhbm51YWxSYXRlUGN0ID0gTWF0aC5tYXgoMCwgTnVtYmVyKGFubnVhbFJhdGVQY3QpfHwwKTsKICAgIHRhcmdldCA9IE1hdGgubWF4KDAsIE51bWJlcih0YXJnZXQpfHwwKTsKICAgIHZhciByID0gYW5udWFsUmF0ZVBjdC8xMDAvMTI7CiAgICB2YXIgcG9zc2libGUgPSB0cnVlLCBuID0gMDsKICAgIGlmICh0YXJnZXQgPD0gY3VycmVudCkgeyBuID0gMDsgfQogICAgZWxzZSBpZiAobW9udGhseSA8PSAwICYmIHIgPT09IDApIHsgcG9zc2libGUgPSBmYWxzZTsgfQogICAgZWxzZSBpZiAobW9udGhseSA8PSAwKSB7IG4gPSBNYXRoLmNlaWwoTWF0aC5sb2codGFyZ2V0L2N1cnJlbnQpL01hdGgubG9nKDErcikpOyB9CiAgICBlbHNlIGlmIChyID09PSAwKSB7IG4gPSBNYXRoLmNlaWwoKHRhcmdldC1jdXJyZW50KS9tb250aGx5KTsgfQogICAgZWxzZSB7CiAgICAgIHZhciBuZWVkID0gdGFyZ2V0KnIvbW9udGhseSArIDEsIGhhdmUgPSBjdXJyZW50KnIvbW9udGhseSArIDE7CiAgICAgIG4gPSBNYXRoLmNlaWwoTWF0aC5sb2cobmVlZC9oYXZlKS9NYXRoLmxvZygxK3IpKTsKICAgIH0KICAgIGlmIChuIDwgMCB8fCAhaXNGaW5pdGUobikpIHsgcG9zc2libGUgPSBmYWxzZTsgbiA9IDA7IH0KICAgIGZ1bmN0aW9uIGJhbGFuY2VBdChtKXsKICAgICAgaWYgKHIgPT09IDApIHJldHVybiBjdXJyZW50ICsgbW9udGhseSptOwogICAgICB2YXIgZiA9IE1hdGgucG93KDErciwgbSk7CiAgICAgIHJldHVybiBjdXJyZW50KmYgKyBtb250aGx5KihmLTEpL3I7CiAgICB9CiAgICB2YXIgY29udHJpYnV0ZWQgPSBjdXJyZW50ICsgbW9udGhseSpuOwogICAgdmFyIGZpbmFsQW10ID0gcG9zc2libGUgPyBiYWxhbmNlQXQobikgOiAwOwogICAgdmFyIGludGVyZXN0ID0gcG9zc2libGUgPyBNYXRoLm1heCgwLCBmaW5hbEFtdCAtIGNvbnRyaWJ1dGVkKSA6IDA7CiAgICB2YXIgcHJvaiA9IFtdOwogICAgdmFyIHllYXJzID0gTWF0aC5jZWlsKG4vMTIpOwogICAgZm9yICh2YXIgeT0xOyB5PD15ZWFycyAmJiB5PD00MDsgeSsrKXsKICAgICAgdmFyIG0gPSBNYXRoLm1pbih5KjEyLCBuKTsKICAgICAgcHJvai5wdXNoKHt5ZWFyOnksIGJhbGFuY2U6YmFsYW5jZUF0KG0pLCBjb250cmlidXRlZDpjdXJyZW50ICsgbW9udGhseSptfSk7CiAgICAgIGlmIChtID49IG4pIGJyZWFrOwogICAgfQogICAgcmV0dXJuIHttb250aHM6biwgeWVhcnM6TWF0aC5mbG9vcihuLzEyKSwgcmVtTW9udGhzOm4lMTIsIHRvdGFsQ29udHJpYnV0ZWQ6Y29udHJpYnV0ZWQsCiAgICAgICAgICAgIGludGVyZXN0RWFybmVkOmludGVyZXN0LCBwcm9qZWN0ZWRCYWxhbmNlOmZpbmFsQW10LCBwb3NzaWJsZTpwb3NzaWJsZSwgcHJvamVjdGlvbjpwcm9qLCBfYmFsYW5jZUF0OmJhbGFuY2VBdH07CiAgfQogIHJldHVybiB7YnVkZ2V0NTAzMDIwOmJ1ZGdldDUwMzAyMCwgbG9hbkVtaTpsb2FuRW1pLCBhbmFseXplVGV4dDphbmFseXplVGV4dCwgcGFzc3dvcmRFbnRyb3B5OnBhc3N3b3JkRW50cm9weSwgc3RyZW5ndGhMYWJlbDpzdHJlbmd0aExhYmVsLCBzYXZpbmdzR29hbDpzYXZpbmdzR29hbH07Cn0pKCk7CmlmICh0eXBlb2YgbW9kdWxlICE9PSAndW5kZWZpbmVkJyAmJiBtb2R1bGUuZXhwb3J0cykgeyBtb2R1bGUuZXhwb3J0cyA9IENvcmU7IH0K
+// {{BRAND}} shared helpers — copy buttons, input niceties. No dependencies.
+function copyText(text, btn) {
+  var done = function(){ if(btn){ var o=btn.textContent; btn.textContent='Copied ✓'; setTimeout(function(){btn.textContent=o;},1600);} };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
+}
+function fallbackCopy(text){
+  var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+function fmtUSD(n){ return '$' + Number(n).toLocaleString('en-US',{maximumFractionDigits:2,minimumFractionDigits:2}); }
+function clamp(n,min,max){ return Math.min(max, Math.max(min, n)); }
+// Shared core math so it can be unit-tested in Node without a DOM.
+var Core = (function(){
+  function budget503020(income){
+    income = Math.max(0, Number(income)||0);
+    var needs=income*0.50, wants=income*0.30, save=income*0.20;
+    return {needs:needs, wants:wants, save:save, yearlyNeeds:needs*12, yearlyWants:wants*12, yearlySave:save*12};
+  }
+  function loanEmi(principal, annualRatePct, years){
+    principal=Math.max(0,Number(principal)||0); annualRatePct=Math.max(0,Number(annualRatePct)||0); years=Math.max(0.25,Number(years)||0);
+    var n=Math.round(years*12), r=annualRatePct/100/12, emi;
+    if(r===0){ emi=principal/n; } else { var f=Math.pow(1+r,n); emi=principal*r*f/(f-1); }
+    var total=emi*n, interest=total-principal;
+    // yearly amortization summary
+    var rows=[], bal=principal;
+    for(var y=1;y<=years && bal>0.001;y++){
+      var yInt=0, yPrin=0;
+      for(var m=0;m<12 && bal>0.001;m++){
+        var i=bal*r, p=emi-i;
+        if(p>bal){ p=bal; i=emi-p; }
+        yInt+=i; yPrin+=p; bal-=p;
+      }
+      rows.push({year:y, interest:yInt, principal:yPrin, balance:Math.max(0,bal)});
+    }
+    return {emi:emi, total:total, interest:interest, months:n, schedule:rows};
+  }
+  function analyzeText(text){
+    text = text || '';
+    var chars = text.length;
+    var charsNoSpace = text.replace(/\s/g,'').length;
+    var words = (text.trim().match(/\S+/g) || []).length;
+    var sentences = (text.match(/[^.!?]+[.!?]+/g) || []).length;
+    var paragraphs = text.split(/\n\s*\n/).filter(function(p){return p.trim().length>0;}).length;
+    if(text.trim().length>0 && paragraphs===0) paragraphs=1;
+    var readMin = words/200, speakMin = words/130;
+    return {words:words, chars:chars, charsNoSpace:charsNoSpace, sentences:sentences, paragraphs:paragraphs, readMin:readMin, speakMin:speakMin};
+  }
+  function passwordEntropy(length, poolSize){
+    return (Number(length)||0) * Math.log2(poolSize||1);
+  }
+  function strengthLabel(bits){
+    if(bits<40) return {label:'Weak', color:'#dc2626', pct:25};
+    if(bits<60) return {label:'Fair', color:'#d97706', pct:50};
+    if(bits<80) return {label:'Strong', color:'#16a34a', pct:75};
+    return {label:'Very strong', color:'#1d4ed8', pct:100};
+  }
+  // Months needed to reach a savings target with monthly contributions + monthly-compounded interest.
+  function savingsGoal(current, monthly, annualRatePct, target){
+    current = Math.max(0, Number(current)||0);
+    monthly = Math.max(0, Number(monthly)||0);
+    annualRatePct = Math.max(0, Number(annualRatePct)||0);
+    target = Math.max(0, Number(target)||0);
+    var r = annualRatePct/100/12;
+    var possible = true, n = 0;
+    if (target <= current) { n = 0; }
+    else if (monthly <= 0 && r === 0) { possible = false; }
+    else if (monthly <= 0) { n = Math.ceil(Math.log(target/current)/Math.log(1+r)); }
+    else if (r === 0) { n = Math.ceil((target-current)/monthly); }
+    else {
+      var need = target*r/monthly + 1, have = current*r/monthly + 1;
+      n = Math.ceil(Math.log(need/have)/Math.log(1+r));
+    }
+    if (n < 0 || !isFinite(n)) { possible = false; n = 0; }
+    function balanceAt(m){
+      if (r === 0) return current + monthly*m;
+      var f = Math.pow(1+r, m);
+      return current*f + monthly*(f-1)/r;
+    }
+    var contributed = current + monthly*n;
+    var finalAmt = possible ? balanceAt(n) : 0;
+    var interest = possible ? Math.max(0, finalAmt - contributed) : 0;
+    var proj = [];
+    var years = Math.ceil(n/12);
+    for (var y=1; y<=years && y<=40; y++){
+      var m = Math.min(y*12, n);
+      proj.push({year:y, balance:balanceAt(m), contributed:current + monthly*m});
+      if (m >= n) break;
+    }
+    return {months:n, years:Math.floor(n/12), remMonths:n%12, totalContributed:contributed,
+            interestEarned:interest, projectedBalance:finalAmt, possible:possible, projection:proj, _balanceAt:balanceAt};
+  }
+  return {budget503020:budget503020, loanEmi:loanEmi, analyzeText:analyzeText, passwordEntropy:passwordEntropy, strengthLabel:strengthLabel, savingsGoal:savingsGoal};
+})();
+if (typeof module !== 'undefined' && module.exports) { module.exports = Core; }
