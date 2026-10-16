@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free YouTube Hook &amp; Title Generator — Hooks and Titles That Get Clicks</title>
+<meta name="description" content="Free YouTube hook and title generator by {{BRAND}}: enter your topic, pick a platform and tone, and get proven hook lines and clickable title ideas. One-click copy.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/youtube-hook-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free YouTube Hook &amp; Title Generator — {{BRAND}}">
+<meta property="og:description" content="Generate proven YouTube hooks and titles from your topic. First-3-seconds lines for Shorts and cold opens for long-form.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/youtube-hook-generator.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a YouTube hook?","acceptedAnswer":{"@type":"Answer","text":"A hook is the opening of your video — the first 3 seconds of a Short or the first 30 seconds of a long-form video — designed to make the viewer keep watching instead of swiping away."}},
+{"@type":"Question","name":"Why does the title matter so much on YouTube?","acceptedAnswer":{"@type":"Answer","text":"The title plus the thumbnail decide whether someone clicks at all. A clear title with a keyword, a number or a curiosity gap typically earns a higher click-through rate than a vague one."}},
+{"@type":"Question","name":"Should the hook and the title say the same thing?","acceptedAnswer":{"@type":"Answer","text":"Not exactly. The title earns the click; the hook earns the watch time. They should promise the same payoff, but the hook should deliver it in spoken, conversational words — never read the title back to the viewer."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>YouTube Hook &amp; Title Generator</h1>
+  <p>Enter your topic once — get proven opening hooks for Shorts and long-form, plus clickable title ideas. Pick the line you like, tweak it to your voice, copy it.</p>
+
+  <div class="toolbox">
+    <h2>Generate hooks &amp; titles</h2>
+    <div class="field">
+      <label for="topic">Your video topic (be specific)</label>
+      <input type="text" id="topic" placeholder="e.g. how to save money on groceries">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="platform">Platform / format</label>
+        <select id="platform">
+          <option>YouTube Shorts</option>
+          <option>YouTube long-form</option>
+          <option>TikTok</option>
+          <option>Reels</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="tone">Tone</label>
+        <select id="tone">
+          <option>Funny / playful</option>
+          <option>Serious / educational</option>
+          <option>Dramatic / bold</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="genHooksUI()">Generate hooks &amp; titles</button>
+    <div id="hookOut" style="display:none">
+      <h3>Opening hooks</h3>
+      <div id="hookList"></div>
+      <h3>Title ideas <span class="muted">(aim under 60 characters)</span></h3>
+      <div id="titleList"></div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why Your YouTube Title and Hook Matter More Than the Video</h2>
+    <p>Two numbers decide whether a video grows: the click-through rate (who clicks) and the retention (who stays). The <strong>title</strong> drives the click; the <strong>hook</strong> drives the retention. Everything else — your camera, your editing, your topic research — only gets a chance to work after those two do their job. The good news: titles and hooks are learnable formulas, not talent. This page covers the formulas that working creators actually use in 2026.</p>
+    <h3>The title: one job — earn the click</h3>
+    <p>A great title does three things in about six words: names the topic (so the algorithm and the searcher both know what it is), promises a payoff (why clicking is worth it), and creates a small curiosity gap (a question the video answers). "How to Save Money on Groceries" names the topic but promises nothing. "7 Grocery Tricks That Cut My Bill in Half" names the topic, promises a payoff, and opens a gap: which tricks?</p>
+    <p>Keep titles under roughly 60 characters so they don't get cut off on mobile — most YouTube viewing is on phones. Front-load the keyword: "Guitar Chords for Beginners" beats "The Ultimate Guide You Need to Guitar Chords". Numbers help because they make the video feel concrete and scannable ("5", "7", "10"). And never promise what the video doesn't deliver — clickbait gets the click but destroys watch time, and YouTube's recommendation system promotes watch time, not clicks alone.</p>
+    <h3>The hook: first 3 seconds (Shorts) or first 30 seconds (long-form)</h3>
+    <table>
+      <tr><th>Hook type</th><th>Example</th><th>When to use it</th></tr>
+      <tr><td>Pattern interrupt</td><td>"Stop scrolling — this trick changed everything."</td><td>Shorts: breaks the swipe reflex</td></tr>
+      <tr><td>Curiosity gap</td><td>"Nobody is talking about this secret…"</td><td>Shorts and TikTok</td></tr>
+      <tr><td>Cold open + payoff</td><td>"In the next 60 seconds I'll show you X."</td><td>Long-form intros</td></tr>
+      <tr><td>Story hook</td><td>"Last month everything I knew turned out wrong."</td><td>Long-form vlogs and essays</td></tr>
+      <tr><td>Contrarian</td><td>"Forget what you've heard — the answer is simpler."</td><td>Education and finance niches</td></tr>
+    </table>
+    <p>For Shorts, the spoken hook must land within the first 1–3 seconds, before the swipe instinct fires. Skip greetings, skip your channel name, skip "in today's video" — the very first frame and the very first words <em>are</em> the hook. For long-form, your first 30 seconds need a payoff promise: tell the viewer exactly what they will walk away with. Viewers decide in seconds whether the video is worth their time, so the payoff should be the earliest thing you say.</p>
+    <h3>Title and hook should match — but not echo</h3>
+    <p>The title earns the click and the hook earns the watch time, so they must promise the same thing. If the title says "7 Grocery Tricks," the hook should not open with a story about your vacation. But don't read the title back to the viewer either — that feels repetitive and a surprising number of viewers bounce from "as the title says." Restate the promise in spoken, conversational words instead.</p>
+    <h3>Common mistakes and quick fixes</h3>
+    <p><strong>Mistake 1: the vague title.</strong> "My Morning Routine" tells nobody why they should care. Fix: add the payoff — "My Morning Routine That Saves Me 2 Hours a Day." <strong>Mistake 2: the slow open.</strong> Ten seconds of animated intro before any substance loses most viewers. Fix: hook first, branding later (or over the hook). <strong>Mistake 3: three promises in one title.</strong> "7 Tricks, 1 Secret, and What Banks Hide" is three videos competing in one title. Fix: one promise per title. <strong>Mistake 4: copying big channels verbatim.</strong> A giant channel can title a video "wow" and get clicks on reputation; a small channel can't. Fix: earn your clicks with specificity until the audience knows your name.</p>
+    <h3>Your workflow with this tool</h3>
+    <p>One, type your topic as plainly as possible — the more specific, the better the output. Two, generate hooks and titles, then pick the one that makes <em>you</em> want to click. Three, say the hook out loud; if it sounds awkward in your mouth, rewrite it in your own words. Four, pair the title with a thumbnail that says the same thing visually, and double-check your title length with our <a href="word-counter.html">word counter</a> before you publish. If you're also scripting the visuals, the <a href="ai-prompt-generator.html">AI video prompt generator</a> can structure each shot while the hook carries the opening.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Video Prompt Generator</a></h3><p>Structured cinematic prompts for AI video tools.</p></div>
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time — check title length.</p></div>
+      <div class="card"><h3><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income into needs, wants, savings.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function cleanTopic(t){t=(t||'').trim().replace(/\s+/g,' ');if(!t)t='your next video';return t.charAt(0).toLowerCase()+t.slice(1);}
+function titleCase(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function pick(arr,seed){var i=0;for(var c=0;c<seed.length;c++)i=(i*31+seed.charCodeAt(c))%997;return arr[i%arr.length];}
+function buildHooks(topicRaw,platform,tone){
+  var topic=cleanTopic(topicRaw);
+  var isShort=platform.indexOf('Short')===0||platform==='TikTok'||platform==='Reels';
+  var hooks=[];
+  if(isShort){
+    hooks.push(['Pattern interrupt (say this in the first 3 seconds)','Stop scrolling — '+topic+' is about to get way more interesting.']);
+    hooks.push(['Curiosity gap','Nobody is talking about this '+topic+' secret...']);
+    hooks.push(['Direct callout','If you care about '+topic+', watch the next 10 seconds.']);
+    hooks.push(['Bold claim','This '+topic+' trick changed everything for me.']);
+    hooks.push(['Question hook','Why does everyone get '+topic+' wrong?']);
+  }else{
+    hooks.push(['Cold open line','In the next 60 seconds, I\'m going to show you something about '+topic+' that most people never figure out.']);
+    hooks.push(['Story hook','Last month, everything I knew about '+topic+' turned out to be wrong. Here\'s what happened.']);
+    hooks.push(['Stakes hook','If you get '+topic+' right, this one change can save you hours every week.']);
+    hooks.push(['Contrarian hook','Forget everything you\'ve heard about '+topic+' — the real answer is simpler.']);
+    hooks.push(['Payoff promise','By the end of this video, you\'ll know exactly how to handle '+topic+' like a pro.']);
+  }
+  if(tone==='Funny / playful')hooks.push(['Humor hook','I made every '+topic+' mistake so you don\'t have to. You\'re welcome.']);
+  if(tone==='Serious / educational')hooks.push(['Authority hook','I tested '+topic+' for 30 days and kept detailed notes. These are the only three things that mattered.']);
+  if(tone==='Dramatic / bold')hooks.push(['Drama hook','This is the '+topic+' mistake that\'s quietly costing people thousands.']);
+  return hooks;
+}
+function buildTitles(topicRaw,tone){
+  var topic=cleanTopic(topicRaw);var T=titleCase(topic);
+  var num=pick(['7','9','10','12','15'],topicRaw+tone);
+  var titles=[
+    T+' — The Complete Guide (2026)',
+    'How to Master '+T+' (Even as a Beginner)',
+    num+' '+T+' Tips That Actually Work',
+    'I Tested '+T+' for 30 Days — Here\'s What Happened',
+    'The '+T+' Mistake Everyone Makes'
+  ];
+  if(tone==='Funny / playful')titles.push('Trying '+T+' Until It Finally Works');
+  if(tone==='Serious / educational')titles.push(T+': What the Data Actually Says');
+  if(tone==='Dramatic / bold')titles.push('Why '+T+' Is Harder Than It Looks (And How to Win)');
+  return titles;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function genHooksUI(){
+  var topicRaw=document.getElementById('topic').value;
+  var platform=document.getElementById('platform').value;
+  var tone=document.getElementById('tone').value;
+  var hooks=buildHooks(topicRaw,platform,tone);
+  var titles=buildTitles(topicRaw,tone);
+  var hl=document.getElementById('hookList');hl.innerHTML='';
+  hooks.forEach(function(h,i){
+    var d=document.createElement('div');d.className='idea';
+    d.innerHTML='<strong>'+esc(h[0])+':</strong> <span>'+esc(h[1])+'</span> ';
+    var b=document.createElement('button');b.className='btn-ghost';b.textContent='Copy';
+    b.onclick=function(){copyText(h[1],b);};d.appendChild(b);hl.appendChild(d);
+  });
+  var tl=document.getElementById('titleList');tl.innerHTML='';
+  titles.forEach(function(t){
+    var d=document.createElement('div');d.className='idea';
+    d.innerHTML='<span>'+esc(t)+'</span> <em class="muted">('+t.length+' chars)</em> ';
+    var b=document.createElement('button');b.className='btn-ghost';b.textContent='Copy';
+    b.onclick=function(){copyText(t,b);};d.appendChild(b);tl.appendChild(d);
+  });
+  document.getElementById('hookOut').style.display='block';
+}
+</script>
+</body>
+</html>
