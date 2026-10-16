@@ -77,6 +77,9 @@ footer.site li{margin:6px 0}
 .copyout{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:18px;white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;line-height:1.6;margin-top:12px;position:relative}
 .strength{height:10px;border-radius:999px;background:#e2e8f0;margin-top:8px;overflow:hidden}
 .strength i{display:block;height:100%;border-radius:999px;transition:width .2s}
+.idea{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.idea .btn-ghost{flex-shrink:0}
+.muted{color:var(--muted);font-size:.85em}
 @media(max-width:640px){
   .hero{padding:38px 24px}
   .hero h1{font-size:1.7rem}
