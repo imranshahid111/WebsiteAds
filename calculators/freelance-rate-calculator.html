@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Freelance Hourly Rate Calculator — How Much Should You Charge in 2026?</title>
+<meta name="description" content="Use {{BRAND}}'s free freelance hourly rate calculator: enter your target income, billable hours, expenses and tax allowance to find your minimum rate and a quote-ready recommended rate. No sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/calculators/freelance-rate-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Freelance Hourly Rate Calculator — {{BRAND}}">
+<meta property="og:description" content="Stop undercharging. Find your real floor rate and a quote-ready rate from your income goal, billable hours, and expenses. Free, no sign-up.">
+<meta property="og:url" content="https://websiteads.vercel.app/calculators/freelance-rate-calculator.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why can't I just divide my old salary by 2,080 hours?","acceptedAnswer":{"@type":"Answer","text":"A salaried worker bills roughly 2,080 hours a year, but a freelancer never bills that many. You lose weeks to vacation, sick days and holidays, and hours every week to pitching, admin and invoicing. You also pay your own taxes, insurance and tools. Dividing a salary by 2,080 skips all of that and guarantees you undercharge."}},
+{"@type":"Question","name":"What is a good freelance hourly rate for beginners?","acceptedAnswer":{"@type":"Answer","text":"There is no universal beginner rate — it depends on your income goal and billable hours, which is exactly what this calculator computes. As a rough sanity check, most full-time US freelancers in 2026 land between $50 and $150 an hour depending on the skill. If your floor rate looks shockingly high, it usually means your billable hours are lower than you assumed."}},
+{"@type":"Question","name":"How much should I add for self-employment tax?","acceptedAnswer":{"@type":"Answer","text":"In the US, self-employment tax is 15.3% on net earnings (the employee + employer halves of Social Security and Medicare). You also owe income tax on top. A common planning shortcut is to set aside 25–30% of every invoice for taxes total. This calculator's tax allowance field defaults to 15% as a starting estimate — adjust it to your real situation."}},
+{"@type":"Question","name":"Should I tell clients my floor rate or my recommended rate?","acceptedAnswer":{"@type":"Answer","text":"Quote with the recommended rate — the floor is private information. The floor is the number below which you are effectively paying the client; the recommended rate includes a 15% buffer for negotiation, scope creep and slow months. Never quote the floor itself."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Freelance Hourly Rate Calculator</h1>
+  <p>Enter your income goal, real billable hours, business expenses, and a tax allowance — see your true minimum rate and a quote-ready recommended rate.</p>
+
+  <div class="toolbox">
+    <h2>Your freelance numbers</h2>
+    <div class="field">
+      <label for="frIncome">Target annual income ($) — what you want to take home before taxes</label>
+      <input type="number" id="frIncome" value="75000" min="0" step="1000">
+    </div>
+    <div class="field">
+      <label for="frOff">Weeks off per year (vacation, holidays, sick days — unpaid)</label>
+      <input type="number" id="frOff" value="4" min="0" max="52" step="1">
+    </div>
+    <div class="field">
+      <label for="frHours">Billable hours per week (client work only, not admin)</label>
+      <input type="number" id="frHours" value="25" min="0" max="80" step="1">
+    </div>
+    <div class="field">
+      <label for="frExpenses">Annual business expenses ($) — software, hardware, insurance, coworking</label>
+      <input type="number" id="frExpenses" value="5000" min="0" step="500">
+    </div>
+    <div class="field">
+      <label for="frTax">Tax allowance (%) — set aside for income + self-employment tax</label>
+      <input type="number" id="frTax" value="15" min="0" max="50" step="1">
+    </div>
+    <button onclick="calcRate()">Calculate my rate</button>
+    <div class="result" id="frResult" style="display:none">
+      <p id="frImpossible" style="display:none;color:#dc2626">With zero billable hours there is no rate to calculate — add billable hours per week (and make sure weeks off is under 52).</p>
+      <div id="frOk">
+        <div class="stat-row">
+          <div class="stat"><div class="v" id="frFloor">—</div><div class="k">Floor rate (never quote below this)</div></div>
+          <div class="stat"><div class="v" id="frRec">—</div><div class="k">Recommended quote rate</div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="v" id="frAnnual">—</div><div class="k">Annual income at floor</div></div>
+          <div class="stat"><div class="v" id="frMonthly">—</div><div class="k">Monthly income at floor</div></div>
+          <div class="stat"><div class="v" id="frWeekly">—</div><div class="k">Weekly income at floor</div></div>
+          <div class="stat"><div class="v" id="frHoursYr">—</div><div class="k">Billable hours / year</div></div>
+        </div>
+        <div class="bar" style="display:flex"><i id="frBarInc" style="background:#1d4ed8;width:100%"></i><i id="frBarExp" style="background:#d97706;width:0%"></i><i id="frBarTax" style="background:#dc2626;width:0%"></i></div>
+        <p style="margin-top:8px">Where every dollar you must earn goes (blue = your income goal, orange = business expenses, red = tax allowance).</p>
+        <h3 style="margin-top:20px">How your rate changes with billable hours</h3>
+        <table id="frTable"><tr><th>Billable hrs/week</th><th>Hours/year</th><th>Floor rate</th></tr></table>
+        <p style="margin-top:8px">Same income goal, same expenses — fewer billable hours means every hour must carry more weight.</p>
+      </div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why Your Hourly Rate Is Not Your Salary ÷ 2,080</h2>
+    <p>The most expensive math mistake a new freelancer makes is taking their old salary, dividing by 2,080 working hours, and calling it a rate. A $75,000 salary becomes "$36 an hour" — and then the freelancer slowly goes broke. The 2,080 number assumes every work hour is a paid hour, which is true for employees and false for everyone else. Three things a salary quietly covers that your rate must now cover openly: <strong>unpaid time</strong> (vacation, holidays, sick days, plus the pitching, proposals, admin and invoicing that clients never see), <strong>the employer half of your taxes</strong>, and <strong>your overhead</strong> (software subscriptions, hardware, insurance, coworking, your own training). Skip any one of them and the rate looks fine on paper while your bank account shrinks.</p>
+    <h3>The inputs, explained</h3>
+    <p><strong>Target annual income:</strong> what you want to keep for yourself after business costs — think of it as the salary you are replacing, before taxes. <strong>Weeks off:</strong> be honest here. Four weeks of vacation plus a week of holidays plus a sick week is six unpaid weeks, and most freelancers underestimate this. <strong>Billable hours per week:</strong> hours a client actually pays for — not your 40-hour work week. If you work 40 hours but 15 go to marketing, admin and proposals, your billable number is 25. <strong>Business expenses:</strong> everything the work costs you per year — Adobe or Figma subscriptions, a laptop replacement fund, liability insurance, coworking fees. <strong>Tax allowance:</strong> the slice of each invoice you must not spend. In the US, self-employment tax alone is 15.3% of net earnings, and income tax sits on top — many freelancers set aside 25–30% of every payment. The default 15% here is a conservative starting estimate; adjust it once you know your real tax picture.</p>
+    <h3>The math: how the floor rate works</h3>
+    <p>The formula is: <em>(target income + annual expenses) × (1 + tax allowance) ÷ billable hours per year</em>. First we add your income goal to your costs — that is the real amount the business must earn. Then we gross it up for taxes, because a $75,000 take-home goal at a 15% allowance means the business must collect about $92,000. Finally we divide by your actual billable hours (billable weeks × billable hours per week) — not 2,080. The <strong>recommended rate</strong> is the floor plus a 15% buffer. That buffer is not greed: it is negotiation room, scope-creep insurance, and a cushion for slow months. Quote with the recommended rate. The floor is private — it is simply the line below which you are subsidizing the client.</p>
+    <h3>A worked example</h3>
+    <p>Take a designer who wants $75,000 a year, takes 4 weeks off, bills 25 hours a week, spends $5,000 a year on tools and insurance, and sets aside 15% for taxes. Her billable year is 48 weeks × 25 hours = <strong>1,200 hours</strong>. The business must earn ($75,000 + $5,000) × 1.15 = <strong>$92,000</strong>. Her floor rate is $92,000 ÷ 1,200 = <strong>$76.67/hour</strong>, and her recommended quote rate is about <strong>$88/hour</strong>. Now compare that to the naive salary math: $75,000 ÷ 2,080 = $36.06. The real floor is more than double the naive number — which is exactly why so many talented freelancers feel busy all year and still can't save.</p>
+    <h3>Three reasons freelancers undercharge</h3>
+    <p><strong>1. They price the work week, not the billable week.</strong> "I work 40 hours" becomes 40 billable hours in the math, but half of those hours are invisible labor. Count only hours clients pay for. <strong>2. They forget the employer's half of everything.</strong> Your old employer paid half your Social Security and Medicare, gave you paid leave, and bought your laptop. Those costs did not disappear — they moved to you. <strong>3. They anchor to the cheapest competitor.</strong> Someone on a marketplace charges $20/hour because they live somewhere cheaper, are learning, or are also going broke. Price your own numbers, not theirs.</p>
+    <h3>How to use the two numbers in a quote</h3>
+    <p>When a client asks your rate, start from the recommended rate and quote the project, not the hours, whenever you can: "This project is $2,200" lands better than "$88 an hour." If they push for hourly, quote the recommended rate as your standard and let negotiation pull toward — but never below — the floor. If a project forces you below the floor, the honest answer is no; taking it means working at a loss and resenting the client. Track your actual billable hours for a month and rerun the calculator with real numbers — most people's first estimate is optimistic, and the rate usually goes up, not down.</p>
+    <h3>Next steps after your calculation</h3>
+    <p>Run your numbers, then write the recommended rate on a sticky note and quote it for the next 30 days without flinching — the first quote at a real rate is the hardest. Put the floor rate somewhere private as your walk-away line. Then make the income real: run our <a href="50-30-20-budget-calculator.html">50/30/20 budget calculator</a> with your new freelance income to split it into needs, wants and savings, and feed the savings slice into our <a href="savings-goal-calculator.html">savings goal calculator</a> to see how fast an emergency fund builds from freelance earnings. Revisit this calculator every 6 months or after any big life change — a new expense, a tax surprise, or a week of unpaid illness all change the floor.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split freelance income into needs, wants, and savings.</p></div>
+      <div class="card"><h3><a href="savings-goal-calculator.html">Savings Goal Calculator</a></h3><p>How many months until your goal — interest included.</p></div>
+      <div class="card"><h3><a href="loan-emi-calculator.html">Loan EMI Calculator</a></h3><p>Monthly payment and total interest before you borrow.</p></div>
+      <div class="card"><h3><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="../tools/word-counter.html">Word Counter</a></li>
+        <li><a href="../tools/password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. Educational content only — not financial advice. See our <a href="../disclaimer.html">disclaimer</a>.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function calcRate(){
+  var r = Core.freelanceRate(
+    document.getElementById('frIncome').value,
+    document.getElementById('frOff').value,
+    document.getElementById('frHours').value,
+    document.getElementById('frExpenses').value,
+    document.getElementById('frTax').value
+  );
+  document.getElementById('frResult').style.display='block';
+  var ok = r.possible;
+  document.getElementById('frImpossible').style.display = ok ? 'none' : 'block';
+  document.getElementById('frOk').style.display = ok ? 'block' : 'none';
+  if(!ok) return;
+  document.getElementById('frFloor').textContent = fmtUSD(r.floorRate) + '/hr';
+  document.getElementById('frRec').textContent = fmtUSD(r.recommendedRate) + '/hr';
+  document.getElementById('frAnnual').textContent = fmtUSD(r.floorRate * r.annualHours);
+  document.getElementById('frMonthly').textContent = fmtUSD(r.monthlyAtFloor);
+  document.getElementById('frWeekly').textContent = fmtUSD(r.weeklyAtFloor);
+  document.getElementById('frHoursYr').textContent = r.annualHours.toLocaleString('en-US');
+  var total = r.subtotal + r.taxAllowance;
+  // breakdown bar: income goal vs expenses vs tax allowance
+  var ti = Math.max(0, Number(document.getElementById('frIncome').value)||0);
+  var ex = Math.max(0, Number(document.getElementById('frExpenses').value)||0);
+  var ta = r.taxAllowance;
+  var t2 = ti + ex + ta;
+  document.getElementById('frBarInc').style.width = (t2>0 ? ti/t2*100 : 100) + '%';
+  document.getElementById('frBarExp').style.width = (t2>0 ? ex/t2*100 : 0) + '%';
+  document.getElementById('frBarTax').style.width = (t2>0 ? ta/t2*100 : 0) + '%';
+  var tbl = document.getElementById('frTable');
+  while(tbl.rows.length>1) tbl.deleteRow(1);
+  r.scenarios.forEach(function(s){
+    var tr = tbl.insertRow(-1);
+    tr.insertCell(0).textContent = s.hrsPerWeek;
+    tr.insertCell(1).textContent = s.annualHours.toLocaleString('en-US');
+    tr.insertCell(2).textContent = fmtUSD(s.floor) + '/hr';
+  });
+}
+window.addEventListener('load', calcRate);
+</script>
+</body>
+</html>

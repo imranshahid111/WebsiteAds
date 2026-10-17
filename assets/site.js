@@ -93,6 +93,32 @@ var Core = (function(){
     return {months:n, years:Math.floor(n/12), remMonths:n%12, totalContributed:contributed,
             interestEarned:interest, projectedBalance:finalAmt, possible:possible, projection:proj, _balanceAt:balanceAt};
   }
-  return {budget503020:budget503020, loanEmi:loanEmi, analyzeText:analyzeText, passwordEntropy:passwordEntropy, strengthLabel:strengthLabel, savingsGoal:savingsGoal};
+  // Freelance hourly rate: (target income + expenses) + tax allowance, spread over actual billable hours.
+  function freelanceRate(targetIncome, weeksOff, billableHrsPerWeek, expenses, taxPct){
+    targetIncome = Math.max(0, Number(targetIncome)||0);
+    weeksOff = Math.min(52, Math.max(0, Number(weeksOff)||0));
+    billableHrsPerWeek = Math.max(0, Number(billableHrsPerWeek)||0);
+    expenses = Math.max(0, Number(expenses)||0);
+    taxPct = Math.max(0, Number(taxPct)||0);
+    var billableWeeks = 52 - weeksOff;
+    var annualHours = billableWeeks * billableHrsPerWeek;
+    var possible = annualHours > 0;
+    var subtotal = targetIncome + expenses;
+    var taxAllowance = subtotal * taxPct / 100;
+    var totalNeeded = subtotal + taxAllowance;
+    var floorRate = possible ? totalNeeded / annualHours : 0;
+    var recommendedRate = floorRate * 1.15;
+    var scenarios = [];
+    [15,20,25,30,35].forEach(function(h){
+      var hrs = billableWeeks * h;
+      scenarios.push({hrsPerWeek:h, annualHours:hrs, floor: hrs>0 ? totalNeeded/hrs : 0});
+    });
+    return {billableWeeks:billableWeeks, annualHours:annualHours,
+            subtotal:subtotal, taxAllowance:taxAllowance, totalNeeded:totalNeeded,
+            floorRate:floorRate, recommendedRate:recommendedRate,
+            monthlyAtFloor:floorRate*annualHours/12, weeklyAtFloor:floorRate*annualHours/52,
+            scenarios:scenarios, possible:possible};
+  }
+  return {budget503020:budget503020, loanEmi:loanEmi, analyzeText:analyzeText, passwordEntropy:passwordEntropy, strengthLabel:strengthLabel, savingsGoal:savingsGoal, freelanceRate:freelanceRate};
 })();
 if (typeof module !== 'undefined' && module.exports) { module.exports = Core; }
