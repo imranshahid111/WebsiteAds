@@ -1,6 +1,6 @@
-# websiteads.vercel.app — Free AI Tools & Online Calculators
+# Xoft Tools — Free AI Tools & Online Calculators
 
-> Free browser-based tools and calculators for creators, students, freelancers, and small businesses in the USA. No sign-up and no paywall. Every calculation runs locally in the visitor's own browser — inputs are never sent to a server.
+> Xoft Tools (websiteads.vercel.app) offers free browser-based tools and calculators for creators, students, freelancers, and small businesses in the USA. No sign-up and no paywall. Every calculation runs locally in the visitor's own browser — inputs are never sent to a server.
 
 ## Calculators
 

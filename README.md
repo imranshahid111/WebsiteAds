@@ -1,4 +1,4 @@
-# {{BRAND}} — Static Website v1
+# Xoft Tools — Static Website v1
 
 GitHub-Pages-ready static site. No build step, no CDN, no backend — pure HTML/CSS/JS. All tools run client-side in the visitor's browser.
 
@@ -30,17 +30,17 @@ Option B — free GitHub subdomain (quick preview only):
 
 ## Replace the placeholders (do this before going live)
 
-1. `{{BRAND}}` — the chosen site name. Replace literally everywhere:
+1. `Xoft Tools` — the chosen site name. Replace literally everywhere:
    ```bash
    cd /path/to/site
-   grep -rl '{{BRAND}}' . | xargs sed -i 's/{{BRAND}}/YourName/g'
+   grep -rl 'Xoft Tools' . | xargs sed -i 's/Xoft Tools/YourName/g'
    ```
 2. `YOURDOMAIN.com` — the real domain, no protocol:
    ```bash
    grep -rl 'YOURDOMAIN.com' . | xargs sed -i 's/YOURDOMAIN.com/yourdomain.com/g'
    ```
 3. `hello@YOURDOMAIN.com` — replace with the real contact email (it becomes `hello@yourdomain.com` automatically in step 2 if you use that address).
-4. Check: after replacing, `grep -r '{{BRAND}}' .` and `grep -r 'YOURDOMAIN' .` should return nothing.
+4. Check: after replacing, `grep -r 'Xoft Tools' .` and `grep -r 'YOURDOMAIN' .` should return nothing.
 
 ## Add a new tool page
 
