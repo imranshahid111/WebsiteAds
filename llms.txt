@@ -1,0 +1,26 @@
+# websiteads.vercel.app — Free AI Tools & Online Calculators
+
+> Free browser-based tools and calculators for creators, students, freelancers, and small businesses in the USA. No sign-up and no paywall. Every calculation runs locally in the visitor's own browser — inputs are never sent to a server.
+
+## Calculators
+
+- [50/30/20 Budget Calculator](https://websiteads.vercel.app/calculators/50-30-20-budget-calculator.html): Split monthly income into needs, wants, and savings with the classic 50/30/20 rule, with worked examples and adjustments for high-cost cities.
+- [Savings Goal Calculator](https://websiteads.vercel.app/calculators/savings-goal-calculator.html): See how many months it takes to reach a savings goal with monthly deposits and compound interest.
+- [Loan EMI Calculator](https://websiteads.vercel.app/calculators/loan-emi-calculator.html): Exact monthly payment, total interest, and a year-by-year payoff summary before borrowing.
+- [Freelance Hourly Rate Calculator](https://websiteads.vercel.app/calculators/freelance-rate-calculator.html): Hourly and day rates from a target income, adjusted for taxes, platform fees, billable hours, and time off.
+- [Profit Margin Calculator](https://websiteads.vercel.app/calculators/profit-margin-calculator.html): Gross profit margin, markup, and break-even point for small businesses and online sellers.
+
+## AI and creator tools
+
+- [AI Video Prompt Generator](https://websiteads.vercel.app/tools/ai-prompt-generator.html): Turn a topic into a structured, cinematic AI video prompt for Shorts, TikTok, and Reels.
+- [YouTube Hook & Title Generator](https://websiteads.vercel.app/tools/youtube-hook-generator.html): Proven opening hooks for the first 3 seconds and clickable title ideas for Shorts and long-form videos.
+- [Word Counter & Reading Time](https://websiteads.vercel.app/tools/word-counter.html): Count words, characters, sentences, and paragraphs, plus reading and speaking time.
+- [Strong Password Generator](https://websiteads.vercel.app/tools/password-generator.html): Create strong random passwords with a live strength meter.
+
+## Company
+
+- [About](https://websiteads.vercel.app/about.html): What this site is and who it is for.
+- [Contact](https://websiteads.vercel.app/contact.html): Tool requests, error reports, and feedback.
+- [Privacy Policy](https://websiteads.vercel.app/privacy-policy.html): How data and advertising cookies are handled.
+- [Terms of Service](https://websiteads.vercel.app/terms.html)
+- [Disclaimer](https://websiteads.vercel.app/disclaimer.html): Calculator results are educational estimates, not financial advice.
