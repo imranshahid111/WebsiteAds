@@ -119,6 +119,28 @@ var Core = (function(){
             monthlyAtFloor:floorRate*annualHours/12, weeklyAtFloor:floorRate*annualHours/52,
             scenarios:scenarios, possible:possible};
   }
-  return {budget503020:budget503020, loanEmi:loanEmi, analyzeText:analyzeText, passwordEntropy:passwordEntropy, strengthLabel:strengthLabel, savingsGoal:savingsGoal, freelanceRate:freelanceRate};
+  // Profit margin calculator for small business: gross and net margin from price, unit cost, volume and overhead.
+  function profitMargin(price, unitCost, units, overhead){
+    price = Math.max(0, Number(price)||0);
+    unitCost = Math.max(0, Number(unitCost)||0);
+    units = Math.max(0, Math.floor(Number(units)||0));
+    overhead = Math.max(0, Number(overhead)||0);
+    var revenue = price * units;
+    var variableCost = unitCost * units;
+    var grossProfit = revenue - variableCost;
+    var netProfit = grossProfit - overhead;
+    var grossMargin = revenue > 0 ? grossProfit / revenue * 100 : 0;
+    var netMargin = revenue > 0 ? netProfit / revenue * 100 : 0;
+    var scenarios = [];
+    [0.9, 1.0, 1.1].forEach(function(mult){
+      var p = price * mult, rev = p * units;
+      scenarios.push({price: p, revenue: rev,
+        grossMargin: rev > 0 ? (rev - variableCost) / rev * 100 : 0,
+        netMargin: rev > 0 ? (rev - variableCost - overhead) / rev * 100 : 0});
+    });
+    return {revenue:revenue, variableCost:variableCost, grossProfit:grossProfit, grossMargin:grossMargin,
+            netProfit:netProfit, netMargin:netMargin, scenarios:scenarios};
+  }
+  return {budget503020:budget503020, loanEmi:loanEmi, analyzeText:analyzeText, passwordEntropy:passwordEntropy, strengthLabel:strengthLabel, savingsGoal:savingsGoal, freelanceRate:freelanceRate, profitMargin:profitMargin};
 })();
 if (typeof module !== 'undefined' && module.exports) { module.exports = Core; }

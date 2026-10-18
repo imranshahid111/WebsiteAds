@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Profit Margin Calculator for Small Business — {{BRAND}}</title>
+<meta name="description" content="Use {{BRAND}}'s free profit margin calculator: enter your price, cost, sales volume and overhead to see gross and net margin instantly. Built for small businesses. No sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/calculators/profit-margin-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Profit Margin Calculator for Small Business — {{BRAND}}">
+<meta property="og:description" content="Know your real margin before you price. Enter price, cost, sales and overhead to see gross and net profit instantly. Free, no sign-up.">
+<meta property="og:url" content="https://websiteads.vercel.app/calculators/profit-margin-calculator.html">
+<meta property="og:site_name" content="{{BRAND}}">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between gross margin and net margin?","acceptedAnswer":{"@type":"Answer","text":"Gross margin = (revenue − cost of the product itself) ÷ revenue. It tells you whether your pricing works before overhead. Net margin = (gross profit − all business overhead) ÷ revenue. It tells you what the business actually keeps. A shop can have a healthy 60% gross margin and still lose money if rent, wages and fees eat everything — net margin is the number that decides whether the business survives."}},
+{"@type":"Question","name":"What is a good profit margin for a small business?","acceptedAnswer":{"@type":"Answer","text":"It depends on the industry. Retail and food businesses often run 5–15% net margins; service businesses 15–30%; software can exceed 30%. For a small product business, a net margin under 10% means price or cost changes can wipe you out fast. Use the calculator above with your real numbers instead of chasing a universal target."}},
+{"@type":"Question","name":"Should I raise prices or cut costs to improve my margin?","acceptedAnswer":{"@type":"Answer","text":"Do the math both ways with this calculator. A 5% price increase usually beats a 5% cost cut, because price lifts every dollar of revenue while cost cuts are capped by what you actually spend. Try the ±10% price scenario table below your results — small price moves often unlock the margin without touching costs."}},
+{"@type":"Question","name":"Why does my margin look fine but I have no cash?","acceptedAnswer":{"@type":"Answer","text":"Margin is a ratio, not cash in hand. You can have a 40% margin and still be broke if money is locked in inventory, customers pay late, or you took on debt. Fix the cash problem separately: speed up collections, trim inventory, and plan spending with a tool like our 50/30/20 budget calculator — margin tells you the business model works, cash flow tells you it survives the month."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>{{BRAND}}</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Profit Margin Calculator for Small Business</h1>
+  <p>Enter your selling price, cost per unit, monthly sales, and overhead — see your gross and net margin instantly, plus what happens if you change your price.</p>
+
+  <div class="toolbox">
+    <h2>Your business numbers (per month)</h2>
+    <div class="field">
+      <label for="pmPrice">Selling price per unit ($)</label>
+      <input type="number" id="pmPrice" value="49.99" min="0" step="0.01">
+    </div>
+    <div class="field">
+      <label for="pmCost">Cost per unit ($) — materials, manufacturing, or wholesale price</label>
+      <input type="number" id="pmCost" value="22" min="0" step="0.01">
+    </div>
+    <div class="field">
+      <label for="pmUnits">Units sold per month</label>
+      <input type="number" id="pmUnits" value="500" min="0" step="1">
+    </div>
+    <div class="field">
+      <label for="pmOverhead">Monthly overhead ($) — rent, wages, software, shipping, fees</label>
+      <input type="number" id="pmOverhead" value="3000" min="0" step="100">
+    </div>
+    <button onclick="calcMargin()">Calculate my margin</button>
+    <div class="result" id="pmResult" style="display:none">
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="pmGrossM">—</div><div class="k">Gross margin</div></div>
+        <div class="stat"><div class="v" id="pmNetM">—</div><div class="k">Net margin</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="pmRevenue">—</div><div class="k">Monthly revenue</div></div>
+        <div class="stat"><div class="v" id="pmGrossP">—</div><div class="k">Gross profit</div></div>
+        <div class="stat"><div class="v" id="pmNetP">—</div><div class="k">Net profit</div></div>
+        <div class="stat"><div class="v" id="pmOverheadV">—</div><div class="k">Overhead</div></div>
+      </div>
+      <div class="bar" style="display:flex"><i id="pmBarVar" style="background:#d97706;width:44%"></i><i id="pmBarOver" style="background:#dc2626;width:12%"></i><i id="pmBarNet" style="background:#16a34a;width:44%"></i></div>
+      <p style="margin-top:8px">Where every dollar of revenue goes (orange = product cost, red = overhead, green = what the business keeps).</p>
+      <h3 style="margin-top:20px">What if you change your price?</h3>
+      <table id="pmTable"><tr><th>Price</th><th>Revenue</th><th>Gross margin</th><th>Net margin</th></tr></table>
+      <p style="margin-top:8px">Same costs, same sales volume — a small price move changes the margin more than most cost cuts.</p>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Gross Margin vs Net Margin: The Two Numbers That Decide Whether Your Business Survives</h2>
+    <p>Most small business owners know their revenue. Far fewer know their margin — and margin, not revenue, decides who stays open. A bakery doing $20,000 a month and keeping $800 is one bad month away from closing; a freelancer billing $6,000 and keeping $4,500 is quietly rich. The difference is margin: the percentage of every dollar that is profit, not just passing through. <strong>Gross margin</strong> = (revenue − product cost) ÷ revenue. It answers: "Does my pricing work before overhead?" <strong>Net margin</strong> = (gross profit − all overhead) ÷ revenue. It answers: "What does the business actually keep?" You need both. A healthy gross margin with a terrible net margin means your pricing is fine but your overhead is eating the business — which is a completely different problem from pricing too low.</p>
+    <h3>The inputs, explained</h3>
+    <p><strong>Selling price per unit:</strong> what the customer pays, before discounts. If you run frequent sales, use your average realized price, not the sticker price. <strong>Cost per unit:</strong> everything the item itself costs you — materials, manufacturing, wholesale price, packaging. Not rent, not your salary — just the variable cost of one more unit. <strong>Units sold per month:</strong> your average monthly volume; seasonal businesses should use a typical month, not the holiday peak. <strong>Monthly overhead:</strong> every fixed cost of keeping the doors open — rent, wages, software subscriptions, shipping accounts, payment processing fees, insurance. Be thorough: the number most owners underestimate is fees, which typically skim 2.9% + 30¢ per transaction and vanish into the background.</p>
+    <h3>A worked example</h3>
+    <p>Take a small skincare brand selling a moisturizer at <strong>$49.99</strong>, costing <strong>$22</strong> to make, selling <strong>500 units a month</strong>, with <strong>$3,000</strong> in monthly overhead. Revenue is 500 × $49.99 = <strong>$24,995</strong>. Product cost is 500 × $22 = <strong>$11,000</strong>. Gross profit = $13,995, a <strong>56.0% gross margin</strong> — pricing works. Subtract the $3,000 overhead and net profit is <strong>$10,995</strong>, a <strong>44.0% net margin</strong>. That is a strong business. Now drop the price to $44.99 to "be competitive": net margin falls to about 37.8% — roughly $1,600 less kept every month — without a single cost changing. Price moves hit margin harder than almost anything else, which is why the scenario table above exists.</p>
+    <h3>Three ways to improve a weak margin</h3>
+    <p><strong>1. Raise the price (try it in the table first).</strong> A 5–10% increase rarely loses 5–10% of customers, and it lifts every dollar of revenue. Add value instead of apologizing for it — bundle, improve packaging, add a guarantee. <strong>2. Cut the real unit cost.</strong> Renegotiate with suppliers, order in larger batches, simplify packaging. But know the floor: cheaper materials can cheapen the product and cost you customers. <strong>3. Trim overhead, not muscle.</strong> Cancel unused subscriptions, renegotiate processing fees and rent, automate one repetitive task. Do not cut the marketing that brings the sales — a 44% margin on zero revenue is zero dollars.</p>
+    <h3>The margin trap: looking profitable while cash is empty</h3>
+    <p>A positive margin does not mean money is in the bank. Margin is a ratio — cash is a timing problem. Inventory ties up cash for months, customers pay on 30-day terms while your suppliers want 15, and debt payments hit whether sales arrive or not. If your margin looks fine but the account is dry, the fix is cash flow, not pricing: invoice immediately, shorten payment terms, trim inventory, and separate business money from personal money so the profit is visible. Run our <a href="50-30-20-budget-calculator.html">50/30/20 budget calculator</a> on your take-home to split it into needs, wants and savings — and if you do client work instead of selling products, our <a href="freelance-rate-calculator.html">freelance hourly rate calculator</a> finds the rate that keeps your personal margin healthy. Revisit this calculator whenever you change prices, switch suppliers, or take on new overhead — margins drift silently, and a quarterly check is how you catch it.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split your take-home into needs, wants, and savings.</p></div>
+      <div class="card"><h3><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></h3><p>Your floor rate and quote-ready rate from income goal and billable hours.</p></div>
+      <div class="card"><h3><a href="savings-goal-calculator.html">Savings Goal Calculator</a></h3><p>How many months until your goal — interest included.</p></div>
+      <div class="card"><h3><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>{{BRAND}}</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="../tools/word-counter.html">Word Counter</a></li>
+        <li><a href="../tools/password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 {{BRAND}}. Educational content only — not financial advice. See our <a href="../disclaimer.html">disclaimer</a>.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function calcMargin(){
+  var r = Core.profitMargin(
+    document.getElementById('pmPrice').value,
+    document.getElementById('pmCost').value,
+    document.getElementById('pmUnits').value,
+    document.getElementById('pmOverhead').value
+  );
+  document.getElementById('pmResult').style.display='block';
+  document.getElementById('pmGrossM').textContent = r.grossMargin.toFixed(1) + '%';
+  document.getElementById('pmNetM').textContent = r.netMargin.toFixed(1) + '%';
+  document.getElementById('pmRevenue').textContent = fmtUSD(r.revenue);
+  document.getElementById('pmGrossP').textContent = fmtUSD(r.grossProfit);
+  document.getElementById('pmNetP').textContent = fmtUSD(r.netProfit);
+  document.getElementById('pmOverheadV').textContent = fmtUSD(Math.max(0, Number(document.getElementById('pmOverhead').value)||0));
+  // breakdown bar: product cost vs overhead vs net profit
+  var rev = r.revenue;
+  var wVar = rev>0 ? Math.max(0, r.variableCost)/rev*100 : 100;
+  var wOver = rev>0 ? Math.max(0, Math.max(0, Number(document.getElementById('pmOverhead').value)||0))/rev*100 : 0;
+  var wNet = rev>0 ? Math.max(0, 100 - wVar - wOver) : 0;
+  document.getElementById('pmBarVar').style.width = wVar + '%';
+  document.getElementById('pmBarOver').style.width = wOver + '%';
+  document.getElementById('pmBarNet').style.width = wNet + '%';
+  var tbl = document.getElementById('pmTable');
+  while(tbl.rows.length>1) tbl.deleteRow(1);
+  r.scenarios.forEach(function(s){
+    var tr = tbl.insertRow(-1);
+    tr.insertCell(0).textContent = fmtUSD(s.price);
+    tr.insertCell(1).textContent = fmtUSD(s.revenue);
+    tr.insertCell(2).textContent = s.grossMargin.toFixed(1) + '%';
+    tr.insertCell(3).textContent = s.netMargin.toFixed(1) + '%';
+  });
+}
+window.addEventListener('load', calcMargin);
+</script>
+</body>
+</html>
