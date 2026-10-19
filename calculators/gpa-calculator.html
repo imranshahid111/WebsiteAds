@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free GPA Calculator for College Students — Xoft Tools</title>
+<meta name="description" content="Use Xoft Tools's free GPA calculator: enter your grades and credit hours to get your semester and cumulative GPA instantly, plus what you need next semester to reach your target. No sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/calculators/gpa-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free GPA Calculator for College Students — Xoft Tools">
+<meta property="og:description" content="Semester GPA, cumulative GPA, and the grades you need to hit your target — computed instantly from your grades and credit hours. Free, no sign-up.">
+<meta property="og:url" content="https://websiteads.vercel.app/calculators/gpa-calculator.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is GPA calculated?","acceptedAnswer":{"@type":"Answer","text":"Each letter grade converts to grade points (on the standard 4.0 scale, A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0, with plus/minus steps between). Multiply each course's grade points by its credit hours to get quality points, add all quality points, and divide by total credit hours. That weighted average is your GPA."}},
+{"@type":"Question","name":"What is the difference between weighted and unweighted GPA?","acceptedAnswer":{"@type":"Answer","text":"Unweighted GPA caps every class at 4.0, so an A in an honors course counts the same as an A in a regular one. Weighted GPA (often a 5.0 scale) gives extra points for harder classes — an A in an AP or honors course might count as 5.0. High schools report one or the other; most US colleges recalculate on their own scale, so report whichever number your school gives you."}},
+{"@type":"Question","name":"Do colleges look at semester GPA or cumulative GPA?","acceptedAnswer":{"@type":"Answer","text":"Both, but cumulative GPA is the headline number on your transcript. Semester GPA shows your trend — an upward trend (weak first year, strong later semesters) matters more than most students think. Graduate schools, employers with GPA cutoffs, and scholarship renewals all use the cumulative number, so one bad semester is survivable if the rest are solid."}},
+{"@type":"Question","name":"What is a good GPA in college?","acceptedAnswer":{"@type":"Answer","text":"A 3.0 (B average) is the most common baseline — many scholarships and internships require it. A 3.5+ (Dean's List territory at most schools) is strong for competitive graduate programs. A 2.0 is typically the minimum for academic good standing and graduation. Context matters more than the raw number: a 3.2 in a hard major with an upward trend beats a 3.6 trending down."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>GPA Calculator</h1>
+  <p>Add your courses with grades and credit hours — get your semester GPA instantly, fold in your previous record for a cumulative GPA, and see exactly what you need next semester to hit your target.</p>
+
+  <div class="toolbox">
+    <h2>Your courses this semester</h2>
+    <div class="field">
+      <label>Grading scale</label>
+      <div>
+        <label style="display:inline;margin-right:16px"><input type="radio" name="gpaScale" value="4.0" checked> 4.0 — standard</label>
+        <label style="display:inline"><input type="radio" name="gpaScale" value="5.0"> 5.0 — weighted (honors/AP-style)</label>
+      </div>
+    </div>
+    <table id="gpaTable" style="width:100%;margin:12px 0">
+      <tr><th>Course (optional)</th><th>Grade</th><th>Credits</th><th></th></tr>
+    </table>
+    <button type="button" id="gpaAddRow" style="margin-bottom:12px">+ Add course</button>
+    <h3>Your record so far (optional)</h3>
+    <div class="field">
+      <label for="gpaPriorGpa">Current cumulative GPA</label>
+      <input type="number" id="gpaPriorGpa" value="" placeholder="e.g. 3.0" min="0" max="5.3" step="0.01">
+    </div>
+    <div class="field">
+      <label for="gpaPriorCredits">Credits completed so far</label>
+      <input type="number" id="gpaPriorCredits" value="" placeholder="e.g. 30" min="0" step="1">
+    </div>
+    <h3>Your goal (optional)</h3>
+    <div class="field">
+      <label for="gpaTarget">Target cumulative GPA</label>
+      <input type="number" id="gpaTarget" value="" placeholder="e.g. 3.5" min="0" max="5.3" step="0.01">
+    </div>
+    <div class="field">
+      <label for="gpaFutureCredits">Credits you'll take before graduation (or next semester)</label>
+      <input type="number" id="gpaFutureCredits" value="" placeholder="e.g. 15" min="0" step="1">
+    </div>
+    <button onclick="calcGpa()">Calculate my GPA</button>
+    <div class="result" id="gpaResult" style="display:none">
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="gpaSem">—</div><div class="k">This semester's GPA</div></div>
+        <div class="stat"><div class="v" id="gpaQP">—</div><div class="k">Quality points</div></div>
+        <div class="stat"><div class="v" id="gpaCred">—</div><div class="k">Credits counted</div></div>
+      </div>
+      <div id="gpaCumWrap" style="display:none">
+        <div class="stat-row">
+          <div class="stat"><div class="v" id="gpaCum">—</div><div class="k">New cumulative GPA</div></div>
+          <div class="stat"><div class="v" id="gpaCumCred">—</div><div class="k">Total credits</div></div>
+        </div>
+      </div>
+      <div id="gpaNeedWrap" style="display:none">
+        <p id="gpaNeedText" style="margin-top:12px"></p>
+      </div>
+      <div class="bar" style="display:flex" id="gpaBar"><i id="gpaBarFill" style="background:#16a34a;width:0%"></i><i id="gpaBarRest" style="background:#e5e7eb;width:100%"></i></div>
+      <p style="margin-top:8px">Your semester GPA against the scale maximum (green = where you landed).</p>
+      <h3 style="margin-top:20px">Course breakdown</h3>
+      <table id="gpaRows"><tr><th>Course</th><th>Grade</th><th>Credits</th><th>Quality points</th></tr></table>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>How GPA Works in US Colleges, Explained Simply</h2>
+    <p>GPA is a weighted average — "weighted" because a 4-credit lab moves the needle more than a 1-credit seminar. Every letter grade converts to grade points: on the standard 4.0 scale, <strong>A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0</strong>, with plus/minus steps in between (B+ = 3.3, C− = 1.7).</p>
+    <p>Multiply each course's grade points by its credit hours and you get <strong>quality points</strong>. Add up all quality points, divide by all credit hours, and that single number is your GPA. The tool above does exactly this, course by course.</p>
+    <h3>Why credits matter more than grades</h3>
+    <p>An A in a 4-credit course earns 16 quality points; a C in a 1-credit course costs you almost nothing. This is the strategy most students miss: protecting your big-credit courses matters far more than polishing a 1-credit elective from a B+ to an A−. When the semester gets rough, put the hours into the 4-credit classes first — the math rewards it directly, and the calculator above shows it course by course.</p>
+    <h3>Weighted vs unweighted: the 4.0 vs 5.0 confusion</h3>
+    <p>On the standard scale every class caps at 4.0. The 5.0 weighted scale gives extra points for harder classes — an A in an honors or AP-style course counts as 5.0 instead of 4.0. Schools pick one system and your transcript reports it. Use the matching scale in the calculator above. One warning: weighted scales differ between schools, so treat the 5.0 result as an estimate, and remember most colleges recalculate your GPA on their own scale anyway.</p>
+    <h3>A worked example</h3>
+    <p>Take a typical 13-credit semester: <strong>A in a 3-credit course</strong> (12.0 quality points), <strong>B+ in a 4-credit course</strong> (13.2), <strong>A− in a 3-credit course</strong> (11.1), and <strong>C in a 3-credit course</strong> (6.0). Quality points total 42.3; divide by 13 credits and the semester GPA is <strong>3.25</strong> — a solid B+ average.</p>
+    <p>Notice how the single C did real damage: swap it for a B and the GPA jumps to 3.48. That one-class swing is why the "what do I need" section exists — small improvements in high-credit courses pay the most.</p>
+    <h3>How schools actually use the number</h3>
+    <p><strong>Cumulative GPA</strong> is the headline figure — it follows your entire degree and appears on your transcript. <strong>Semester GPA</strong> shows your trend, and trends matter: many admissions committees and employers weigh an upward trajectory (rough first year, strong junior year) more than a flat number. Most schools put academic good standing at 2.0, scholarships and internships commonly want 3.0, and Dean's List / honors programs typically start around 3.5.</p>
+    <h3>Five realistic ways to raise your GPA</h3>
+    <p><strong>1. Retake what you bombed.</strong> Many schools let a retake replace or average with the old grade — one F-to-A retake can move a cumulative GPA more than two semesters of B+'s. <strong>2. Protect the heavy courses.</strong> See the credits math above. <strong>3. Use the add/drop window.</strong> Dropping a failing course early usually leaves no grade at all; dropping late leaves a W or worse.</p>
+    <p><strong>4. Front-load the work.</strong> Grades compound: early quizzes and midterms are easier points than the final, and knowing the material early makes the final cheaper. <strong>5. Get help before you need it.</strong> Office hours and tutoring are empty in September and packed in December — go early, when the professor has time for you.</p>
+    <h3>Common GPA mistakes</h3>
+    <p>Counting pass/fail or withdrawn courses in your GPA — they don't count, leave them out. Assuming A+ always equals 4.3 — on the standard 4.0 scale it equals 4.0 at most schools, so check your catalog. Ignoring credit hours and treating every class equally.</p>
+    <p>And the biggest one: forgetting prior credits. A 4.0 semester on top of 60 credits of 2.5 only moves the cumulative to about 2.77, because 60 credits of history outweigh 13 credits of now. The cumulative section of the calculator makes this painfully clear — on purpose.</p>
+    <p style="margin-top:16px">College grades are only half the student equation. The other half is money: run our <a href="50-30-20-budget-calculator.html">50/30/20 budget calculator</a> to split a part-time paycheck into needs, wants and savings, or our <a href="savings-goal-calculator.html">savings goal calculator</a> to plan for next semester's tuition. And if your grades depend on essays, our <a href="../tools/word-counter.html">word counter</a> tracks words, reading time, and speaking time as you write.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="../tools/word-counter.html">Word Counter &amp; Reading Time</a></h3><p>Track words, sentences, and reading time while you write essays.</p></div>
+      <div class="card"><h3><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split a part-time paycheck into needs, wants, and savings.</p></div>
+      <div class="card"><h3><a href="savings-goal-calculator.html">Savings Goal Calculator</a></h3><p>Plan how long saving for next semester's tuition takes.</p></div>
+      <div class="card"><h3><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></h3><p>Your floor rate and quote-ready rate for side gigs.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="../tools/word-counter.html">Word Counter</a></li>
+        <li><a href="../tools/password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. Educational content only — not financial advice. See our <a href="../disclaimer.html">disclaimer</a>.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var GPA_GRADES = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F'];
+var GPA_DEFAULTS = [
+  {name:'Course 1', grade:'A', credits:3},
+  {name:'Course 2', grade:'B+', credits:4},
+  {name:'Course 3', grade:'A-', credits:3},
+  {name:'Course 4', grade:'C', credits:3}
+];
+function gpaSelectedScale(){
+  var els = document.getElementsByName('gpaScale');
+  for(var i=0;i<els.length;i++){ if(els[i].checked) return els[i].value; }
+  return '4.0';
+}
+function gpaAddRow(name, grade, credits){
+  var tbl = document.getElementById('gpaTable');
+  var tr = tbl.insertRow(-1);
+  var nameC = tr.insertCell(0), gradeC = tr.insertCell(1), credC = tr.insertCell(2), delC = tr.insertCell(3);
+  var nameIn = document.createElement('input'); nameIn.type='text'; nameIn.value=name||''; nameIn.placeholder='e.g. Biology 101'; nameIn.style.width='100%';
+  var sel = document.createElement('select');
+  GPA_GRADES.forEach(function(g){ var o=document.createElement('option'); o.value=g; o.textContent=g; if(g===grade) o.selected=true; sel.appendChild(o); });
+  var credIn = document.createElement('input'); credIn.type='number'; credIn.min='0'; credIn.max='12'; credIn.step='1'; credIn.value=(credits===undefined?'3':credits); credIn.style.width='64px';
+  var del = document.createElement('button'); del.type='button'; del.textContent='×'; del.style.margin='0'; del.style.padding='4px 10px';
+  del.onclick = function(){ if(tbl.rows.length>2) tbl.deleteRow(tr.rowIndex); };
+  nameC.appendChild(nameIn); gradeC.appendChild(sel); credC.appendChild(credIn); delC.appendChild(del);
+}
+document.getElementById('gpaAddRow').onclick = function(){ gpaAddRow('', 'B', 3); };
+GPA_DEFAULTS.forEach(function(d){ gpaAddRow(d.name, d.grade, d.credits); });
+function calcGpa(){
+  var scale = gpaSelectedScale();
+  var max = scale === '5.0' ? 5.3 : 4.0;
+  var courses = [], tbl = document.getElementById('gpaTable');
+  for(var i=1;i<tbl.rows.length;i++){
+    var r = tbl.rows[i];
+    courses.push({name:r.cells[0].firstChild.value, grade:r.cells[1].firstChild.value, credits:r.cells[2].firstChild.value});
+  }
+  var sem = Core.gpaSemester(courses, scale);
+  document.getElementById('gpaResult').style.display='block';
+  document.getElementById('gpaSem').textContent = sem.credits>0 ? sem.gpa.toFixed(2) : '—';
+  document.getElementById('gpaQP').textContent = sem.qualityPoints.toFixed(1);
+  document.getElementById('gpaCred').textContent = sem.credits;
+  var fill = sem.credits>0 ? sem.gpa/max*100 : 0;
+  document.getElementById('gpaBarFill').style.width = Math.max(0, Math.min(100, fill)) + '%';
+  document.getElementById('gpaBarRest').style.width = (100 - Math.max(0, Math.min(100, fill))) + '%';
+  var rt = document.getElementById('gpaRows');
+  while(rt.rows.length>1) rt.deleteRow(1);
+  var valid = courses.filter(function(c){ return GPA_GRADES.indexOf(String(c.grade).toUpperCase())>=0 && Number(c.credits)>0; });
+  sem.rows.forEach(function(row, idx){
+    var tr = rt.insertRow(-1);
+    var nm = (valid[idx] && valid[idx].name) ? valid[idx].name : row.grade;
+    tr.insertCell(0).textContent = nm;
+    tr.insertCell(1).textContent = row.grade;
+    tr.insertCell(2).textContent = row.credits;
+    tr.insertCell(3).textContent = row.points.toFixed(1);
+  });
+  // cumulative
+  var pg = document.getElementById('gpaPriorGpa').value, pc = document.getElementById('gpaPriorCredits').value;
+  var cumWrap = document.getElementById('gpaCumWrap');
+  var cum = null;
+  if(pg !== '' && pc !== ''){
+    cum = Core.gpaCumulative(pg, pc, sem.qualityPoints, sem.credits);
+    cumWrap.style.display='block';
+    document.getElementById('gpaCum').textContent = cum.credits>0 ? cum.gpa.toFixed(2) : '—';
+    document.getElementById('gpaCumCred').textContent = cum.credits;
+  } else { cumWrap.style.display='none'; }
+  // target planner
+  var tg = document.getElementById('gpaTarget').value, fc = document.getElementById('gpaFutureCredits').value;
+  var needWrap = document.getElementById('gpaNeedWrap'), needText = document.getElementById('gpaNeedText');
+  if(tg !== '' && fc !== '' && cum){
+    var need = Core.gpaNeeded(cum.gpa, cum.credits, tg, fc);
+    needWrap.style.display='block';
+    if(need.needed > max + 1e-9){
+      needText.innerHTML = 'To reach a <strong>'+Number(tg).toFixed(2)+'</strong> in <strong>'+fc+'</strong> credits, you would need a <strong>'+need.needed.toFixed(2)+'</strong> average — above the '+max.toFixed(1)+' scale maximum. That target is not mathematically possible; lower it or plan over more credits.';
+    } else if(need.needed <= 1e-9){
+      needText.innerHTML = 'Good news: you already meet your target. Keep your average above <strong>'+Number(tg).toFixed(2)+'</strong> to stay there.';
+    } else {
+      needText.innerHTML = 'To reach a cumulative <strong>'+Number(tg).toFixed(2)+'</strong> after <strong>'+fc+'</strong> more credits, you need an average of <strong>'+need.needed.toFixed(2)+'</strong> across those credits.';
+    }
+  } else { needWrap.style.display='none'; }
+}
+window.addEventListener('load', calcGpa);
+</script>
+</body>
+</html>
