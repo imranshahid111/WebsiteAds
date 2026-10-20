@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Age Calculator — How Old Am I in Years, Months & Days? — Xoft Tools</title>
+<meta name="description" content="Use Xoft Tools's free age calculator to get your exact age in years, months, and days — plus total days lived, the weekday you were born on, and a next-birthday countdown. No sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/calculators/age-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Age Calculator — How Old Am I in Years, Months & Days? — Xoft Tools">
+<meta property="og:description" content="Your exact age in years, months, and days — plus total days lived, your birth weekday, and how long until your next birthday. Free, no sign-up.">
+<meta property="og:url" content="https://websiteads.vercel.app/calculators/age-calculator.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is my exact age calculated in years, months, and days?","acceptedAnswer":{"@type":"Answer","text":"Subtract the years first, then the months, then the days. Whenever the month or day part would go negative, borrow like in long subtraction: borrow one month (add that month's number of days) or one year (add 12 months). The result is your exact age — for example, someone born May 15, 1990 is 36 years, 5 months, and 5 days old on October 20, 2026."}},
+{"@type":"Question","name":"How do age calculators handle February 29 birthdays?","acceptedAnswer":{"@type":"Answer","text":"People born on February 29 only get a real birthday in leap years, so calculators pick a convention. Ours follows the common legal convention: the birthday is observed on February 28 in non-leap years. On that day the calculator shows the new age, and the next-birthday countdown targets February 28."}},
+{"@type":"Question","name":"Why does my age differ between two age calculators?","acceptedAnswer":{"@type":"Answer","text":"Three usual reasons. Different leap-day conventions (February 28 vs March 1) shift the count by a day for Feb 29 birthdays. Different 'as of' dates — a calculator using yesterday's date is off by one day. And timezone bugs: some calculators parse dates at midnight UTC, so a date you enter can shift a day depending on where you live. Our calculator parses dates timezone-free, so what you enter is exactly what it counts."}},
+{"@type":"Question","name":"Does this calculator store my date of birth?","acceptedAnswer":{"@type":"Answer","text":"No. Your date of birth is processed in your own browser with JavaScript and never sent anywhere. Nothing is stored, uploaded, or logged — you can even use the page offline after it loads."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Age Calculator</h1>
+  <p>Enter your date of birth — get your exact age in years, months, and days, your total days on Earth, the weekday you were born on, and a countdown to your next birthday.</p>
+
+  <div class="toolbox">
+    <div class="field">
+      <label for="ageDob">Your date of birth</label>
+      <input type="date" id="ageDob" value="1990-05-15" max="9999-12-31">
+    </div>
+    <div class="field">
+      <label for="ageAsOf">Calculate age as of (leave blank for today)</label>
+      <input type="date" id="ageAsOf" max="9999-12-31">
+    </div>
+    <button onclick="calcAge()">Calculate my age</button>
+    <div class="result" id="ageResult" style="display:none">
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="ageY">—</div><div class="k">Years</div></div>
+        <div class="stat"><div class="v" id="ageM">—</div><div class="k">Months</div></div>
+        <div class="stat"><div class="v" id="ageD">—</div><div class="k">Days</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="v" id="ageTotalDays">—</div><div class="k">Total days lived</div></div>
+        <div class="stat"><div class="v" id="ageTotalWeeks">—</div><div class="k">Weeks</div></div>
+        <div class="stat"><div class="v" id="ageTotalMonths">—</div><div class="k">Total months</div></div>
+      </div>
+      <p id="ageBorn" style="margin-top:12px"></p>
+      <p id="ageNext" style="margin-top:4px"></p>
+    </div>
+    <p class="err" id="ageErr" style="display:none;color:#b91c1c"></p>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>How Old Are You, Exactly?</h2>
+    <p>Most people answer "I'm 36" when asked their age — but that number is up to 364 days wrong. Your exact age is three numbers: <strong>years, months, and days</strong>. A person born May 15, 1990 is <strong>36 years, 5 months, and 5 days</strong> old on October 20, 2026. That precision matters more often than you'd think: insurance quotes, retirement eligibility, school enrollment cutoffs, and legal age gates all run on exact dates, not rounded years.</p>
+    <h3>Why you can't just subtract the years</h3>
+    <p>Take 2026 − 1990 = 36 years — so far so good. But what about the months and days? October 20 minus May 15 is 5 months and 5 days — easy. Now try birthdays like January 31 counted on March 1: February only has 28 or 29 days, so the "months" part has to <em>borrow</em> from the year, exactly like subtraction in school. Our calculator borrows the real length of each month, so the answer is exact rather than a rough "years times 365" estimate.</p>
+    <h3>Leap years and February 29</h3>
+    <p>Leap-day babies get a real birthday only every four years, so calculators have to choose a convention. We use the one most US states follow for legal age: <strong>the birthday is observed on February 28 in non-leap years</strong>. On that day the calculator shows your new age, and the countdown targets the next February 28 (or 29 in leap years). A few jurisdictions use March 1 instead — the difference is a single day, once every four years.</p>
+    <h3>Age in different units</h3>
+    <p>Years, months, days is the human answer — but <strong>total days</strong> is the computer answer, and it's useful too. 13,307 days is easier to compare than "36 years, 5 months, 5 days" when you want stats like average sleep hours, or when a doctor asks how old a baby is (pediatricians count in weeks and months, never years). Total hours and minutes are just those days multiplied out — impressive numbers, but the same fact dressed up.</p>
+    <h3>Time zones and the "as of" date</h3>
+    <p>Leave the "as of" field blank and the calculator uses today. Entering a future date answers questions like "how old will I be when my loan is paid off?" — and yes, you can pair that with our <a href="loan-emi-calculator.html">loan EMI calculator</a> to see the payoff month, then see your age on that exact day. One technical note: the calculator reads dates without time zones, so what you type is what it counts — no off-by-one-day surprises from midnight UTC conversions.</p>
+    <h3>Three things people actually use exact age for</h3>
+    <p><strong>1. Retirement math.</strong> "I'll retire at 65" is a date, not a vibe. Plug your birthdate, set the "as of" field to your target retirement date, and see exactly how long you have — then run our <a href="savings-goal-calculator.html">savings goal calculator</a> to find the monthly deposit that gets you there. <strong>2. Life-stage budgets.</strong> The <a href="50-30-20-budget-calculator.html">50/30/20 rule</a> splits differently at 25 (heavy savings) and 55 (heavy needs) — your age tells you which season you're in.</p>
+    <p><strong>3. Official cutoffs.</strong> School enrollment ("must be 5 by September 1"), driving age, voting age, senior discounts — every one of these is a date comparison, and a one-day mistake means a rejected form. When a date cutoff matters, calculate on the exact cutoff date using the "as of" field, and print the result for the file.</p>
+    <p style="margin-top:16px">Curious what the weekdays of your life looked like? The tool above shows the weekday you were born on — Friday babies outnumber Monday babies in most datasets, by the way. And if you'd rather count something than date it, our <a href="../tools/word-counter.html">word counter</a> tracks words, reading time, and speaking time as you write.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="savings-goal-calculator.html">Savings Goal Calculator</a></h3><p>Find the monthly deposit that gets you to retirement or any goal.</p></div>
+      <div class="card"><h3><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income by your life stage — needs, wants, and savings.</p></div>
+      <div class="card"><h3><a href="loan-emi-calculator.html">Loan EMI Calculator</a></h3><p>Monthly payment, total interest, and payoff date.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="age-calculator.html">Age Calculator</a></li>
+        <li><a href="../tools/ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="../tools/word-counter.html">Word Counter</a></li>
+        <li><a href="../tools/password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. Educational content only — not financial advice. See our <a href="../disclaimer.html">disclaimer</a>.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function ageNum(n){ return n.toLocaleString('en-US'); }
+function ageBdayLabel(year, month, day){
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[month-1]+' '+day+', '+year;
+}
+function calcAge(){
+  var err=document.getElementById('ageErr'), res=document.getElementById('ageResult');
+  err.style.display='none';
+  var dob=document.getElementById('ageDob').value;
+  var asOf=document.getElementById('ageAsOf').value || '';
+  if(!dob){ err.textContent='Please enter your date of birth.'; err.style.display='block'; res.style.display='none'; return; }
+  var r=Core.ageCalc(dob, asOf);
+  if(!r.ok){ err.textContent='That date does not work — check the date of birth (it cannot be after the "as of" date).'; err.style.display='block'; res.style.display='none'; return; }
+  res.style.display='block';
+  document.getElementById('ageY').textContent=r.years;
+  document.getElementById('ageM').textContent=r.months;
+  document.getElementById('ageD').textContent=r.days;
+  document.getElementById('ageTotalDays').textContent=ageNum(r.totalDays);
+  document.getElementById('ageTotalWeeks').textContent=ageNum(r.totalWeeks);
+  document.getElementById('ageTotalMonths').textContent=ageNum(r.totalMonths);
+  var born=document.getElementById('ageBorn');
+  born.textContent='You were born on a '+r.bornWeekday+'.';
+  var next=document.getElementById('ageNext');
+  if(r.nextBirthdayIsToday){
+    if(r.years===0 && r.months===0 && r.days===0){
+      next.textContent='Welcome to the world! Born today.';
+    } else {
+      next.textContent='Happy birthday! You turned '+r.years+' year'+(r.years===1?'':'s')+' old today.';
+    }
+  } else {
+    next.textContent='Your next birthday is in '+r.nextBirthdayIn+' day'+(r.nextBirthdayIn===1?'':'s')+' — you turn '+r.turning+' on a '+r.nextBirthdayWeekday+'.';
+  }
+}
+window.addEventListener('load', calcAge);
+</script>
+</body>
+</html>
