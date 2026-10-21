@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free PDF Bank Statement to Excel (CSV) — Convert Online</title>
+<meta name="description" content="Convert a bank statement PDF to Excel-ready CSV free by Xoft Tools. 100% in-browser — your statement never uploads. Text PDFs supported; scanned PDFs explained.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/pdf-bank-statement-to-excel.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PDF Bank Statement to Excel — Xoft Tools">
+<meta property="og:description" content="Turn a bank statement PDF into a CSV spreadsheet that opens in Excel. Free, private, in your browser.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/pdf-bank-statement-to-excel.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is converting my bank statement free?","acceptedAnswer":{"@type":"Answer","text":"Yes — free with no sign-up and no limits. Drop your PDF and download the CSV instantly."}},
+{"@type":"Question","name":"Is my bank statement uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The PDF is parsed entirely inside your browser using a local copy of the pdf.js library. Your statement never leaves your device."}},
+{"@type":"Question","name":"Why do I get a CSV file and not an .xlsx?","acceptedAnswer":{"@type":"Answer","text":"CSV opens directly in Excel, Google Sheets, and Numbers with one double-click, and it keeps the tool fast and honest. If you need .xlsx specifically, open the CSV in Excel and use Save As."}},
+{"@type":"Question","name":"Which banks' statements work?","acceptedAnswer":{"@type":"Answer","text":"Any text-based PDF statement — which is what nearly all banks issue for download. The parser detects dates, descriptions, and amounts across common layouts, and the preview table is editable so you can fix anything."}},
+{"@type":"Question","name":"Why does it say no transactions found for my PDF?","acceptedAnswer":{"@type":"Answer","text":"Your PDF is probably a scanned image (a photo of paper pages) rather than a text-based export. Scanned PDFs contain no selectable text, so nothing can be extracted without OCR — try downloading the statement again from your bank as a PDF, not a scan."}}
+]}
+</script>
+<style>
+.bs-drop{border:2px dashed #0057B8;border-radius:12px;padding:28px 16px;text-align:center;background:#f4f8ff;cursor:pointer;margin:16px 0}
+.bs-drop:hover{background:#e9f1ff}
+.bs-drop input{display:none}
+.privacy-badge{display:inline-block;background:#e8f7ee;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:6px 14px;font-weight:600;margin:8px 0}
+.bs-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em}
+.bs-table th,.bs-table td{border:1px solid #e5e7eb;padding:7px;text-align:left}
+.bs-table th{background:#f4f8ff}
+.bs-table td[contenteditable="true"]{background:#fffdf5}
+.bs-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+.bs-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0}
+.bs-strip .stat{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;text-align:center}
+.bs-strip .v{font-size:1.35em;font-weight:700;color:#0057B8}
+.bs-strip .k{font-size:.85em;color:#555}
+.bs-hidden{display:none}
+.bs-btn-row{margin:14px 0;display:flex;gap:10px;flex-wrap:wrap}
+.btn{background:#0057B8;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer}
+.btn:hover{background:#004494}
+.btn.ghost{background:#fff;color:#0057B8;border:1px solid #0057B8}
+.btn.danger{background:#fff;color:#b91c1c;border:1px solid #fca5a5;padding:4px 10px;font-size:.85em}
+.bs-note{font-size:.9em;color:#555;margin:8px 0}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>PDF Bank Statement to Excel</h1>
+  <p>Drop your bank statement PDF and get a clean table — Date, Description, Debit, Credit, Balance — ready to download as a CSV that opens in Excel or Google Sheets.</p>
+  <span class="privacy-badge">🔒 100% in-browser — your statement never uploads anywhere</span>
+
+  <div class="toolbox">
+    <div class="bs-drop" id="bsDrop">
+      <input type="file" id="bsFile" accept=".pdf,application/pdf">
+      <strong>Drop your bank statement PDF here</strong><br>or click to choose a file
+    </div>
+    <div class="bs-btn-row">
+      <button class="btn ghost" id="bsSample">Try with a sample statement</button>
+    </div>
+    <div id="bsStatus" role="status"></div>
+
+    <div id="bsOut" class="bs-hidden">
+      <div class="bs-strip" id="bsStrip"></div>
+      <div style="overflow-x:auto">
+        <table class="bs-table" id="bsTable">
+          <thead><tr><th>Date</th><th>Description</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th><th></th></tr></thead>
+          <tbody id="bsBody"></tbody>
+        </table>
+      </div>
+      <p class="bs-note">Tip: cells are editable — click any cell to fix a description or amount before downloading. Bank layouts vary; give the Debit/Credit columns a quick review.</p>
+      <div class="bs-btn-row">
+        <button class="btn" id="bsCsv">Download CSV</button>
+        <button class="btn ghost" id="bsCopy">Copy as table</button>
+      </div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why Bank Statements Come as PDFs (and Why That's Annoying)</h2>
+    <p>Banks issue statements as PDFs because a PDF is a fixed, tamper-evident document — perfect for visa applications, loan files, and tax records. But the moment you want to actually use the numbers, a PDF fights you. Copy-pasting from a PDF mangles the columns into a mess.</p>
+    <p>Retyping months of transactions is nobody's idea of a good evening. Accountants charge by the hour for exactly this drudgery. This tool bridges the gap: it reads the text layer inside your statement PDF and rebuilds the transaction table as a spreadsheet-ready CSV you can download in seconds.</p>
+    <h3>How It Works Under the Hood</h3>
+    <p>Your PDF is parsed right in your browser with pdf.js, the open-source library Mozilla built for Firefox's own PDF viewer. The tool reads each page's text layer — every word plus its exact position on the page — then groups words into rows by vertical position and sorts each row left to right.</p>
+    <p>Rows that start with a date and contain an amount become transactions. Headers, footers, page numbers, and legal disclaimers are skipped automatically. Amount columns are found by clustering their horizontal positions across all pages, which is how debits, credits, and running balances land in the right columns even though every bank lays its statements out differently.</p>
+    <h3>Step by Step: From Statement to Spreadsheet</h3>
+    <p>First, download your statement from your bank as a PDF — the "download statement" or "export PDF" option in online banking, not a photo or scan. Drop it into the box above. The parsing library loads lazily at that moment only, so the page itself stays fast for everyone else.</p>
+    <p>Review the preview table next. Descriptions that wrapped across two lines are joined automatically, and every cell is editable — click any cell to fix a description or amount, or delete a row entirely. Then hit Download CSV. It opens in Excel, Google Sheets, or Numbers with a double-click, and totals, filters, and pivot tables all work on it like any spreadsheet.</p>
+    <h3>Privacy: Nothing Uploads — and Why That Matters</h3>
+    <p>A bank statement is a financial X-ray: every purchase, every paycheck, every transfer, all in one document. Most "PDF to Excel" sites make you upload that document to their server — and then put the result behind a signup or a paywall. Your most sensitive financial file ends up on a stranger's computer.</p>
+    <p>This page never sends your file anywhere. The parsing happens in JavaScript on your own device, and the only network request is fetching the pdf.js library itself from a CDN the first time you drop a file. You could unplug your internet after the page loads and the conversion would still work.</p>
+    <h3>Common Issues, Honestly Explained</h3>
+    <p>Two limitations, stated plainly. First, this works on text-based PDFs — what banks generate when you click "download statement." If your PDF is a scanned image (a photo of paper pages), there is no text layer to read. The tool will tell you so instead of failing silently; just re-download from your bank as a real PDF.</p>
+    <p>Second, statement layouts vary wildly between banks, so while the heuristics handle the common cases, always glance at the Debit and Credit columns before downloading. The editable preview exists exactly for that quick review. Password-protected PDFs can't be opened in the browser and get a clear error message telling you to remove the password first.</p>
+    <h3>Why CSV and Not a Real Excel File</h3>
+    <p>A CSV opens directly in Excel with a double-click, and it also works in Google Sheets, Numbers, and every accounting tool that imports spreadsheets. Generating a true .xlsx in the browser would mean shipping an 800KB library and its licensing baggage for almost no practical gain. If you specifically need the .xlsx format, open the CSV in Excel once and use Save As — two clicks.</p>
+    <h3>What to Do With Your CSV</h3>
+    <p>Once the numbers are in a spreadsheet, the real work gets easy. Sum a month's debits for an expense report, filter by a merchant name to see where the money actually went, or build a pivot table by category. Months of manual entry collapse into an afternoon's analysis.</p>
+    <p>Freelancers reconciling client income will also like the <a href="../calculators/freelance-rate-calculator.html">freelance rate calculator</a> for setting rates from real income data, and the <a href="../calculators/profit-margin-calculator.html">profit margin calculator</a> for checking what the business actually keeps. Budgeters can feed monthly totals into the <a href="../calculators/50-30-20-budget-calculator.html">50/30/20 budget calculator</a> — same free, same private, same no-signup deal.</p>
+
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="../calculators/freelance-rate-calculator.html">Freelance Hourly Rate Calculator</a></h3><p>Find your true floor rate and a quote-ready rate from your income goal, billable hours, and expenses.</p></div>
+      <div class="card"><h3><a href="../calculators/profit-margin-calculator.html">Profit Margin Calculator</a></h3><p>See your gross and net margin from price, cost, sales volume, and overhead — plus price-change scenarios.</p></div>
+      <div class="card"><h3><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></h3><p>Who texts more, active hours, top words &amp; emoji — 100% in your browser, nothing uploads.</p></div>
+      <div class="card"><h3><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income into needs, wants, savings.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></li>
+        <li><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></li>
+        <li><a href="../calculators/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var PDFJS_VER='3.11.174', pdfjsLib=null, pdfjsLoading=null;
+var bsFile=document.getElementById('bsFile'), bsDrop=document.getElementById('bsDrop'),
+    bsOut=document.getElementById('bsOut'), bsStatus=document.getElementById('bsStatus'),
+    bsBody=document.getElementById('bsBody'), bsStrip=document.getElementById('bsStrip');
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function loadPdfJs(){
+  if(pdfjsLib) return Promise.resolve(pdfjsLib);
+  if(pdfjsLoading) return pdfjsLoading;
+  pdfjsLoading=new Promise(function(res,rej){
+    var s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/pdfjs-dist@'+PDFJS_VER+'/build/pdf.min.js';
+    s.onload=function(){pdfjsLib=window['pdfjsLib'];pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@'+PDFJS_VER+'/build/pdf.worker.min.js';res(pdfjsLib);};
+    s.onerror=function(){rej(new Error('pdf.js failed to load'));};
+    document.head.appendChild(s);
+  });
+  return pdfjsLoading;
+}
+function fmtN(v){return v==null||v===''?'':Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function renderBs(rows){
+  bsBody.innerHTML='';
+  var tIn=0,tOut=0;
+  rows.forEach(function(r,idx){
+    if(r.debit) tOut+=parseFloat(r.debit)||0;
+    if(r.credit) tIn+=parseFloat(r.credit)||0;
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td contenteditable="true">'+esc(r.date)+'</td>'+
+      '<td contenteditable="true">'+esc(r.desc)+'</td>'+
+      '<td class="num" contenteditable="true">'+esc(r.debit||'')+'</td>'+
+      '<td class="num" contenteditable="true">'+esc(r.credit||'')+'</td>'+
+      '<td class="num" contenteditable="true">'+esc(r.balance||'')+'</td>'+
+      '<td><button class="btn danger" data-i="'+idx+'">✕</button></td>';
+    bsBody.appendChild(tr);
+  });
+  var lastBal=rows.length&&rows[rows.length-1].balance?rows[rows.length-1].balance:'—';
+  bsStrip.innerHTML=
+    '<div class="stat"><div class="v">'+rows.length+'</div><div class="k">Transactions</div></div>'+
+    '<div class="stat"><div class="v">$'+fmtN(tIn)+'</div><div class="k">Total in</div></div>'+
+    '<div class="stat"><div class="v">$'+fmtN(tOut)+'</div><div class="k">Total out</div></div>'+
+    '<div class="stat"><div class="v">'+(lastBal==='—'?'—':'$'+fmtN(lastBal))+'</div><div class="k">Closing balance</div></div>';
+  bsOut.classList.remove('bs-hidden');
+  var btns=bsBody.querySelectorAll('button.danger');
+  for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){this.closest('tr').remove();});}
+}
+function rowsFromItems(items){
+  var res=Core.bankStatementRows(items);
+  if(!res.count){
+    bsStatus.textContent='No transactions found — is this a scanned PDF? Scanned/image PDFs contain no text to extract. Try downloading the statement again from your bank as a PDF (not a photo or scan).';
+    return;
+  }
+  bsStatus.textContent='Found '+res.count+' transactions. Review the table, edit anything, then download.';
+  renderBs(res.rows);
+}
+function parsePdfFile(f){
+  bsStatus.textContent='Loading the PDF parser (one-time, ~350KB)…';
+  loadPdfJs().then(function(pdfjs){
+    bsStatus.textContent='Reading '+f.name+'…';
+    return f.arrayBuffer().then(function(buf){return pdfjs.getDocument({data:buf}).promise;});
+  }).then(function(pdf){
+    var jobs=[], items=[];
+    for(var p=1;p<=pdf.numPages;p++){
+      jobs.push(pdf.getPage(p).then(function(page){
+        return page.getTextContent().then(function(tc){
+          tc.items.forEach(function(it){
+            items.push({str:it.str, x:it.transform[4], y:it.transform[5]});
+          });
+        });
+      }));
+    }
+    return Promise.all(jobs).then(function(){return {items:items,pages:pdf.numPages};});
+  }).then(function(r){
+    bsStatus.textContent='Parsed '+r.pages+' page(s). Detecting transactions…';
+    rowsFromItems(r.items);
+  }).catch(function(err){
+    var msg=String((err&&err.message)||err||'');
+    if(/password/i.test(msg)) bsStatus.textContent='This PDF is password-protected, which browsers cannot open. Remove the password in your PDF reader (or re-download without one) and try again.';
+    else if(/invalid|format/i.test(msg)) bsStatus.textContent='That file does not look like a valid PDF. Please choose the statement PDF your bank provides.';
+    else bsStatus.textContent='Something went wrong reading that PDF ('+msg+'). Try the sample statement below to see the tool in action.';
+  });
+}
+bsDrop.addEventListener('click',function(){bsFile.click();});
+bsDrop.addEventListener('dragover',function(e){e.preventDefault();});
+bsDrop.addEventListener('drop',function(e){e.preventDefault();if(e.dataTransfer.files.length)parsePdfFile(e.dataTransfer.files[0]);});
+bsFile.addEventListener('change',function(){if(bsFile.files.length)parsePdfFile(bsFile.files[0]);});
+document.getElementById('bsSample').addEventListener('click',function(){
+  var items=[
+    {str:'Date',x:40,y:760},{str:'Description',x:130,y:760},{str:'Withdrawals',x:380,y:760},{str:'Deposits',x:480,y:760},{str:'Balance',x:580,y:760},
+    {str:'03/01/2026',x:40,y:735},{str:'OPENING BALANCE',x:130,y:735},{str:'5,000.00',x:580,y:735},
+    {str:'03/02/2026',x:40,y:715},{str:'GROCERY OUTLET #2210',x:130,y:715},{str:'84.50',x:380,y:715},{str:'4,915.50',x:580,y:715},
+    {str:'FRESH MART DOWNTOWN',x:130,y:706},
+    {str:'03/05/2026',x:40,y:686},{str:'SALARY - ACME CORP',x:130,y:686},{str:'3,200.00',x:480,y:686},{str:'8,115.50',x:580,y:686},
+    {str:'03/09/2026',x:40,y:666},{str:'ATM WITHDRAWAL MAIN ST',x:130,y:666},{str:'200.00',x:380,y:666},{str:'7,915.50',x:580,y:666},
+    {str:'03/12/2026',x:40,y:646},{str:'ELECTRIC UTILITY BILL',x:130,y:646},{str:'132.75',x:380,y:646},{str:'7,782.75',x:580,y:646},
+    {str:'03/15/2026',x:40,y:626},{str:'FREELANCE PAYMENT - CLIENT',x:130,y:626},{str:'850.00',x:480,y:626},{str:'8,632.75',x:580,y:626},
+    {str:'Page 1 of 1',x:280,y:60}
+  ];
+  bsStatus.textContent='Sample statement loaded — this is synthetic demo data so you can try the table.';
+  rowsFromItems(items);
+});
+function bsTableCsv(){
+  var rows=[['Date','Description','Debit','Credit','Balance']];
+  var trs=bsBody.querySelectorAll('tr');
+  for(var i=0;i<trs.length;i++){
+    var tds=trs[i].querySelectorAll('td'), r=[];
+    for(var j=0;j<5;j++) r.push(tds[j].textContent.trim());
+    rows.push(r);
+  }
+  return rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+}
+document.getElementById('bsCsv').addEventListener('click',function(){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([bsTableCsv()],{type:'text/csv'}));
+  a.download='bank-statement.csv'; a.click();
+});
+document.getElementById('bsCopy').addEventListener('click',function(){
+  var lines=bsTableCsv().split('\n').map(function(l){
+    return l.split('","').map(function(c){return c.replace(/^"|"$/g,'');}).join('\t');
+  }).join('\n');
+  copyText(lines,document.getElementById('bsCopy'));
+});
+</script>
+</body>
+</html>

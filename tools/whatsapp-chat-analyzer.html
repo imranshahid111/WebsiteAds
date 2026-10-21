@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free WhatsApp Chat Analyzer — Who Texts More, Stats & Insights</title>
+<meta name="description" content="Free WhatsApp chat analyzer by Xoft Tools: drop your exported .txt chat and see who texts more, active hours, top words & emoji, reply times — 100% in your browser, nothing uploads.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/whatsapp-chat-analyzer.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WhatsApp Chat Analyzer — Xoft Tools">
+<meta property="og:description" content="Analyze any exported WhatsApp chat: message counts, active hours, top words, reply times. Private — your chat never leaves your browser.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/whatsapp-chat-analyzer.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is the WhatsApp Chat Analyzer free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no sign-up. Drop your exported chat file and the full dashboard appears instantly."}},
+{"@type":"Question","name":"Do you store or upload my chat?","acceptedAnswer":{"@type":"Answer","text":"No. The entire analysis runs in JavaScript inside your own browser. Your chat file is read locally with the FileReader API and is never sent to any server."}},
+{"@type":"Question","name":"My iPhone gave me a .zip file, not a .txt. What do I do?","acceptedAnswer":{"@type":"Answer","text":"Open the .zip on your phone or computer and pick the _chat.txt file inside it — that is the actual chat export. Drop that .txt file into the analyzer."}},
+{"@type":"Question","name":"Why do some lines show as unparsed?","acceptedAnswer":{"@type":"Answer","text":"Very old exports or unusual phone-locale formats sometimes use timestamp styles the parser does not recognize. The tool shows an honest unparsed-lines count so you know exactly what was skipped."}},
+{"@type":"Question","name":"Does it work on group chats?","acceptedAnswer":{"@type":"Answer","text":"Yes — group chats are where it shines. Per-sender stats, share percentages, and reply times are computed for every participant in the export."}}
+]}
+</script>
+<style>
+.wa-drop{border:2px dashed #0057B8;border-radius:12px;padding:28px 16px;text-align:center;background:#f4f8ff;cursor:pointer;margin:16px 0}
+.wa-drop:hover{background:#e9f1ff}
+.wa-drop input{display:none}
+.privacy-badge{display:inline-block;background:#e8f7ee;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:6px 14px;font-weight:600;margin:8px 0}
+.wa-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+.wa-cards .stat{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;text-align:center}
+.wa-cards .v{font-size:1.5em;font-weight:700;color:#0057B8}
+.wa-cards .k{font-size:.85em;color:#555}
+.wa-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95em}
+.wa-table th,.wa-table td{border:1px solid #e5e7eb;padding:8px;text-align:left}
+.wa-table th{background:#f4f8ff}
+.bars{display:flex;align-items:flex-end;gap:3px;height:110px;margin:8px 0}
+.bars .bar{background:#0057B8;border-radius:3px 3px 0 0;flex:1;min-width:4px}
+.bars .bar.dim{background:#bcd3f5}
+.bar-x{display:flex;gap:3px;font-size:.68em;color:#666}
+.bar-x span{flex:1;text-align:center;min-width:4px}
+.tag{display:inline-block;background:#eef2ff;border-radius:6px;padding:3px 8px;margin:2px;font-size:.88em}
+.wa-hidden{display:none}
+.wa-btn-row{margin:14px 0;display:flex;gap:10px;flex-wrap:wrap}
+.btn{background:#0057B8;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer}
+.btn:hover{background:#004494}
+.btn.ghost{background:#fff;color:#0057B8;border:1px solid #0057B8}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="../tools/ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>WhatsApp Chat Analyzer</h1>
+  <p>Drop your exported WhatsApp chat and find out who texts more, when you're both online, your most-used words and emoji, and who replies faster.</p>
+  <span class="privacy-badge">🔒 Your chat never leaves this browser — no upload, no sign-up</span>
+
+  <div class="toolbox">
+    <div class="wa-drop" id="waDrop">
+      <input type="file" id="waFile" accept=".txt">
+      <strong>Drop your exported .txt chat here</strong><br>or click to choose a file
+    </div>
+    <div class="wa-btn-row">
+      <button class="btn ghost" id="waSample">Try with a sample chat</button>
+      <button class="btn ghost wa-hidden" id="waToggleOrder">Date order: DD/MM ⇄ MM/DD</button>
+    </div>
+    <div id="waStatus" role="status"></div>
+
+    <div id="waDash" class="wa-hidden">
+      <h2>Chat dashboard</h2>
+      <div class="wa-cards" id="waCards"></div>
+
+      <h3>Messages per hour</h3>
+      <div class="bars" id="waHourly"></div>
+      <div class="bar-x" id="waHourlyX"></div>
+
+      <h3>Messages per weekday</h3>
+      <div class="bars" id="waWeekday"></div>
+      <div class="bar-x" id="waWeekdayX"></div>
+
+      <h3>Per-sender stats</h3>
+      <div style="overflow-x:auto"><table class="wa-table" id="waSenders"></table></div>
+
+      <h3>Top words &amp; emoji</h3>
+      <div id="waWords"></div>
+      <div id="waEmoji" style="font-size:1.6em;margin:8px 0"></div>
+
+      <div class="wa-btn-row">
+        <button class="btn" id="waCopy">Copy summary</button>
+        <button class="btn ghost" id="waCsv">Download stats (CSV)</button>
+      </div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>What This Analyzer Actually Tells You</h2>
+    <p>Every WhatsApp chat has a hidden shape: who starts conversations, who replies in seconds and who replies tomorrow, whether you're both night owls or one of you does all the morning texting. This analyzer turns an exported chat into those numbers — message counts per person, share percentages, hourly and weekday rhythms, your most-used words and emoji, and median reply times.</p>
+    <p>It also finds the longest silence in the whole conversation, which is usually more funny than dramatic. These are descriptive statistics, not psychology: the numbers show what happened, and you decide what it means. Nothing here claims to read minds or judge relationships.</p>
+    <h3>How to Export Your Chat on Android</h3>
+    <p>Open the chat on your phone and tap the three dots in the top corner. Choose More, then Export chat, then Without media. Your phone saves a plain .txt file — that is the file you drop into the analyzer above. The whole thing takes about ten seconds.</p>
+    <p>Exports cap at roughly 40,000 messages, which covers years of even the chattiest friendships. If the chat is a group, every participant's messages come along in the same file, and the analyzer breaks the stats down per sender automatically.</p>
+    <h3>How to Export Your Chat on iPhone</h3>
+    <p>Open the chat, tap the contact or group name at the top of the screen, and scroll down to Export Chat. Choose Without Media and share the file to yourself — by email, AirDrop, or Files. iPhone wraps the export in a .zip archive, so open it and pick the _chat.txt inside.</p>
+    <p>That _chat.txt is the actual export; drop it into the analyzer. One thing to know: WhatsApp Web cannot export chats at all, so this has to be done on your phone. The steps above work on current iOS versions.</p>
+    <h3>How to Use the Tool</h3>
+    <p>Drop the .txt file into the box above, or click the box to browse for it. Everything happens instantly on your device: the parser reads the file, figures out each message's date, sender, and text, then builds the full dashboard — headline cards, charts, tables, and all.</p>
+    <p>If the dates look wrong — a chat from June showing up as May, for example — your export probably uses the other date order. Hit the date-order toggle to flip between DD/MM and MM/DD and the dashboard re-parses live. No account, no upload, no waiting room, no paywall at the end.</p>
+    <h3>Privacy: Why "In Your Browser" Matters Here</h3>
+    <p>A chat export is one of the most personal files you own — years of conversations with someone you care about, jokes, plans, arguments, all of it. Many analyzer tools ask you to upload that file to their server, which means your private messages end up sitting on a stranger's computer.</p>
+    <p>This page does the opposite. Your file is read with the browser's FileReader API and every calculation runs in JavaScript on your own device. Nothing is transmitted anywhere, nothing is stored, and there is no server on our end that ever sees a single message. You can disconnect from the internet after the page loads and it still works.</p>
+    <h3>Reading Your Results Honestly</h3>
+    <p>Median reply time is the most interesting number on the dashboard. Unlike the average, it ignores the one time someone took three days and shows the typical case instead. "Conversation starters" counts who texts first after at least six quiet hours — a decent proxy for who keeps the chat alive.</p>
+    <p>The longest-silence stat is just for fun; a two-week gap usually means somebody went on holiday, not that the friendship ended. And keep an eye on the unparsed-lines counter: if your export uses an unusual timestamp format, a few lines may be skipped, and the dashboard tells you exactly how many so nothing is hidden.</p>
+    <h3>Group Chats Are Where It Shines</h3>
+    <p>One-on-one chats are fun, but group chats are where the per-sender breakdown earns its keep: who carries the group, who only appears for memes, whose reply time suggests they muted the chat months ago. Share percentages make the group dynamics visible at a glance.</p>
+    <p>The copy-summary button produces a paste-ready text summary of the whole analysis — the kind of thing people screenshot and drop back into the group itself. If you like this kind of text analysis, our <a href="word-counter.html">word counter</a> gives instant word, character, and reading-time stats for anything you paste, and the <a href="ai-prompt-generator.html">AI prompt generator</a> can turn a chat theme into a video prompt.</p>
+
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="word-counter.html">Word Counter &amp; Reading Time</a></h3><p>Count words, characters, sentences, and paragraphs — plus instant reading and speaking time.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Video Prompt Generator</a></h3><p>Turn a simple topic into a structured, cinematic AI video prompt for Shorts, TikTok, and Reels.</p></div>
+      <div class="card"><h3><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></h3><p>Convert a bank statement PDF to a CSV spreadsheet — free, in your browser, nothing uploads.</p></div>
+      <div class="card"><h3><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></h3><p>Split income into needs, wants, savings.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></li>
+        <li><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></li>
+        <li><a href="../calculators/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var waFile=document.getElementById('waFile'), waDrop=document.getElementById('waDrop'),
+    waDash=document.getElementById('waDash'), waStatus=document.getElementById('waStatus'),
+    waToggle=document.getElementById('waToggleOrder'), waCards=document.getElementById('waCards'),
+    waHourly=document.getElementById('waHourly'), waHourlyX=document.getElementById('waHourlyX'),
+    waWeekday=document.getElementById('waWeekday'), waWeekdayX=document.getElementById('waWeekdayX'),
+    waSenders=document.getElementById('waSenders'), waWords=document.getElementById('waWords'),
+    waEmoji=document.getElementById('waEmoji');
+var waText='', waDayFirst=null, waStats=null;
+var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function drawBars(el,xl,data,labels,peak){
+  el.innerHTML=''; xl.innerHTML='';
+  var max=Math.max.apply(null,data.concat([1]));
+  for(var i=0;i<data.length;i++){
+    var b=document.createElement('div'); b.className='bar'+(data[i]<max*0.25?' dim':'');
+    b.style.height=Math.max(3,Math.round(data[i]/max*100))+'%'; b.title=labels[i]+': '+data[i];
+    el.appendChild(b);
+    var s=document.createElement('span'); s.textContent=(i%3===0||data.length<=8)?labels[i]:''; xl.appendChild(s);
+  }
+}
+function renderWA(){
+  if(!waText) return;
+  var p=Core.waChatParse(waText, waDayFirst);
+  waDayFirst=p.dayFirst;
+  waStats=Core.waChatStats(p);
+  var s=waStats;
+  waToggle.classList.remove('wa-hidden');
+  waToggle.textContent='Date order: '+(waDayFirst?'DD/MM':'MM/DD')+' (tap to flip)';
+  waStatus.textContent='Parsed '+s.total.toLocaleString('en-US')+' messages from '+(s.senders.length)+' sender(s)'+(s.unparsed?'; '+s.unparsed+' line(s) could not be parsed':'')+'.';
+  waDash.classList.remove('wa-hidden');
+  var top=s.senders[0];
+  var days=s.first&&s.last?Math.max(1,Math.round((s.last-s.first)/86400000)+1):0;
+  var sil=s.longestSilenceMin>=1440?(s.longestSilenceMin/1440).toFixed(1)+' days':(s.longestSilenceMin>=60?Math.round(s.longestSilenceMin/60)+'h '+Math.round(s.longestSilenceMin%60)+'m':Math.round(s.longestSilenceMin)+' min');
+  waCards.innerHTML=
+    '<div class="stat"><div class="v">'+s.total.toLocaleString('en-US')+'</div><div class="k">Messages</div></div>'+
+    '<div class="stat"><div class="v">'+s.words.toLocaleString('en-US')+'</div><div class="k">Words</div></div>'+
+    '<div class="stat"><div class="v">'+s.activeDays+'</div><div class="k">Active days</div></div>'+
+    '<div class="stat"><div class="v">'+esc(top?top.sender:'—')+'</div><div class="k">Top sender ('+(top?top.share:'0')+'%)</div></div>'+
+    '<div class="stat"><div class="v">'+sil+'</div><div class="k">Longest silence</div></div>'+
+    '<div class="stat"><div class="v">'+s.media+'</div><div class="k">Media shared</div></div>';
+  var hl=[]; for(var h=0;h<24;h++) hl.push(h+':00');
+  drawBars(waHourly,waHourlyX,s.hourly,hl);
+  drawBars(waWeekday,waWeekdayX,s.weekday,WD);
+  var th='<tr><th>Sender</th><th>Messages</th><th>Share</th><th>Avg length</th><th>Median reply</th><th>Starts convos</th></tr>';
+  s.senders.forEach(function(r){
+    th+='<tr><td>'+esc(r.sender)+'</td><td>'+r.messages.toLocaleString('en-US')+'</td><td>'+r.share+'%</td><td>'+r.avgLen+' chars</td><td>'+(r.medianReplyMin===null?'—':(r.medianReplyMin>=60?Math.round(r.medianReplyMin/60*10)/10+' h':r.medianReplyMin+' min'))+'</td><td>'+r.starters+'</td></tr>';
+  });
+  waSenders.innerHTML=th;
+  waWords.innerHTML='<strong>Top words:</strong> '+s.topWords.slice(0,20).map(function(w){return '<span class="tag">'+esc(w.k)+' ×'+w.n+'</span>';}).join('');
+  waEmoji.innerHTML=s.topEmoji.length?('<strong style="font-size:.6em">Top emoji:</strong> '+s.topEmoji.map(function(w){return '<span title="×'+w.n+'">'+esc(w.k)+'</span>';}).join(' ')):'';
+}
+waDrop.addEventListener('click',function(){waFile.click();});
+waDrop.addEventListener('dragover',function(e){e.preventDefault();});
+waDrop.addEventListener('drop',function(e){e.preventDefault();if(e.dataTransfer.files.length)readWAFile(e.dataTransfer.files[0]);});
+waFile.addEventListener('change',function(){if(waFile.files.length)readWAFile(waFile.files[0]);});
+function readWAFile(f){
+  var r=new FileReader();
+  r.onload=function(){waText=r.result;waDayFirst=null;renderWA();};
+  r.onerror=function(){waStatus.textContent='Could not read that file. Try the .txt export again.';};
+  r.readAsText(f);
+}
+waToggle.addEventListener('click',function(){waDayFirst=!waDayFirst;renderWA();});
+document.getElementById('waSample').addEventListener('click',function(){waText=WA_SAMPLE;waDayFirst=null;renderWA();waStatus.textContent+=' (sample chat)';});
+document.getElementById('waCopy').addEventListener('click',function(){
+  if(!waStats)return;
+  var s=waStats, L=[];
+  L.push('WhatsApp chat stats ('+s.total.toLocaleString('en-US')+' messages, '+s.activeDays+' active days):');
+  s.senders.forEach(function(r){L.push('- '+r.sender+': '+r.messages.toLocaleString('en-US')+' msgs ('+r.share+'%), avg '+r.avgLen+' chars/msg');});
+  L.push('Top words: '+s.topWords.slice(0,10).map(function(w){return w.k;}).join(', '));
+  copyText(L.join('\n'),document.getElementById('waCopy'));
+});
+document.getElementById('waCsv').addEventListener('click',function(){
+  if(!waStats)return;
+  var s=waStats, rows=[['sender','messages','share_pct','avg_chars','median_reply_min','convo_starters']];
+  s.senders.forEach(function(r){rows.push([r.sender,r.messages,r.share,r.avgLen,r.medianReplyMin===null?'':r.medianReplyMin,r.starters]);});
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='whatsapp-chat-stats.csv';a.click();
+});
+var WA_SAMPLE=[
+'[12/03/2026, 9:02:11 PM] Maya: OMG did you finish the finale??',
+'[12/03/2026, 9:02:40 PM] Dan: YES. I am not okay 😭',
+'[12/03/2026, 9:03:05 PM] Maya: That plot twist!! I screamed',
+'[12/03/2026, 9:05:22 PM] Dan: image omitted',
+'[12/03/2026, 9:05:23 PM] Dan: my reaction exactly',
+'[12/03/2026, 9:06:01 PM] Maya: hahahaha perfect',
+'[12/03/2026, 9:06:44 PM] Maya: okay but the ending... we need to talk tomorrow',
+'[12/03/2026, 9:07:12 PM] Dan: coffee? 10am at our spot?',
+'[12/03/2026, 9:08:30 PM] Maya: yes!! see you there ☕',
+'[13/03/2026, 10:04:02 AM] Dan: running 5 mins late, sorry!',
+'[13/03/2026, 10:04:55 AM] Maya: no worries, I just got here',
+'[13/03/2026, 10:31:20 AM] Maya: that was the best debrief ever',
+'[13/03/2026, 10:32:01 AM] Dan: we should do this for every show',
+'[13/03/2026, 10:32:45 AM] Maya: deal 🤝',
+'[13/03/2026, 11:15:00 AM] Dan: btw did you send mom the photos?',
+'[13/03/2026, 11:16:12 AM] Maya: oops, doing it now',
+'[13/03/2026, 11:16:13 AM] Maya: image omitted',
+'[13/03/2026, 11:16:14 AM] Maya: image omitted',
+'[13/03/2026, 11:17:00 AM] Dan: she will love these',
+'[13/03/2026, 6:42:10 PM] Maya: https://example.com check this theory video',
+'[13/03/2026, 6:50:33 PM] Dan: watching now, this is wild',
+'[13/03/2026, 6:55:01 PM] Dan: okay the director basically confirmed our theory',
+'[13/03/2026, 6:55:40 PM] Maya: TOLD YOU',
+'[13/03/2026, 6:56:12 PM] Maya: I am always right about finales',
+'[13/03/2026, 6:57:00 PM] Dan: sure sure 😂',
+'[14/03/2026, 8:00:05 AM] Maya: good morning! weekend plans?',
+'[14/03/2026, 8:02:44 AM] Dan: hiking if the weather holds',
+'[14/03/2026, 8:03:12 AM] Maya: count me in 🥾',
+'[14/03/2026, 8:03:50 AM] Dan: leaving at 7, bring snacks',
+'[14/03/2026, 8:04:20 AM] Maya: on it'
+].join('\n');
+</script>
+</body>
+</html>
