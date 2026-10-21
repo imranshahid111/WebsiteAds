@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Hashtag Generator for YouTube, TikTok &amp; Instagram — Xoft Tools</title>
+<meta name="description" content="Free hashtag generator by Xoft Tools: type your topic, pick YouTube, TikTok or Instagram, and get niche + trending hashtags in one click. Copy the whole set and paste it into your caption.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/hashtag-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Hashtag Generator for YouTube, TikTok &amp; Instagram — Xoft Tools">
+<meta property="og:description" content="Niche + trending hashtags from one topic, tuned for YouTube, TikTok and Instagram. One-click copy.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/hashtag-generator.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Do hashtags still work in 2026?","acceptedAnswer":{"@type":"Answer","text":"Yes, as discovery and search signals — not as a magic virality button. On TikTok and Instagram, hashtags help the algorithm categorize your post and surface it in search; on YouTube they act as lightweight topic labels shown above your video title. Precision beats volume: tags that describe your actual topic outperform generic spam tags like #viral every time."}},
+{"@type":"Question","name":"How many hashtags should I use on TikTok?","acceptedAnswer":{"@type":"Answer","text":"Three to five focused hashtags per post is the sweet spot on TikTok. Mix one or two exact-topic tags with a couple of mid-size niche tags. Twenty random tags dilute the signal and can look spammy to both the algorithm and viewers."}},
+{"@type":"Question","name":"Should I put hashtags in my YouTube video title?","acceptedAnswer":{"@type":"Answer","text":"You can, but keep the total across your title and description under 15. YouTube ignores every hashtag on a video that uses more than 15, and hashtags in the title eat space that a clickable keyword could use instead. Most creators get more value from 3 to 5 hashtags in the description."}},
+{"@type":"Question","name":"Can I reuse the same hashtags on every post?","acceptedAnswer":{"@type":"Answer","text":"Rotate them. Posting an identical hashtag set on every video can look like spam to platform algorithms and stops working as well over time. Keep a small core of topic tags and refresh the rest for each post — this generator builds a fresh mix from your topic every time."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Hashtag Generator</h1>
+  <p>Type your topic once — get a ready-to-paste hashtag set tuned for YouTube, TikTok, or Instagram. Niche tags for the right audience, mid-tail combos for search, broad tags for reach. Copy all with one click.</p>
+
+  <div class="toolbox">
+    <h2>Generate hashtags</h2>
+    <div class="field">
+      <label for="htopic">Your topic (be specific)</label>
+      <input type="text" id="htopic" placeholder="e.g. easy pasta recipes">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="hplatform">Platform</label>
+        <select id="hplatform">
+          <option value="youtube">YouTube</option>
+          <option value="tiktok">TikTok</option>
+          <option value="instagram">Instagram</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="hcount">Number of hashtags</label>
+        <select id="hcount">
+          <option>5</option>
+          <option>10</option>
+          <option selected>15</option>
+          <option>20</option>
+          <option>30</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="hstyle">Tag mix</label>
+        <select id="hstyle">
+          <option value="mix">Mix: broad + niche (recommended)</option>
+          <option value="niche">Niche only</option>
+          <option value="trending">Trending broad</option>
+        </select>
+      </div>
+    </div>
+    <p id="hashErr" style="display:none;color:#dc2626;font-weight:600">Please enter a topic first — the tags are built from your words.</p>
+    <button onclick="genHashtagsUI()">Generate hashtags</button>
+    <div id="hashOut" style="display:none">
+      <h3>Your hashtag set <span class="muted">(paste into your caption or description)</span></h3>
+      <div class="copyout" id="hashAll"></div>
+      <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn-ghost" id="hashCopy">Copy all hashtags</button>
+        <span class="muted" id="hashMeta"></span>
+      </div>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Do Hashtags Still Work in 2026?</h2>
+    <p>Short answer: yes — but what they <em>do</em> has changed. On TikTok and Instagram, hashtags are search and discovery tools: they help the algorithm categorize your post and surface it when someone searches your topic. On YouTube, they work more like topic labels, shown as clickable links above your video title. The era of stuffing 30 tags onto a post and going viral is long over.</p>
+    <p>What still works is precision. Tags that describe your actual topic in the words viewers type — #pastarecipe on a pasta video — tell the algorithm exactly who to show it to. Broad spam like #viral, #fyp-everything, or #follow4follow tells it nothing. Relevance beats volume on every platform, and this page shows you the mix that working creators actually use.</p>
+    <h3>What hashtags do on each platform</h3>
+    <table>
+      <tr><th>Platform</th><th>Where they appear</th><th>How many to use</th><th>What they actually do</th></tr>
+      <tr><td>YouTube</td><td>Clickable links above the title</td><td>3–5 (max 15)</td><td>Light topic signal; helps viewers find related videos</td></tr>
+      <tr><td>TikTok</td><td>In the caption</td><td>3–5</td><td>Feed categorization and in-app search</td></tr>
+      <tr><td>Instagram</td><td>Caption or first comment</td><td>5–10</td><td>Search, Explore page, and the Reels tab</td></tr>
+    </table>
+    <h3>The 3-tier hashtag mix</h3>
+    <p>Think of your set in three tiers. Tier 1 is <strong>niche exact</strong>: the literal words of your topic (#pastarecipe, #pasta, #recipe). These reach people already searching for what you made. Tier 2 is <strong>mid-tail combos</strong>: your topic plus intent words (#pastarecipetips, #easyrecipes). These catch searchers one step broader. Tier 3 is <strong>broad reach</strong>: platform discovery tags (#reels, #youtubeshorts, #fyp). These add reach but convert worst, so they go last.</p>
+    <p>This generator builds the set in exactly that order: your exact topic phrase first, then topic-plus-intent variants, then the platform's discovery pack. Pick "Niche only" if your audience is specific, "Trending broad" if you want maximum reach, or the recommended mix for the balanced default.</p>
+    <h3>How many hashtags to use</h3>
+    <p>On YouTube, use 3–5 in the description — and know the hard rule: <strong>more than 15 hashtags anywhere on a video and YouTube ignores every one of them</strong>, title and description included. On TikTok, 3–5 focused tags outperform 20 random ones because the caption space is short and each tag is a clear signal. On Instagram you have more room: 5–10 is the practical range for feed posts and Reels.</p>
+    <h3>Mistakes that make hashtags useless</h3>
+    <p><strong>Mistake 1: mega-generic tags.</strong> #love has billions of posts — your video drowns in seconds. Compete where you can win: tags with real but modest volume. <strong>Mistake 2: the identical set on every post.</strong> Algorithms read repetition as spam and it stops working. Keep a small core and rotate the rest — regenerate a fresh set per post with this tool.</p>
+    <p><strong>Mistake 3: irrelevant trending tags.</strong> Slapping #taylorswift on a plumbing tutorial brings viewers who bounce in two seconds, and bounces hurt your watch time. <strong>Mistake 4: hashtags in the YouTube title.</strong> They eat space where a clickable keyword should be; keep tags in the description instead.</p>
+    <h3>Your workflow with this tool</h3>
+    <p>One, type your topic as specifically as possible — "easy pasta recipes" beats "food". Two, pick the platform and a count (start with the platform's recommended range). Three, copy the whole set and paste it at the end of your caption or description.</p>
+    <p>Four, check your full caption length with our <a href="word-counter.html">word counter</a> before posting, and pair the post with a strong opener from the <a href="youtube-hook-generator.html">YouTube hook &amp; title generator</a>. If you need fresh video concepts too, the <a href="ai-prompt-generator.html">AI video prompt generator</a> structures each shot while the hashtags handle discovery.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></h3><p>Proven opening hooks and clickable title ideas for Shorts and long-form.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Video Prompt Generator</a></h3><p>Structured cinematic prompts for AI video tools.</p></div>
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time — check caption length.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></li>
+        <li><a href="hashtag-generator.html">Hashtag Generator</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+function genHashtagsUI(){
+  var topic=document.getElementById('htopic').value.trim();
+  var err=document.getElementById('hashErr');
+  if(!topic){err.style.display='block';return;}
+  err.style.display='none';
+  var r=Core.hashtags(topic,
+    document.getElementById('hplatform').value,
+    document.getElementById('hcount').value,
+    document.getElementById('hstyle').value);
+  var all='#'+r.tags.join(' #');
+  document.getElementById('hashAll').textContent=all;
+  var label={youtube:'YouTube',tiktok:'TikTok',instagram:'Instagram'}[r.platform]||r.platform;
+  document.getElementById('hashMeta').textContent=r.tags.length+' hashtags · '+all.length+' characters · tuned for '+label;
+  var btn=document.getElementById('hashCopy');
+  btn.onclick=function(){copyText(all,btn);};
+  document.getElementById('hashOut').style.display='block';
+}
+</script>
+</body>
+</html>
