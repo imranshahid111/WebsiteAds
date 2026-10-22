@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free YouTube Thumbnail Safe-Zone Checker — Xoft Tools</title>
+<meta name="description" content="Check your YouTube thumbnail text before you upload: see if it hits the timestamp zone, the edge margins, or is too small for the sidebar — free, in your browser.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/thumbnail-safe-zone-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free YouTube Thumbnail Safe-Zone Checker — Xoft Tools">
+<meta property="og:description" content="Paste your thumbnail headline, see the safe zone, timestamp danger area, and a sidebar readability test.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/thumbnail-safe-zone-checker.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.sz-thumb{position:relative;width:100%;aspect-ratio:16/9;background:#0f172a;border-radius:10px;overflow:hidden;margin:12px 0}
+.sz-zone-safe{position:absolute;left:5%;top:5%;width:90%;height:90%;border:2px dashed rgba(34,197,94,.85);border-radius:6px;pointer-events:none}
+.sz-zone-safe b{position:absolute;top:4px;left:8px;font-size:11px;font-weight:700;color:#bbf7d0;background:rgba(22,101,52,.75);padding:2px 8px;border-radius:999px}
+.sz-zone-danger{position:absolute;left:82.5%;top:83.33%;width:17.5%;height:16.67%;background:rgba(220,38,38,.35);border:2px solid rgba(220,38,38,.9);border-radius:6px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.sz-zone-danger span{font-size:12px;color:#fff;font-weight:700;background:rgba(0,0,0,.6);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.sz-zone-tr{position:absolute;left:88%;top:0;width:12%;height:16%;background:rgba(217,119,6,.28);border:2px solid rgba(217,119,6,.85);border-bottom-left-radius:6px;pointer-events:none}
+.sz-text{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;color:#fff;line-height:1.18;pointer-events:none;word-break:break-word;
+  text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,2px 2px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000}
+.sz-mini{width:168px;max-width:100%}
+.sz-mini .sz-zone-danger span,.sz-mini .sz-zone-safe b{display:none}
+.sz-pos{display:grid;grid-template-columns:repeat(3,46px);gap:6px}
+.sz-pos button{width:46px;height:36px;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;cursor:pointer;position:relative;font-size:0}
+.sz-pos button::after{content:'';position:absolute;inset:0;margin:auto;width:9px;height:9px;border-radius:50%;background:#94a3b8}
+.sz-pos button.on{background:#1d4ed8;border-color:#1d4ed8}
+.sz-pos button.on::after{background:#fff}
+.sz-verdict{margin:14px 0}
+.sz-grade{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;font-size:1.05em;margin-bottom:10px}
+.sz-grade strong{flex:1}
+.sz-good{background:#dcfce7;color:#166534}
+.sz-warn{background:#fef3c7;color:#92400e}
+.sz-bad{background:#fee2e2;color:#991b1b}
+.sz-msgs{list-style:none;margin:0;padding:0}
+.sz-msgs li{margin:6px 0;padding:8px 12px;border-radius:8px;font-size:.95em}
+li.sz-good{background:#f0fdf4;border-left:4px solid #16a34a}
+li.sz-warn{background:#fffbeb;border-left:4px solid #d97706}
+li.sz-bad{background:#fef2f2;border-left:4px solid #dc2626}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the YouTube thumbnail safe zone?","acceptedAnswer":{"@type":"Answer","text":"The safe zone is the central roughly 80% of a 1280x720 thumbnail (about 1100x620 pixels) where text, faces, and logos stay fully visible. It sits clear of the bottom-right timestamp badge, the desktop hover buttons, and the outer edges that some TVs and embeds crop."}},
+{"@type":"Question","name":"Where exactly does YouTube put the timestamp?","acceptedAnswer":{"@type":"Answer","text":"YouTube overlays a dark duration badge (for example \"12:45\") in the bottom-right corner of every video thumbnail, on both mobile and desktop. Keep important text at least about 200 pixels from the right edge and 150 pixels from the bottom of a 1280x720 canvas."}},
+{"@type":"Question","name":"What size should my YouTube thumbnail be?","acceptedAnswer":{"@type":"Answer","text":"Design at 1280x720 pixels in a 16:9 aspect ratio, with a minimum width of 640 pixels. Keep the file under 2 MB. JPG works best for photo-heavy thumbnails, PNG keeps bold text edges razor sharp."}},
+{"@type":"Question","name":"Does YouTube crop thumbnails on mobile?","acceptedAnswer":{"@type":"Answer","text":"No — the full 16:9 image is shown in mobile feeds and search. The real risks are overlays (the timestamp badge, hover buttons) and slight edge cropping on some TV apps and embeds, which is why a ~5% edge margin is smart."}},
+{"@type":"Question","name":"Does this checker work for YouTube Shorts thumbnails?","acceptedAnswer":{"@type":"Answer","text":"No. Shorts use vertical 9:16 artwork with a completely different layout (action buttons down the right edge, caption at the bottom). This tool models the 16:9 thumbnail used for standard YouTube videos only."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>YouTube Thumbnail Safe-Zone Checker</h1>
+  <p>Type the headline on your thumbnail — the tool draws exactly where it lands on a 1280×720 canvas, flags the timestamp danger zone, and tests whether it's readable in the tiny "Up next" sidebar. Fix placement before you upload, not after the views don't come.</p>
+
+  <div class="toolbox">
+    <h2>Check your thumbnail text</h2>
+    <div class="field">
+      <label for="szText">Headline on your thumbnail (line breaks = new lines)</label>
+      <textarea id="szText" rows="3" placeholder="e.g. I Made $1000&#10;In 30 Days"></textarea>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="szSize">Font size <span class="muted" id="szSizeVal">110 px</span></label>
+        <input type="range" id="szSize" min="40" max="200" value="110" style="width:100%">
+        <span class="muted">At 1280×720 scale — most thumbnails use 80–120.</span>
+      </div>
+      <div class="field">
+        <label>Text position</label>
+        <div class="sz-pos" id="szPos">
+          <button data-pos="tl" aria-label="top left"></button><button data-pos="tc" aria-label="top center"></button><button data-pos="tr" aria-label="top right"></button>
+          <button data-pos="ml" aria-label="middle left"></button><button data-pos="mc" aria-label="center" class="on"></button><button data-pos="mr" aria-label="middle right"></button>
+          <button data-pos="bl" aria-label="bottom left"></button><button data-pos="bc" aria-label="bottom center"></button><button data-pos="br" aria-label="bottom right"></button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+      <button class="btn-ghost" id="szSample">Try a sample</button>
+    </div>
+    <p class="muted">Estimates only — actual badge sizes vary slightly by device, so keep a small margin.</p>
+
+    <h3>Preview <span class="muted">(1280 × 720)</span></h3>
+    <div class="sz-thumb" id="szThumb">
+      <div class="sz-zone-safe"><b>safe zone</b></div>
+      <div class="sz-zone-tr"></div>
+      <div class="sz-zone-danger"><span>⏱ timestamp</span></div>
+      <div class="sz-text" style="display:none"></div>
+    </div>
+    <div id="szVerdict" class="sz-verdict"><p class="muted">Type your headline above to see the check.</p></div>
+
+    <h3>Sidebar test <span class="muted">(168 px — the "Up next" column)</span></h3>
+    <div class="sz-thumb sz-mini" id="szMini">
+      <div class="sz-zone-safe"></div>
+      <div class="sz-zone-tr"></div>
+      <div class="sz-zone-danger"></div>
+      <div class="sz-text" style="display:none"></div>
+    </div>
+    <p class="muted">If you can't read your headline at this size, viewers scrolling on their phones can't either.</p>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>What the Thumbnail "Safe Zone" Actually Is</h2>
+    <p>YouTube does not crop your 16:9 thumbnail — the full image shows in feeds, search results, and the player. The real problem is what YouTube puts <em>on top</em> of it. A duration badge sits in the bottom-right corner of every thumbnail, hover buttons appear in the top-right corner on desktop, and some TV apps trim the outer edges. The "safe zone" is simply the area none of that touches: roughly the central 80% of the canvas.</p>
+    <p>Design for that center first and treat the corners as rented space. Anything important — your headline, a face, a logo — belongs inside the safe zone. Everything outside it is a gamble against overlays you don't control.</p>
+    <h2>The 4 Zones on Every YouTube Thumbnail</h2>
+    <table>
+      <tr><th>Zone</th><th>Location</th><th>What it does</th></tr>
+      <tr><td>Timestamp danger zone</td><td>Bottom-right corner</td><td>A dark duration badge (e.g. "12:45") covers anything under it — on mobile and desktop alike</td></tr>
+      <tr><td>Hover-button zone</td><td>Top-right corner (desktop)</td><td>"Watch Later" and "Add to queue" buttons appear here on hover</td></tr>
+      <tr><td>Edge margin</td><td>Outer ~5% of all edges</td><td>Some TV apps and embeds crop the edges slightly (overscan)</td></tr>
+      <tr><td>Safe zone</td><td>Central ~80%</td><td>Always fully visible on every device — this is where your text lives</td></tr>
+    </table>
+    <p>The bottom-right corner is the killer. Every creator eventually uploads a thumbnail with text sitting exactly where the timestamp lands, and the result looks broken to every viewer. Keep important content at least 200 pixels from the right edge and 150 pixels from the bottom of a 1280×720 design, and that mistake is gone forever.</p>
+    <h2>How to Check Your Thumbnail With This Tool</h2>
+    <p>One — type the exact headline from your thumbnail, line breaks included. Two — set the font size close to what your design uses (most thumbnails land between 80 and 120 at 1280×720 scale). Three — pick the position where the text actually sits. Four — read the verdict: green means safe, amber means tweak something, red means the timestamp or an edge will eat your text.</p>
+    <h2>Design Rules That Survive Small Screens</h2>
+    <p>Three to six words, in bold type at 80–120 point. That combination stays readable on a phone held at arm's length, which is where most of your impressions come from. The sidebar test above shows your thumbnail at 168 pixels wide — the size viewers see in the "Up next" column. If your headline isn't readable there, it isn't ready to upload.</p>
+    <p>Contrast does half the work. White or yellow bold text with a thick dark stroke or drop shadow survives busy backgrounds and both of YouTube's light and dark themes. Never place light text on a light area and trust it — shrink the preview and look again.</p>
+    <h2>Mistakes That Kill Your Click-Through Rate</h2>
+    <p><strong>Mistake 1: text in the bottom-right corner.</strong> The timestamp badge covers it on every device, and the thumbnail looks broken. <strong>Mistake 2: tiny text.</strong> Thumbnails win or lose in feeds at a few hundred pixels wide; if it only reads at full size, it fails. <strong>Mistake 3: edge-to-edge text.</strong> TVs and embeds crop the outer margin — pull text inward.</p>
+    <p><strong>Mistake 4: repeating your title word for word.</strong> The thumbnail and the title are a team: the title says <em>what</em>, the thumbnail says <em>why</em>. If both say "How to Save Money," one of them is wasted space.</p>
+    <p>Pair this checker with our <a href="youtube-hook-generator.html">YouTube hook &amp; title generator</a> to write a title that complements your thumbnail text instead of duplicating it — and use the <a href="ai-prompt-generator.html">AI video prompt generator</a> to plan the thumbnail's visual concept before you open your editor.</p>
+    <h2>After the Check Passes: Thumbnail + Title Pairing</h2>
+    <p>Safe text placement is only half the thumbnail's job — the other half is what the thumbnail and the video title say <em>together</em>. YouTube shows them as a pair in every feed, so they should divide the work. Let the thumbnail carry the emotion or the result ("$1,000 in 30 Days") and let the title carry the context and the keyword ("How I Made $1,000 Flipping Thrift Finds in 30 Days"). Viewers read both in a split second, and the pair should make sense without either repeating the other.</p>
+    <p>Then run one last two-second test. Shrink your finished thumbnail to the size of a postage stamp — or just use the sidebar test above — and ask: could a stranger tell what the video is about? If the answer is yes and the text sits in the safe zone, upload it. If the answer is no, the fix is almost never "add more text." It is bigger text, fewer words, or a clearer focal image.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></h3><p>Proven opening hooks and clickable title ideas for Shorts and long-form.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Video Prompt Generator</a></h3><p>Structured cinematic prompts for AI video tools.</p></div>
+      <div class="card"><h3><a href="hashtag-generator.html">Hashtag Generator</a></h3><p>Niche + trending hashtags for YouTube, TikTok, and Instagram.</p></div>
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time — check title and caption length.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="../calculators/freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="../calculators/profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="../calculators/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="../calculators/age-calculator.html">Age Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></li>
+        <li><a href="hashtag-generator.html">Hashtag Generator</a></li>
+        <li><a href="thumbnail-safe-zone-checker.html">Thumbnail Safe-Zone Checker</a></li>
+        <li><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></li>
+        <li><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var szPos='mc';
+function szEscape(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function szDraw(el,r){
+  var layer=el.querySelector('.sz-text');
+  if(!r.ok){layer.style.display='none';layer.innerHTML='';return;}
+  layer.style.display='flex';
+  layer.style.left=(r.box.x/1280*100)+'%';
+  layer.style.top=(r.box.y/720*100)+'%';
+  layer.style.width=(r.box.w/1280*100)+'%';
+  layer.style.height=(r.box.h/720*100)+'%';
+  layer.style.fontSize=(r.fontSize*el.clientWidth/1280)+'px';
+  layer.innerHTML=r.lines.map(szEscape).join('<br>');
+}
+function szRender(){
+  var text=document.getElementById('szText').value;
+  var size=Number(document.getElementById('szSize').value);
+  document.getElementById('szSizeVal').textContent=size+' px';
+  var r=Core.safeZoneCheck(text,size,szPos);
+  szDraw(document.getElementById('szThumb'),r);
+  szDraw(document.getElementById('szMini'),r);
+  var v=document.getElementById('szVerdict');
+  if(!r.ok){v.innerHTML='<p class="muted">Type your headline above to see the check.</p>';return;}
+  var cls=r.grade==='Safe'?'sz-good':(r.grade==='Needs tweaks'?'sz-warn':'sz-bad');
+  var html='<div class="sz-grade '+cls+'"><strong>'+r.grade+'</strong><span>'+r.score+' / 100</span></div><ul class="sz-msgs">';
+  r.msgs.forEach(function(m){html+='<li class="sz-'+m.t+'">'+m.x+'</li>';});
+  v.innerHTML=html+'</ul>';
+}
+document.getElementById('szText').addEventListener('input',szRender);
+document.getElementById('szSize').addEventListener('input',szRender);
+document.getElementById('szPos').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  szPos=b.getAttribute('data-pos');
+  var btns=this.querySelectorAll('button');
+  for(var i=0;i<btns.length;i++)btns[i].classList.remove('on');
+  b.classList.add('on');szRender();
+});
+document.getElementById('szSample').addEventListener('click',function(){
+  document.getElementById('szText').value='I Made $1000\nIn 30 Days';
+  document.getElementById('szSize').value=120;szPos='ml';
+  var btns=document.getElementById('szPos').querySelectorAll('button');
+  for(var i=0;i<btns.length;i++)btns[i].classList.toggle('on',btns[i].getAttribute('data-pos')==='ml');
+  szRender();
+});
+window.addEventListener('resize',szRender);
+</script>
+</body>
+</html>
