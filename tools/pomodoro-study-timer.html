@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JBY5WR7Z4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7JBY5WR7Z4');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Pomodoro Study Timer (Online Focus Timer) — Xoft Tools</title>
+<meta name="description" content="A free online Pomodoro study timer: customizable focus sessions, short and long breaks, an end-of-session alarm, and a full session plan — works in your browser, no sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/pomodoro-study-timer.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Pomodoro Study Timer (Online Focus Timer) — Xoft Tools">
+<meta property="og:description" content="Study in focused 25-minute sprints with short and long breaks — a free Pomodoro timer in your browser.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/pomodoro-study-timer.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.pom-timer{background:#0f172a;color:#f8fafc;border-radius:14px;padding:28px 20px;text-align:center;margin:18px 0}
+.pom-phase{display:inline-block;font-size:.8em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-radius:999px;background:#1d4ed8;margin-bottom:10px}
+.pom-phase.focus{background:#16a34a}
+.pom-phase.short{background:#d97706}
+.pom-phase.long{background:#0d9488}
+.pom-phase.idle{background:#475569}
+.pom-clock{font-size:clamp(3rem,14vw,5rem);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em;margin:4px 0}
+.pom-task{color:#cbd5e1;font-size:.95em;margin:2px 0 10px;min-height:1.4em}
+.pom-bar{height:8px;background:#1e293b;border-radius:999px;overflow:hidden;margin:12px auto;max-width:420px}
+.pom-bar i{display:block;height:100%;width:0;background:#38bdf8;border-radius:999px;transition:width .3s}
+.pom-dots{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.pom-dot{width:12px;height:12px;border-radius:50%;background:#334155}
+.pom-dot.done{background:#22c55e}
+.pom-dot.now{background:#fbbf24;box-shadow:0 0 0 3px rgba(251,191,36,.25)}
+.pom-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.pom-btns .btn-ghost{color:#f8fafc;border-color:#475569}
+.pom-plan{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+.pom-plan th,.pom-plan td{border:1px solid #e2e8f0;padding:7px 10px;text-align:left}
+.pom-plan th{background:#f1f5f9}
+.pom-kind{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8em;font-weight:700}
+.pom-kind.focus{background:#dcfce7;color:#166534}
+.pom-kind.short{background:#fef3c7;color:#92400e}
+.pom-kind.long{background:#ccfbf1;color:#0f766e}
+.pom-totals{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.pom-total{flex:1;min-width:120px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;text-align:center}
+.pom-total b{display:block;font-size:1.35em}
+.pom-total span{font-size:.82em;color:#64748b}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the Pomodoro Technique?","acceptedAnswer":{"@type":"Answer","text":"The Pomodoro Technique is a time-management method from the late 1980s: you work in focused 25-minute sessions (pomodoros), take a 5-minute break after each one, and take a longer 15–30 minute break after every four sessions. The fixed start-and-stop times make it easier to begin and to stop, which is why it works so well for studying."}},
+{"@type":"Question","name":"How long should a Pomodoro session be?","acceptedAnswer":{"@type":"Answer","text":"The classic length is 25 minutes of focus with a 5-minute break, and a longer 15–30 minute break after four sessions. If 25 feels too short once you are in flow, try 50/10; if you struggle to start, try 15/5. This timer lets you change all three lengths."}},
+{"@type":"Question","name":"What should I do during a Pomodoro break?","acceptedAnswer":{"@type":"Answer","text":"Step away from the work: stretch, get water, look out a window. Short breaks recharge attention; scrolling social media on a break usually does the opposite, because it starts a new attention loop you have to close again. Save the phone for the long break."}},
+{"@type":"Question","name":"Does the Pomodoro timer keep running if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Yes. This timer counts from a real clock timestamp, so switching tabs, minimizing the browser, or locking your phone does not pause it. Keep the tab open and you will hear the end-of-session alarm; you can also allow browser notifications for an on-screen alert."}},
+{"@type":"Question","name":"How many Pomodoros should I do per day?","acceptedAnswer":{"@type":"Answer","text":"For deep study, 6–8 pomodoros (about 3–4 hours of true focused work) is a strong day for most students — that matches what research on deliberate practice suggests is the productive ceiling. Start with 4 per day and add one per week rather than jumping to 12 and burning out."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Pomodoro Study Timer</h1>
+  <p>Study in focused sprints instead of marathon cramming. Set your session lengths, press start, and let the timer carry you through focus blocks, short breaks, and a well-earned long break — with an alarm when each phase ends.</p>
+
+  <div class="toolbox">
+    <h2>Your study session</h2>
+    <div class="row">
+      <div class="field">
+        <label for="pFocus">Focus (minutes)</label>
+        <input type="number" id="pFocus" value="25" min="5" max="120" style="width:100%">
+      </div>
+      <div class="field">
+        <label for="pShort">Short break (minutes)</label>
+        <input type="number" id="pShort" value="5" min="1" max="45" style="width:100%">
+      </div>
+      <div class="field">
+        <label for="pLong">Long break (minutes)</label>
+        <input type="number" id="pLong" value="15" min="5" max="90" style="width:100%">
+      </div>
+      <div class="field">
+        <label for="pEvery">Long break every (sessions)</label>
+        <input type="number" id="pEvery" value="4" min="2" max="16" style="width:100%">
+      </div>
+      <div class="field">
+        <label for="pSessions">Total focus sessions</label>
+        <input type="number" id="pSessions" value="8" min="1" max="16" style="width:100%">
+      </div>
+    </div>
+    <div class="field">
+      <label for="pTask">What are you studying? (optional — shown during focus)</label>
+      <input type="text" id="pTask" placeholder="e.g. Chapter 7: Cell division" style="width:100%">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label><input type="checkbox" id="pAuto" checked> Auto-start the next phase</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="pSound" checked> Alarm when a phase ends</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="pNotify"> Browser notification at phase end</label>
+      </div>
+    </div>
+
+    <div class="pom-timer">
+      <div><span class="pom-phase idle" id="pPhase">Ready</span></div>
+      <div class="pom-clock" id="pClock">25:00</div>
+      <div class="pom-task" id="pTaskLine"></div>
+      <div class="pom-bar"><i id="pBar"></i></div>
+      <div class="pom-dots" id="pDots"></div>
+      <div class="pom-btns">
+        <button class="btn" id="pStart">Start</button>
+        <button class="btn-ghost" id="pSkip">Skip phase</button>
+        <button class="btn-ghost" id="pReset">Reset</button>
+      </div>
+    </div>
+
+    <h3>Session plan <span class="muted" id="pPlanNote"></span></h3>
+    <div class="pom-totals" id="pTotals"></div>
+    <table class="pom-plan" id="pPlan"></table>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why 25 Minutes Works When "Study All Day" Fails</h2>
+    <p>The Pomodoro Technique was created in the late 1980s by Francesco Cirillo, who named it after a tomato-shaped kitchen timer. The rule is almost embarrassingly simple: 25 minutes of real focus, then a 5-minute break. After four sessions, take a longer break of 15–30 minutes. No phones during focus, no guilt during breaks.</p>
+    <p>The magic isn't the number 25 — it's the <em>container</em>. Starting a 25-minute session feels possible on a tired evening; starting "three hours of studying" doesn't. And because the break is scheduled, your brain stops negotiating with itself about when to rest. Over a day, those tiny starts compound into hours of genuine, phone-free work.</p>
+    <h2>How to Use This Timer</h2>
+    <p>One — set your lengths. The classic 25/5/15 with a long break every 4 sessions is the best starting point; change them only after a week of the default. Two — type what you're studying in the task box so the screen reminds you during focus. Three — press start and keep this tab open; the timer counts from a real clock, so switching tabs won't pause it, but the alarm only sounds if the page is loaded.</p>
+    <p>When a phase ends, you'll hear a chime (or see a notification if you enabled it). Stand up on breaks — stretch, get water, look out a window. Don't open social media "for just the break": that's a new attention loop your next session has to close. If auto-start is on, the next phase begins by itself; turn it off if you'd rather catch your breath first.</p>
+    <h2>Picking the Right Session Length</h2>
+    <table>
+      <tr><th>Pattern</th><th>Best for</th></tr>
+      <tr><td>15 / 5 (classic short)</td><td>Starting when you're exhausted or dreading the work — tiny sessions you can't say no to</td></tr>
+      <tr><td>25 / 5 (classic)</td><td>Most studying: textbook chapters, problem sets, flashcards, essays</td></tr>
+      <tr><td>50 / 10</td><td>Deep work when you're already in flow — long essays, coding, lab reports</td></tr>
+      <tr><td>90 / 20</td><td>Rare. Only for tasks where setup itself takes 20 minutes, like art projects or long proofs</td></tr>
+    </table>
+    <p>If you find yourself watching the clock during 25-minute sessions, drop to 15 — the timer should pull you along, not hold you back. If 25 feels over before it starts, go up to 50. The "right" length is the one you actually repeat tomorrow.</p>
+    <h2>What to Do When Focus Breaks</h2>
+    <p>You will get distracted — that's normal, not a failure. The technique's answer is the "inform, negotiate, schedule, call back" habit: when a thought intrudes ("I should text Mom"), jot it on paper, and return to the task. The timer keeps running; a distracted pomodoro is still a pomodoro, just an imperfect one.</p>
+    <p>If interruptions keep stealing whole sessions — notifications, people, noise — fix the environment, not the timer. One session per day with phone in another room beats six sessions next to a buzzing phone. Students who track their sessions for two weeks usually find their real enemy isn't willpower; it's whatever sits on the desk.</p>
+    <h2>How Many Pomodoros Make a Good Day</h2>
+    <p>For deep study, 6–8 pomodoros is a genuinely strong day: that's about 3–4 hours of true focused work, which is close to what research on deliberate practice suggests is the realistic ceiling for hard thinking. Writing assignments count too — check your draft's length with our <a href="word-counter.html">word counter</a> between sessions to see how much each focus block produces.</p>
+    <p>Start with 4 sessions a day and add one per week. Students who jump straight to 12 usually burn out by day three and conclude "the technique doesn't work." It works. They just overdosed. And once grades start moving, our <a href="../calculators/gpa-calculator.html">GPA calculator</a> shows exactly what those study hours are buying you this semester.</p>
+    <h2>The Break Rules That Matter</h2>
+    <p>Short breaks are for your body: stand, stretch, water, window. Five minutes is enough to reset attention but short enough that the thread of the work stays warm. Long breaks are for real recovery: walk, snack, rest your eyes properly. A 15-minute break spent scrolling is not a break — your eyes and brain did more work, not less.</p>
+    <p>Skipping breaks to "get ahead" is the classic beginner trap. By session three your focus is gone and you spend the fourth session re-reading the same paragraph. The breaks are part of the method, not a reward for it. Trust the timer: it has outlasted every crammer who ignored it.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time — check essay and assignment length.</p></div>
+      <div class="card"><h3><a href="../calculators/gpa-calculator.html">GPA Calculator</a></h3><p>Semester + cumulative GPA from grades and credit hours.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools — plan study videos too.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a live strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="../calculators/freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="../calculators/profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="../calculators/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="../calculators/age-calculator.html">Age Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></li>
+        <li><a href="hashtag-generator.html">Hashtag Generator</a></li>
+        <li><a href="thumbnail-safe-zone-checker.html">Thumbnail Safe-Zone Checker</a></li>
+        <li><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></li>
+        <li><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></li>
+        <li><a href="pomodoro-study-timer.html">Pomodoro Study Timer</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var pSettings = {focus:25, short:5, long:15, every:4, sessions:8};
+var pPlan = null, pIdx = 0, pLeft = 0, pEndsAt = 0, pRunning = false, pTimer = null, pDone = 0;
+
+function pReadSettings(){
+  pSettings.focus = Math.max(5, Math.min(120, Number(document.getElementById('pFocus').value) || 25));
+  pSettings.short = Math.max(1, Math.min(45, Number(document.getElementById('pShort').value) || 5));
+  pSettings.long  = Math.max(5, Math.min(90, Number(document.getElementById('pLong').value) || 15));
+  pSettings.every = Math.max(2, Math.round(Number(document.getElementById('pEvery').value) || 4));
+  pSettings.sessions = Math.max(1, Math.min(16, Math.round(Number(document.getElementById('pSessions').value) || 8)));
+}
+function pFmt(sec){
+  sec = Math.max(0, Math.ceil(sec));
+  var m = Math.floor(sec/60), s = sec % 60;
+  return (m < 10 ? '0'+m : m) + ':' + (s < 10 ? '0'+s : s);
+}
+function pFmtOffset(min){
+  var h = Math.floor(min/60), m = Math.round(min % 60);
+  if (h > 0 && m > 0) return h + 'h ' + m + 'm';
+  if (h > 0) return h + 'h';
+  return m + ' min';
+}
+function pRebuild(){
+  pReadSettings();
+  pPlan = Core.pomodoroSchedule(pSettings.focus, pSettings.short, pSettings.long, pSettings.every, pSettings.sessions);
+  pReset(false);
+  document.getElementById('pPlanNote').textContent = '(classic ' + pPlan.focusMin + '/' + pPlan.shortMin + ' — long break every ' + pPlan.every + ')';
+  document.getElementById('pTotals').innerHTML =
+    '<div class="pom-total"><b>' + pPlan.totalFocusMin + ' min</b><span>focused work</span></div>' +
+    '<div class="pom-total"><b>' + pPlan.totalBreakMin + ' min</b><span>breaks</span></div>' +
+    '<div class="pom-total"><b>' + pFmtOffset(pPlan.totalMin) + '</b><span>finish in</span></div>';
+  var html = '<tr><th>#</th><th>Phase</th><th>Duration</th><th>Starts at</th></tr>';
+  pPlan.steps.forEach(function(st, i){
+    var label = st.kind === 'focus' ? 'Focus session ' + st.session : (st.kind === 'short' ? 'Short break' : 'Long break');
+    html += '<tr><td>' + (i+1) + '</td><td><span class="pom-kind ' + st.kind + '">' + label + '</span></td><td>' +
+            st.durMin + ' min</td><td>' + pFmtOffset(st.startMin) + '</td></tr>';
+  });
+  document.getElementById('pPlan').innerHTML = html;
+  pRender();
+}
+function pRender(){
+  var step = pPlan && pPlan.steps[pIdx];
+  var phase = document.getElementById('pPhase');
+  var clock = document.getElementById('pClock');
+  if (!step) {
+    phase.textContent = 'Done — great work!'; phase.className = 'pom-phase focus';
+    clock.textContent = '00:00'; document.getElementById('pBar').style.width = '100%';
+    document.getElementById('pTaskLine').textContent = '';
+    pDrawDots(); return;
+  }
+  var names = {focus:'Focus', short:'Short break', long:'Long break'};
+  phase.textContent = names[step.kind] + (step.kind === 'focus' ? ' ' + step.session + ' / ' + pPlan.sessions : '');
+  phase.className = 'pom-phase ' + step.kind;
+  clock.textContent = pFmt(pLeft);
+  var total = step.durMin * 60;
+  document.getElementById('pBar').style.width = Math.min(100, (total - pLeft) / total * 100) + '%';
+  document.getElementById('pTaskLine').textContent = (step.kind === 'focus' && document.getElementById('pTask').value)
+    ? 'Studying: ' + document.getElementById('pTask').value : '';
+  pDrawDots();
+  document.getElementById('pStart').textContent = pRunning ? 'Pause' : (pLeft < total ? 'Resume' : 'Start');
+}
+function pDrawDots(){
+  var html = '';
+  for (var i = 1; i <= pPlan.sessions; i++){
+    var cls = 'pom-dot';
+    if (i <= pDone) cls += ' done';
+    else if (pPlan.steps[pIdx] && pPlan.steps[pIdx].kind === 'focus' && pPlan.steps[pIdx].session === i) cls += ' now';
+    html += '<span class="' + cls + '"></span>';
+  }
+  document.getElementById('pDots').innerHTML = html;
+}
+function pBeep(){
+  if (!document.getElementById('pSound').checked) return;
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.25, 0.5].forEach(function(delay, i){
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = i === 2 ? 880 : 660;
+      g.gain.setValueAtTime(0.001, ctx.currentTime + delay);
+      g.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime + delay + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.22);
+      o.start(ctx.currentTime + delay); o.stop(ctx.currentTime + delay + 0.25);
+    });
+  } catch(e){}
+}
+function pNotify(title, body){
+  if (!document.getElementById('pNotify').checked) return;
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') { try { new Notification(title, {body: body}); } catch(e){} }
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(function(p){ if (p === 'granted') { try { new Notification(title, {body: body}); } catch(e){} } });
+  }
+}
+function pStartPause(){
+  var step = pPlan.steps[pIdx];
+  if (!step) { pReset(false); return; }
+  if (pRunning) {
+    pRunning = false; clearInterval(pTimer); pTimer = null;
+    pLeft = Math.max(0, (pEndsAt - Date.now()) / 1000);
+  } else {
+    pEndsAt = Date.now() + pLeft * 1000;
+    pRunning = true;
+    pTimer = setInterval(pTick, 250);
+    if (document.getElementById('pNotify').checked && 'Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }
+  pRender();
+}
+function pTick(){
+  pLeft = (pEndsAt - Date.now()) / 1000;
+  if (pLeft <= 0) { pAdvance(); return; }
+  pRender();
+}
+function pAdvance(){
+  var step = pPlan.steps[pIdx];
+  if (step && step.kind === 'focus') pDone++;
+  pIdx++;
+  var next = pPlan.steps[pIdx];
+  pBeep();
+  if (!next) {
+    pRunning = false; clearInterval(pTimer); pTimer = null;
+    pNotify('Study block complete!', 'You finished ' + pPlan.sessions + ' focus sessions — ' + pPlan.totalFocusMin + ' minutes of real work.');
+    pRender(); return;
+  }
+  pLeft = next.durMin * 60;
+  pNotify(next.kind === 'focus' ? 'Focus time' : 'Break time',
+          next.kind === 'focus' ? 'Session ' + next.session + ' of ' + pPlan.sessions + ' — ' + next.durMin + ' minutes.' : next.durMin + '-minute break. Stand up!');
+  if (document.getElementById('pAuto').checked) {
+    pEndsAt = Date.now() + pLeft * 1000;
+    if (!pTimer) pTimer = setInterval(pTick, 250);
+    pRunning = true;
+  } else {
+    pRunning = false; clearInterval(pTimer); pTimer = null;
+  }
+  pRender();
+}
+function pReset(keepSettings){
+  pRunning = false; if (pTimer) { clearInterval(pTimer); pTimer = null; }
+  pIdx = 0; pDone = 0;
+  pLeft = pPlan ? pPlan.steps[0].durMin * 60 : pSettings.focus * 60;
+  pRender();
+}
+['pFocus','pShort','pLong','pEvery','pSessions'].forEach(function(id){
+  document.getElementById(id).addEventListener('change', function(){
+    if (pRunning) { pRunning = false; clearInterval(pTimer); pTimer = null; }
+    pRebuild();
+  });
+});
+document.getElementById('pTask').addEventListener('input', pRender);
+document.getElementById('pStart').addEventListener('click', pStartPause);
+document.getElementById('pSkip').addEventListener('click', function(){
+  if (!pRunning && pLeft === 0) return;
+  if (pRunning) { pRunning = false; clearInterval(pTimer); pTimer = null; }
+  pAdvance();
+});
+document.getElementById('pReset').addEventListener('click', function(){ pReset(true); });
+pRebuild();
+</script>
+</body>
+</html>
