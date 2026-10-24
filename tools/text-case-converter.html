@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JBY5WR7Z4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7JBY5WR7Z4');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Text Case Converter &amp; Duplicate Line Remover — Xoft Tools</title>
+<meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, Sentence case and more, and remove duplicate lines in one click — free, in your browser, no sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://websiteads.vercel.app/tools/text-case-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Text Case Converter &amp; Duplicate Line Remover — Xoft Tools">
+<meta property="og:description" content="Fix casing and strip duplicate lines from pasted text in one click — free, private, and instant.">
+<meta property="og:url" content="https://websiteads.vercel.app/tools/text-case-converter.html">
+<meta property="og:site_name" content="Xoft Tools">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.tc-text{width:100%;min-height:170px;font-family:inherit;font-size:1em;line-height:1.5;padding:12px;border:1px solid #e2e8f0;border-radius:10px;resize:vertical}
+.tc-out{background:#f8fafc}
+.tc-note{font-size:.85em;color:#64748b;margin:6px 0 0}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a text case converter?","acceptedAnswer":{"@type":"Answer","text":"A text case converter changes the capitalization of your text without retyping it: UPPERCASE, lowercase, Title Case, Sentence case, aLtErNaTiNg case, or iNvErSe case. Paste your text, pick a style, and copy the result back."}},
+{"@type":"Question","name":"How do I remove duplicate lines from a list?","acceptedAnswer":{"@type":"Answer","text":"Paste your list, keep 'Remove duplicate lines' ticked, and copy the output. The tool keeps the first occurrence of each line in the original order and drops later repeats, then tells you exactly how many lines were removed."}},
+{"@type":"Question","name":"Does Title Case capitalize every word?","acceptedAnswer":{"@type":"Answer","text":"No. Small words like 'and', 'of', and 'the' stay lowercase in the middle of a title, but are capitalized at the start or end — so 'the lord of the rings' becomes 'The Lord of the Rings'. Fix short acronyms like NASA by hand after converting."}},
+{"@type":"Question","name":"Will converting change the meaning of my text?","acceptedAnswer":{"@type":"Answer","text":"Only the casing and the repeats change; the words stay the same. But never run code, passwords, or case-sensitive IDs through a case converter — 'PassWord123' and 'password123' are different passwords, and code can break."}},
+{"@type":"Question","name":"Is my pasted text uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. This tool runs entirely in JavaScript in your own browser. Nothing you paste is sent to a server, stored, or seen by anyone else."}}
+]}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="../index.html"><span>Xoft Tools</span></a>
+    <nav class="links">
+      <a href="../calculators/50-30-20-budget-calculator.html">Calculators</a>
+      <a href="ai-prompt-generator.html">AI Tools</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Text Case Converter &amp; Duplicate Line Remover</h1>
+  <p>Paste your text, pick a case style, and clean up repeats — the result updates live as you type. Nothing you paste ever leaves your browser.</p>
+
+  <div class="toolbox">
+    <h2>Your text</h2>
+    <div class="field">
+      <label for="tcInput">Paste or type text here</label>
+      <textarea class="tc-text" id="tcInput" placeholder="Paste your text, list, or draft here…"></textarea>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="tcMode">Case style</label>
+        <select id="tcMode" style="width:100%">
+          <option value="title">Title Case — Every Major Word Capitalized</option>
+          <option value="upper">UPPERCASE — ALL CAPS</option>
+          <option value="lower">lowercase — all small</option>
+          <option value="sentence">Sentence case — First word capitalized</option>
+          <option value="alternating">aLtErNaTiNg — mixed case</option>
+          <option value="inverse">iNvErSe — opposite of the original</option>
+          <option value="none">Keep original casing</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label><input type="checkbox" id="tcDedupe" checked> Remove duplicate lines</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="tcIgnoreCase" checked> Ignore case when deduping</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="tcTrim" checked> Trim spaces on each line</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="tcBlanks" checked> Remove empty lines</label>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="tcSort"> Sort lines A–Z after deduping</label>
+      </div>
+    </div>
+    <p class="tc-note">Conversion runs first, then duplicate removal. The dedupe options only apply while "Remove duplicate lines" is ticked.</p>
+
+    <h2>Result</h2>
+    <div class="field">
+      <label for="tcOutput">Converted text</label>
+      <textarea class="tc-text tc-out" id="tcOutput" readonly placeholder="Your converted text appears here…"></textarea>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="v" id="tcLines">0</div><div class="k">Output lines</div></div>
+      <div class="stat"><div class="v" id="tcWords">0</div><div class="k">Words</div></div>
+      <div class="stat"><div class="v" id="tcChars">0</div><div class="k">Characters</div></div>
+      <div class="stat"><div class="v" id="tcRemoved">0</div><div class="k">Duplicates removed</div></div>
+      <div class="stat"><div class="v" id="tcBlanksOut">0</div><div class="k">Blank lines removed</div></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn" id="tcCopy">Copy result</button>
+      <button class="btn-ghost" id="tcDownload">Download .txt</button>
+      <button class="btn-ghost" id="tcSample">Try sample text</button>
+      <button class="btn-ghost" id="tcClear">Clear</button>
+    </div>
+  </div>
+
+  <article class="prose" id="guide">
+    <h2>Why Reformat Text Instead of Retyping It</h2>
+    <p>Pasted text rarely arrives clean. An email arrives in ALL CAPS because someone left Caps Lock on. A list copied from a spreadsheet carries the same name five times. A headline drafted in lowercase needs title case before it can go on a page. Retyping fixes all of it, but retyping is slow and introduces new typos — the exact problem you were trying to solve.</p>
+    <p>A case converter and duplicate remover fixes the formatting without touching the meaning. You paste once, pick the style, and copy the result back. The words stay yours; only the casing and the repeats change. For students cleaning up essay drafts, creators tidying captions and tag lists, and office workers de-duplicating mailing lists, that one paste saves the most boring ten minutes of the day.</p>
+    <h2>The Case Styles, Explained</h2>
+    <table>
+      <tr><th>Style</th><th>Looks like</th><th>Best for</th></tr>
+      <tr><td>UPPERCASE</td><td>ALL WORDS IN CAPS</td><td>Labels, warnings, and short headings — sparingly, since full caps reads as shouting online</td></tr>
+      <tr><td>lowercase</td><td>all words in small letters</td><td>Slugs, file names, and casual notes</td></tr>
+      <tr><td>Title Case</td><td>Every Major Word Capitalized</td><td>Headlines, video titles, and headings</td></tr>
+      <tr><td>Sentence case</td><td>Only the first word capitalized</td><td>Normal sentences, descriptions, and captions</td></tr>
+      <tr><td>aLtErNaTiNg</td><td>mixed case, letter by letter</td><td>Playful captions and memes</td></tr>
+      <tr><td>iNvErSe</td><td>Opposite of the original</td><td>Fixing text typed with Caps Lock inverted</td></tr>
+    </table>
+    <p>Title Case has one subtlety worth knowing: small words like "and", "of", and "the" stay lowercase in the middle of a title but are capitalized at the start or end. This tool follows that rule, so "the lord of the rings" becomes "The Lord of the Rings". Acronyms are a different story — "NASA" becomes "Nasa" under Title Case, so fix short acronyms by hand after converting.</p>
+    <h2>How Duplicate Line Removal Works</h2>
+    <p>Duplicate removal works line by line. The tool reads your text one line at a time and keeps the first occurrence of each line, in the original order. Later repeats are dropped, and a counter tells you exactly how many lines were removed — so you can check the result against what you expected. Turning on "ignore case" treats "Apple" and "apple" as the same line, which matters when a list was typed by different people.</p>
+    <p>Two options change the result. "Trim spaces on each line" strips invisible spaces from the start and end of every line, so " apple" and "apple" count as duplicates. "Remove empty lines" drops blank lines entirely. If you need a sorted list instead of the original order, tick "Sort A–Z" — the tool dedupes first, then sorts, so the output is clean and alphabetical. Check the counts before copying; for a mailing list, count your output against your expected contacts.</p>
+    <h2>Three Everyday Uses</h2>
+    <p>Mailing lists are the classic case: export a list of emails from two systems, paste it here, remove duplicates, and you stop sending the same person two copies. Content creators use it for hashtag lists — paste the tags from three old posts, dedupe them, and the list is ready for the next caption. Our <a href="hashtag-generator.html">hashtag generator</a> builds fresh sets; this tool cleans the ones you already have.</p>
+    <p>Students and writers use it for reference lists and outlines: paste a bibliography, drop the repeated entries, and sort A–Z for a clean reference section. Developers and data-entry workers use it for config lines, IDs, and keyword lists where a hidden duplicate can break an import. And anyone who has ever pasted an essay into a counter can check the final length with our <a href="word-counter.html">word counter</a> before submitting.</p>
+    <h2>Mistakes That Break Your Text</h2>
+    <p>The biggest mistake is converting twice. Running Title Case over text that is already in Title Case is harmless, but running it after Sentence case — or the other way around — can mangle proper nouns and acronyms. Convert once, then fix names and acronyms by hand. The second mistake is deduping with "ignore case" off when the list mixes "Apple" and "apple": you will keep both and think the list is clean.</p>
+    <p>The third mistake is trusting the tool with text it should not change. Code, passwords, and case-sensitive IDs must never go through a case converter — "PassWord123" and "password123" are different passwords. This page runs entirely in your browser, so nothing you paste is uploaded, but case changes are permanent once you copy over the original. Keep the original somewhere until you have checked the result.</p>
+  </article>
+
+  <div class="related">
+    <h2>More free tools</h2>
+    <div class="grid">
+      <div class="card"><h3><a href="word-counter.html">Word Counter</a></h3><p>Words, characters, reading time — check essay and assignment length.</p></div>
+      <div class="card"><h3><a href="hashtag-generator.html">Hashtag Generator</a></h3><p>Niche + trending hashtags for YouTube, TikTok, and Instagram from one topic.</p></div>
+      <div class="card"><h3><a href="ai-prompt-generator.html">AI Prompt Generator</a></h3><p>Structured prompts for AI video tools — plan study videos too.</p></div>
+      <div class="card"><h3><a href="password-generator.html">Password Generator</a></h3><p>Strong random passwords with a live strength meter.</p></div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Xoft Tools</h4><p>Free AI tools and online calculators for creators, students, and small businesses.</p></div>
+      <div><h4>Tools</h4><ul>
+        <li><a href="../calculators/50-30-20-budget-calculator.html">50/30/20 Budget Calculator</a></li>
+        <li><a href="../calculators/savings-goal-calculator.html">Savings Goal Calculator</a></li>
+        <li><a href="../calculators/loan-emi-calculator.html">Loan EMI Calculator</a></li>
+        <li><a href="../calculators/freelance-rate-calculator.html">Freelance Rate Calculator</a></li>
+        <li><a href="../calculators/profit-margin-calculator.html">Profit Margin Calculator</a></li>
+        <li><a href="../calculators/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="../calculators/age-calculator.html">Age Calculator</a></li>
+        <li><a href="ai-prompt-generator.html">AI Prompt Generator</a></li>
+        <li><a href="youtube-hook-generator.html">YouTube Hook &amp; Title Generator</a></li>
+        <li><a href="hashtag-generator.html">Hashtag Generator</a></li>
+        <li><a href="thumbnail-safe-zone-checker.html">Thumbnail Safe-Zone Checker</a></li>
+        <li><a href="whatsapp-chat-analyzer.html">WhatsApp Chat Analyzer</a></li>
+        <li><a href="pdf-bank-statement-to-excel.html">PDF Bank Statement to Excel</a></li>
+        <li><a href="pomodoro-study-timer.html">Pomodoro Study Timer</a></li>
+        <li><a href="text-case-converter.html">Text Case Converter</a></li>
+        <li><a href="word-counter.html">Word Counter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../terms.html">Terms of Service</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <p>&copy; 2026 Xoft Tools. All rights reserved.</p>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script>
+var tcInput = document.getElementById('tcInput');
+var tcOutput = document.getElementById('tcOutput');
+function tcRun(){
+  var input = tcInput.value;
+  var mode = document.getElementById('tcMode').value;
+  var cased = (mode === 'none') ? input : Core.convertCase(input, mode);
+  var result = cased, removed = 0, blanks = 0;
+  if (document.getElementById('tcDedupe').checked) {
+    var d = Core.dedupeLines(cased, {
+      ignoreCase: document.getElementById('tcIgnoreCase').checked,
+      trimLines: document.getElementById('tcTrim').checked,
+      removeBlanks: document.getElementById('tcBlanks').checked,
+      sortLines: document.getElementById('tcSort').checked
+    });
+    result = d.text; removed = d.removed; blanks = d.blanksRemoved;
+  }
+  tcOutput.value = result;
+  var stats = Core.analyzeText(result);
+  document.getElementById('tcLines').textContent = result === '' ? 0 : result.split('\n').length;
+  document.getElementById('tcWords').textContent = stats.words.toLocaleString('en-US');
+  document.getElementById('tcChars').textContent = stats.chars.toLocaleString('en-US');
+  document.getElementById('tcRemoved').textContent = removed;
+  document.getElementById('tcBlanksOut').textContent = blanks;
+}
+['tcInput','tcMode','tcDedupe','tcIgnoreCase','tcTrim','tcBlanks','tcSort'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', tcRun);
+  document.getElementById(id).addEventListener('change', tcRun);
+});
+document.getElementById('tcCopy').addEventListener('click', function(){
+  copyText(tcOutput.value, document.getElementById('tcCopy'));
+});
+document.getElementById('tcDownload').addEventListener('click', function(){
+  var blob = new Blob([tcOutput.value], {type: 'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'converted-text.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+document.getElementById('tcSample').addEventListener('click', function(){
+  tcInput.value = 'the quick BROWN fox\njumps over the lazy dog\nthe quick brown fox\n\nHELLO WORLD, this is a TEST\nthe quick brown fox';
+  tcRun();
+});
+document.getElementById('tcClear').addEventListener('click', function(){
+  tcInput.value = ''; tcRun();
+});
+tcRun();
+</script>
+</body>
+</html>
